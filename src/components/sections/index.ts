@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { Services } from "./Services";
+export { Features } from "./Features";
+export { CTA } from "./CTA";
+export { Stats } from "./Stats";
+export { ProcessSection } from "./ProcessSection";
+export { FAQSection } from "./FAQSection";
+export { BenefitsSection } from "./BenefitsSection";
+export { RelatedServices } from "./RelatedServices";
