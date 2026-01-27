@@ -39,6 +39,12 @@ import {
   Gauge,
   FileCode,
   Smartphone,
+  Video,
+  Eye,
+  Building,
+  Linkedin,
+  Youtube,
+  Twitter,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -52,7 +58,12 @@ import {
   CTA,
 } from "@/components/sections";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { generateMetadata as genMeta, generateServiceSchema } from "@/lib/metadata";
+import {
+  generateMetadata as genMeta,
+  generateServiceSchema,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+} from "@/lib/metadata";
 import { SERVICES, SERVICE_DETAILS, SITE_URL, BRAND_NAME } from "@/lib/constants";
 
 // Icon map for dynamic icon lookup
@@ -94,8 +105,13 @@ const iconMap: Record<string, LucideIcon> = {
   Gauge,
   FileCode,
   Smartphone,
+  Video,
+  Eye,
+  Building,
+  Linkedin,
+  Youtube,
+  Twitter,
   SiteMap: Globe, // Alias - SiteMap doesn't exist, use Globe
-  Linkedin: Users, // Alias - Linkedin doesn't exist as icon, use Users
 };
 
 // Generate static params for all services
@@ -157,6 +173,16 @@ export default async function ServicePage({
     url: `${SITE_URL}/services/${slug}`,
   });
 
+  // Generate Breadcrumb schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: SITE_URL },
+    { name: "Services", url: `${SITE_URL}/services` },
+    { name: service.title, url: `${SITE_URL}/services/${slug}` },
+  ]);
+
+  // Generate FAQ schema
+  const faqSchema = generateFAQSchema(details.faqs);
+
   // Map benefits to include actual icon components
   const benefitsWithIcons = details.benefits.map((benefit) => ({
     ...benefit,
@@ -166,6 +192,8 @@ export default async function ServicePage({
   return (
     <>
       <JsonLd data={serviceSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       {/* Breadcrumb */}
       <nav className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
@@ -268,7 +296,7 @@ export default async function ServicePage({
       {/* Benefits */}
       <BenefitsSection
         title="Key Benefits"
-        subtitle="Why leading B2B companies trust us with their marketing"
+        subtitle="Why public companies trust us with their investor relations"
         benefits={benefitsWithIcons}
       />
 

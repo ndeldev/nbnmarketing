@@ -1,17 +1,16 @@
 import Link from "next/link";
 import { Linkedin, Twitter } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { BRAND_NAME, NAV_LINKS, SOCIAL_LINKS, CONTACT_EMAIL } from "@/lib/constants";
+import { BRAND_NAME, SOCIAL_LINKS, CONTACT_EMAIL } from "@/lib/constants";
 
 const footerLinks = {
   services: [
-    { label: "Publications", href: "/services/publications" },
-    { label: "Newsletters", href: "/services/newsletters" },
-    { label: "Outreach", href: "/services/outreach" },
-    { label: "Campaigns", href: "/services/campaigns" },
-    { label: "Paid Ads", href: "/services/ads" },
-    { label: "SEO", href: "/services/seo" },
-    { label: "Technical SEO", href: "/services/technical-seo" },
+    { label: "Digital Advertising", href: "/services/advertising" },
+    { label: "Content & Publications", href: "/services/content" },
+    { label: "European Distribution", href: "/services/europe" },
+    { label: "Email Marketing", href: "/services/email" },
+    { label: "Social & Video", href: "/services/social" },
+    { label: "Analytics & Reporting", href: "/services/analytics" },
   ],
   company: [
     { label: "About", href: "/about" },
@@ -38,7 +37,7 @@ export function Footer() {
               {BRAND_NAME}
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              B2B marketing that drives measurable growth for ambitious companies.
+              Capital markets communications for public companies across North America and Europe.
             </p>
             <div className="mt-6 flex gap-4">
               <a

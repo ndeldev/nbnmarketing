@@ -5,18 +5,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { generateMetadata as genMeta } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { generateMetadata as genMeta, generateLocalBusinessSchema } from "@/lib/metadata";
 import { BRAND_NAME, CONTACT_EMAIL } from "@/lib/constants";
 
 export const metadata: Metadata = genMeta({
   title: "Contact Us",
   description: `Get in touch with ${BRAND_NAME}. Book a strategy call or send us a message to discuss how we can help accelerate your B2B marketing.`,
   path: "/contact",
+  image: "/og-contact.jpg",
 });
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={generateLocalBusinessSchema()} />
+
       {/* Hero */}
       <section className="bg-muted/30 py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

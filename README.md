@@ -1,6 +1,6 @@
 # Meridian Marketing Site
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Production Ready
 
 B2B marketing agency website built with Next.js 16, optimized for SEO and performance.
@@ -90,9 +90,12 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 
 ## Features
 
-- Next.js 14 with App Router
+- Next.js 16 with App Router
 - TypeScript
-- Tailwind CSS + shadcn/ui
+- Tailwind CSS 4 + shadcn/ui
+- Japanese Greydients design system (Shikoku, Fuji Nezu, Toki Nezu)
+- Custom shadow utilities (shadow-soft, shadow-crisp)
+- Framer Motion animations
 - SEO optimized (sitemap, robots.txt, JSON-LD)
 - AVIF/WebP image optimization
 - Docker support

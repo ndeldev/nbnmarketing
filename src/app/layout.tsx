@@ -65,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} light`} style={{ colorScheme: 'light' }}>
       <head>
         <JsonLd data={generateOrganizationSchema()} />
       </head>

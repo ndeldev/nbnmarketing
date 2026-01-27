@@ -90,17 +90,38 @@ export function generateServiceSchema(service: {
   name: string;
   description: string;
   url: string;
+  serviceType?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.name,
     description: service.description,
+    url: service.url,
+    serviceType: service.serviceType || "Marketing Services",
     provider: {
       "@type": "Organization",
       name: BRAND_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.png`,
     },
-    url: service.url,
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${BRAND_NAME} ${service.name}`,
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.name,
+          },
+        },
+      ],
+    },
   };
 }
 
@@ -141,5 +162,102 @@ export function generateBreadcrumbSchema(
       name: item.name,
       item: item.url,
     })),
+  };
+}
+
+/**
+ * Generate JSON-LD structured data for FAQPage
+ */
+export function generateFAQSchema(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+/**
+ * Generate JSON-LD structured data for LocalBusiness
+ */
+export function generateLocalBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE_URL}/#organization`,
+    name: BRAND_NAME,
+    image: `${SITE_URL}/og-image.jpg`,
+    url: SITE_URL,
+    telephone: "+1-555-123-4567",
+    email: "hello@meridian.agency",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "123 Marketing Street",
+      addressLocality: "San Francisco",
+      addressRegion: "CA",
+      postalCode: "94105",
+      addressCountry: "US",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 37.7749,
+      longitude: -122.4194,
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+    sameAs: [
+      "https://linkedin.com/company/meridian-agency",
+      "https://twitter.com/meridianagency",
+    ],
+  };
+}
+
+/**
+ * Generate JSON-LD structured data for Article (blog posts)
+ */
+export function generateArticleSchema(article: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  author: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    url: article.url,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified || article.datePublished,
+    author: {
+      "@type": "Person",
+      name: article.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BRAND_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    image: article.image || `${SITE_URL}/og-image.jpg`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": article.url,
+    },
   };
 }

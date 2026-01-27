@@ -1,7 +1,34 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Disable dark mode - class-based only (which we don't use) */
 @custom-variant dark (&:is(.dark *));
+
+/* Force light color scheme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+    /* Re-apply all light mode variables to override any dark mode defaults */
+    --background: oklch(0.985 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: #2E2930;
+    --primary-foreground: #FAFAFA;
+    --secondary: #E4D2D8;
+    --secondary-foreground: #2E2930;
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.45 0 0);
+    --accent: #A6A5C4;
+    --accent-foreground: #2E2930;
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -44,11 +71,43 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Japanese Greydients Brand Colors */
+  --color-fuji-nezu: var(--fuji-nezu);
+  --color-shikoku: var(--shikoku);
+  --color-toki-nezu: var(--toki-nezu);
+
+  /* Shadow Utilities */
+  --shadow-soft: var(--shadow-soft);
+  --shadow-crisp: var(--shadow-crisp);
 }
 
 :root {
   /* Increased radius for softer, more modern look */
   --radius: 0.75rem;
+
+  /* Japanese Greydients Brand Colors */
+  --fuji-nezu: #A6A5C4;    /* 藤鼠 Wisteria Grey - soft purple-grey accent */
+  --shikoku: #2E2930;       /* 紫黒 Deep Purple - primary dark */
+  --toki-nezu: #E4D2D8;     /* 鴇鼠 Crested Ibis Grey - soft pink-grey */
+
+  /* Shadow Soft - cards, containers */
+  --shadow-soft:
+    0 0 0 1px rgba(0,0,0,0.05),
+    0 1px 1px 0 rgba(0,0,0,0.05),
+    0 2px 2px 0 rgba(0,0,0,0.05),
+    0 4px 4px 0 rgba(0,0,0,0.05),
+    0 8px 8px 0 rgba(0,0,0,0.05),
+    0 16px 16px 0 rgba(0,0,0,0.05);
+
+  /* Shadow Crisp - elevated elements */
+  --shadow-crisp:
+    0 0 0 1px rgba(0,0,0,0.06),
+    0 1px 1px -0.5px rgba(0,0,0,0.06),
+    0 3px 3px -1.5px rgba(0,0,0,0.06),
+    0 6px 6px -3px rgba(0,0,0,0.06),
+    0 12px 12px -6px rgba(0,0,0,0.06),
+    0 24px 24px -12px rgba(0,0,0,0.06);
 
   /* Softer off-white background instead of pure white */
   --background: oklch(0.985 0 0);
@@ -57,14 +116,14 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --primary: #2E2930;  /* Shikoku - buttons, CTA backgrounds */
+  --primary-foreground: #FAFAFA;
+  --secondary: #E4D2D8;  /* Toki Nezu - secondary buttons */
+  --secondary-foreground: #2E2930;
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: #A6A5C4;  /* Fuji Nezu - highlights */
+  --accent-foreground: #2E2930;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -162,7 +221,7 @@
 .indicator-dot {
   width: 6px;
   height: 6px;
-  background: linear-gradient(135deg, oklch(0.70 0.15 250), oklch(0.55 0.20 260));
+  background: linear-gradient(135deg, var(--fuji-nezu), var(--toki-nezu));
   border-radius: 50%;
   animation: dot-appear 0.2s ease-out;
 }
@@ -190,7 +249,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: currentColor;
+  background: var(--fuji-nezu);
   transition: width 0.2s ease;
 }
 
@@ -223,4 +282,39 @@
     oklch(0.92 0.08 350) 70%,
     oklch(0.94 0.05 30) 100%
   );
+}
+
+/* Shadow Utility Classes */
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-crisp {
+  box-shadow: var(--shadow-crisp);
+}
+
+/* Brand Color Backgrounds */
+.bg-brand-primary {
+  background-color: var(--shikoku);
+}
+
+.bg-brand-accent {
+  background-color: var(--fuji-nezu);
+}
+
+.bg-brand-soft {
+  background-color: var(--toki-nezu);
+}
+
+/* Brand Color Text */
+.text-brand-primary {
+  color: var(--shikoku);
+}
+
+.text-brand-accent {
+  color: var(--fuji-nezu);
+}
+
+.text-brand-soft {
+  color: var(--toki-nezu);
 }

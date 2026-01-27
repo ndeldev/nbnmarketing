@@ -9,6 +9,7 @@ export const metadata: Metadata = genMeta({
   title: "About Us",
   description: `${BRAND_NAME} is a B2B marketing agency built by marketers who understand the unique challenges of selling to businesses. Learn about our team and approach.`,
   path: "/about",
+  image: "/og-about.jpg",
 });
 
 const team = [

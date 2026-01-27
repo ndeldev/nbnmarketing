@@ -1,13 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
-  FileText,
-  Mail,
-  Users,
-  Megaphone,
   Target,
-  Search,
-  Code,
+  FileText,
+  Globe,
+  Mail,
+  Video,
+  BarChart3,
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,20 +16,20 @@ import { generateMetadata as genMeta } from "@/lib/metadata";
 import { SERVICES } from "@/lib/constants";
 
 export const metadata: Metadata = genMeta({
-  title: "B2B Marketing Services",
+  title: "Investor Relations Services",
   description:
-    "Comprehensive B2B marketing services including publications, newsletters, outreach, campaigns, paid ads, SEO, and technical SEO. Drive growth with data-driven strategies.",
+    "Full-stack investor relations for public companies. Digital advertising, content & publications, European distribution, email marketing, social & video, and analytics.",
   path: "/services",
+  image: "/og-services.jpg",
 });
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  FileText,
-  Mail,
-  Users,
-  Megaphone,
   Target,
-  Search,
-  Code,
+  FileText,
+  Globe,
+  Mail,
+  Video,
+  BarChart3,
 };
 
 export default function ServicesPage() {
@@ -41,12 +40,12 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              B2B Marketing Services
+              Investor Relations Services
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
-              From thought leadership content to technical SEO, we offer
-              end-to-end marketing services designed to accelerate your
-              pipeline.
+              From digital advertising to analytics reporting, we offer
+              full-stack IR services designed to build shareholder bases across
+              North America and Europe.
             </p>
           </div>
         </div>
@@ -57,7 +56,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((service) => {
-              const Icon = iconMap[service.icon];
+              const Icon = iconMap[service.icon] || Target;
               return (
                 <Card
                   key={service.id}

@@ -1,10 +1,24 @@
 // Brand name - easy to find/replace when brand is finalized
 export const BRAND_NAME = "Meridian";
-export const BRAND_TAGLINE = "B2B Marketing That Drives Growth";
+export const BRAND_TAGLINE = "Capital Markets Communications";
 
 // Site configuration
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://meridian.agency";
-export const SITE_DESCRIPTION = `${BRAND_NAME} is a B2B marketing agency specializing in publications, newsletters, outreach campaigns, ads, SEO, and technical SEO.`;
+export const SITE_DESCRIPTION = `Full-stack investor relations for public companies. We help issuers build market value through strategic communications across North America and Europe.`;
+
+// SEO Keywords for capital markets positioning
+export const SITE_KEYWORDS = [
+  "investor relations agency",
+  "capital markets communications",
+  "TSX-V marketing",
+  "CSE investor awareness",
+  "Frankfurt listing support",
+  "shareholder acquisition",
+  "public company IR",
+  "investor awareness campaigns",
+  "European investor outreach",
+  "stock promotion services",
+] as const;
 
 // Navigation links
 export const NAV_LINKS = [
@@ -18,53 +32,46 @@ export const NAV_LINKS = [
 // Services data
 export const SERVICES = [
   {
-    id: "publications",
-    title: "Publications",
-    shortDescription: "Industry-leading content that establishes thought leadership",
-    description: "Create compelling whitepapers, reports, and industry publications that position your brand as an authority in your space.",
-    icon: "FileText",
-  },
-  {
-    id: "newsletters",
-    title: "Newsletters",
-    shortDescription: "Engage your audience with consistent, valuable content",
-    description: "Build and nurture subscriber relationships with strategic email newsletters that drive engagement and conversions.",
-    icon: "Mail",
-  },
-  {
-    id: "outreach",
-    title: "Outreach",
-    shortDescription: "Connect with decision-makers at scale",
-    description: "Strategic outreach campaigns that open doors and build meaningful B2B relationships with your target accounts.",
-    icon: "Users",
-  },
-  {
-    id: "campaigns",
-    title: "Campaigns",
-    shortDescription: "Integrated marketing campaigns that deliver results",
-    description: "Multi-channel marketing campaigns designed to generate qualified leads and accelerate your sales pipeline.",
-    icon: "Megaphone",
-  },
-  {
-    id: "ads",
-    title: "Paid Advertising",
-    shortDescription: "Precision-targeted ads that maximize ROI",
-    description: "Data-driven paid advertising across LinkedIn, Google, and programmatic channels to reach your ideal buyers.",
+    id: "advertising",
+    title: "Digital Advertising",
+    shortDescription: "Reach investors with precision-targeted campaigns",
+    description: "Multi-platform digital advertising across Google, Bing, and programmatic networks targeting self-directed investors.",
     icon: "Target",
   },
   {
-    id: "seo",
-    title: "SEO",
-    shortDescription: "Organic visibility that compounds over time",
-    description: "Content-driven SEO strategies that improve your search rankings and drive qualified organic traffic.",
-    icon: "Search",
+    id: "content",
+    title: "Content & Publications",
+    shortDescription: "Build credibility through premium media placement",
+    description: "CEO interviews, company profiles, and editorial features placed in leading financial publications.",
+    icon: "FileText",
   },
   {
-    id: "technical-seo",
-    title: "Technical SEO",
-    shortDescription: "The foundation for search success",
-    description: "Technical audits, site architecture optimization, and Core Web Vitals improvements that maximize your search performance.",
-    icon: "Code",
+    id: "europe",
+    title: "European Distribution",
+    shortDescription: "Expand your reach to DACH region investors",
+    description: "Targeted campaigns for Frankfurt-listed issuers and companies seeking European retail investor exposure.",
+    icon: "Globe",
+  },
+  {
+    id: "email",
+    title: "Email Marketing",
+    shortDescription: "Connect directly with active investors",
+    description: "Permission-based email campaigns to verified investor databases, segmented by criteria and sector interest.",
+    icon: "Mail",
+  },
+  {
+    id: "social",
+    title: "Social & Video",
+    shortDescription: "Build executive visibility and thought leadership",
+    description: "LinkedIn thought leadership, YouTube investor presentations, and CEO video content that attracts attention.",
+    icon: "Video",
+  },
+  {
+    id: "analytics",
+    title: "Analytics & Reporting",
+    shortDescription: "Measure campaign impact on market performance",
+    description: "Real-time dashboards, shareholder acquisition tracking, and ROI analysis correlated with trading metrics.",
+    icon: "BarChart3",
   },
 ] as const;
 
@@ -72,18 +79,18 @@ export const SERVICES = [
 export const AUDIENCE_SEGMENTS = [
   {
     id: "startups",
-    label: "Startups",
-    description: "Early-stage companies looking to establish market presence",
+    label: "Emerging",
+    description: "Early-stage public companies building initial shareholder base",
   },
   {
     id: "scaleups",
-    label: "Scale-ups",
-    description: "Growing companies ready to accelerate their marketing",
+    label: "Growth",
+    description: "Companies with catalysts ready to expand market awareness",
   },
   {
     id: "enterprise",
-    label: "Enterprise",
-    description: "Large organizations seeking strategic marketing partners",
+    label: "Established",
+    description: "Mature issuers seeking sustained investor engagement",
   },
 ] as const;
 
@@ -123,447 +130,51 @@ export interface ServiceDetail {
 }
 
 export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
-  publications: {
-    headline: "B2B Publications & PR",
-    tagline: "Establish thought leadership with strategic content that positions your brand as an industry authority",
+  advertising: {
+    headline: "Digital Advertising for Investor Acquisition",
+    tagline: "Precision-targeted campaigns that put your company in front of active investors",
     features: [
-      {
-        icon: "FileText",
-        title: "Whitepapers & Reports",
-        description: "In-depth research publications that showcase your expertise and generate high-quality leads.",
-      },
-      {
-        icon: "BookOpen",
-        title: "Industry Analysis",
-        description: "Data-driven market analysis that positions your company as a trusted industry voice.",
-      },
-      {
-        icon: "Newspaper",
-        title: "Press Releases",
-        description: "Strategic PR distribution to major business publications and industry media outlets.",
-      },
-      {
-        icon: "Award",
-        title: "Thought Leadership",
-        description: "Executive bylines and contributed articles in top-tier industry publications.",
-      },
-      {
-        icon: "BarChart",
-        title: "Research Studies",
-        description: "Original research that generates media coverage and establishes market authority.",
-      },
-      {
-        icon: "Globe",
-        title: "Media Relations",
-        description: "Ongoing relationships with journalists and editors in your industry vertical.",
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Discovery & Strategy",
-        description: "We analyze your market position, competitors, and target audience to develop a content strategy that differentiates your brand.",
-      },
-      {
-        step: 2,
-        title: "Content Development",
-        description: "Our writers and researchers create compelling, data-backed content that resonates with your audience.",
-      },
-      {
-        step: 3,
-        title: "Editorial Review",
-        description: "Rigorous editing and fact-checking ensures every piece meets the highest standards of quality.",
-      },
-      {
-        step: 4,
-        title: "Distribution & Promotion",
-        description: "Strategic placement across owned, earned, and paid channels to maximize reach and impact.",
-      },
-    ],
-    benefits: [
-      {
-        icon: "TrendingUp",
-        title: "Increased Authority",
-        description: "Position your brand as the go-to expert in your industry through consistent, high-quality content.",
-      },
-      {
-        icon: "Users",
-        title: "Lead Generation",
-        description: "Gated content like whitepapers and reports drive qualified leads into your sales funnel.",
-      },
-      {
-        icon: "Share2",
-        title: "Media Coverage",
-        description: "Earn mentions in industry publications and business media through strategic PR efforts.",
-      },
-      {
-        icon: "Target",
-        title: "Brand Differentiation",
-        description: "Stand out from competitors with unique insights and original research.",
-      },
-    ],
-    faqs: [
-      {
-        question: "How long does it take to produce a whitepaper?",
-        answer: "A comprehensive whitepaper typically takes 4-6 weeks from initial research to final design. This includes research, interviews, writing, editing, and professional design. Rush timelines are available for time-sensitive topics.",
-      },
-      {
-        question: "Do you handle distribution and promotion?",
-        answer: "Yes, we offer end-to-end publication services including distribution strategy, press release writing, media outreach, and promotional campaigns to maximize the reach and impact of your content.",
-      },
-      {
-        question: "Can you ghostwrite for our executives?",
-        answer: "Absolutely. We specialize in executive ghostwriting for bylined articles, LinkedIn content, and contributed pieces in industry publications. We capture your executives' voice and expertise.",
-      },
-      {
-        question: "What industries do you specialize in?",
-        answer: "We have deep experience in B2B technology, SaaS, fintech, healthcare tech, and professional services. Our writers have industry-specific expertise to create credible, authoritative content.",
-      },
-    ],
-    relatedServices: ["newsletters", "campaigns", "seo"],
-  },
-  newsletters: {
-    headline: "Newsletter Marketing Services",
-    tagline: "Build lasting relationships with your audience through strategic email newsletters that drive engagement",
-    features: [
-      {
-        icon: "Mail",
-        title: "Newsletter Strategy",
-        description: "Develop a content calendar and editorial strategy aligned with your business goals.",
-      },
-      {
-        icon: "PenTool",
-        title: "Content Creation",
-        description: "Professional writing and design for newsletters that your subscribers actually want to read.",
-      },
-      {
-        icon: "Users",
-        title: "List Growth",
-        description: "Proven tactics to grow your subscriber base with engaged, qualified prospects.",
-      },
-      {
-        icon: "BarChart3",
-        title: "Analytics & Optimization",
-        description: "Track performance metrics and continuously optimize for higher engagement.",
-      },
-      {
-        icon: "Zap",
-        title: "Automation",
-        description: "Set up automated sequences for onboarding, nurturing, and re-engagement.",
-      },
-      {
-        icon: "Shield",
-        title: "Deliverability",
-        description: "Ensure your emails reach the inbox with proper authentication and list hygiene.",
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Audit & Strategy",
-        description: "We review your current email program, audience, and goals to create a tailored newsletter strategy.",
-      },
-      {
-        step: 2,
-        title: "Content Planning",
-        description: "Develop an editorial calendar with themes, formats, and cadence that keeps subscribers engaged.",
-      },
-      {
-        step: 3,
-        title: "Production & Send",
-        description: "Our team handles writing, design, and deployment so you can focus on your business.",
-      },
-      {
-        step: 4,
-        title: "Analyze & Iterate",
-        description: "Monthly reporting and optimization recommendations to continuously improve performance.",
-      },
-    ],
-    benefits: [
-      {
-        icon: "MessageSquare",
-        title: "Direct Audience Access",
-        description: "Build a direct communication channel that you own, independent of social media algorithms.",
-      },
-      {
-        icon: "Heart",
-        title: "Stronger Relationships",
-        description: "Regular touchpoints keep your brand top-of-mind and build trust with your audience.",
-      },
-      {
-        icon: "DollarSign",
-        title: "Revenue Driver",
-        description: "Email consistently delivers the highest ROI of any marketing channel for B2B companies.",
-      },
-      {
-        icon: "Repeat",
-        title: "Retention & Upsell",
-        description: "Keep existing customers engaged and informed about new products and services.",
-      },
-    ],
-    faqs: [
-      {
-        question: "How often should we send our newsletter?",
-        answer: "The optimal frequency depends on your audience and content quality. Most B2B companies see best results with weekly or bi-weekly newsletters. We'll help you find the right cadence based on engagement data.",
-      },
-      {
-        question: "What email platforms do you work with?",
-        answer: "We work with all major email marketing platforms including HubSpot, Mailchimp, Klaviyo, ConvertKit, ActiveCampaign, and enterprise solutions like Marketo and Pardot.",
-      },
-      {
-        question: "Can you help grow our subscriber list?",
-        answer: "Yes, list growth is a core part of our newsletter service. We implement proven tactics including content upgrades, lead magnets, landing page optimization, and co-registration partnerships.",
-      },
-      {
-        question: "Do you provide newsletter templates?",
-        answer: "We design custom newsletter templates that match your brand identity and are optimized for readability across email clients and devices. Templates are mobile-responsive and accessible.",
-      },
-    ],
-    relatedServices: ["publications", "outreach", "campaigns"],
-  },
-  outreach: {
-    headline: "B2B Outreach Marketing",
-    tagline: "Connect with decision-makers at your target accounts through strategic, personalized outreach",
-    features: [
-      {
-        icon: "Target",
-        title: "Account Targeting",
-        description: "Identify and prioritize high-value accounts based on fit, intent, and engagement signals.",
-      },
-      {
-        icon: "UserPlus",
-        title: "Contact Research",
-        description: "Build verified contact lists with accurate emails and direct phone numbers.",
-      },
-      {
-        icon: "MessageCircle",
-        title: "Personalized Messaging",
-        description: "Craft compelling outreach sequences tailored to each prospect's role and pain points.",
-      },
-      {
-        icon: "RefreshCw",
-        title: "Multi-Channel Sequences",
-        description: "Coordinate outreach across email, LinkedIn, and phone for maximum response rates.",
-      },
-      {
-        icon: "Calendar",
-        title: "Meeting Scheduling",
-        description: "Handle the back-and-forth to get qualified meetings on your sales team's calendar.",
-      },
-      {
-        icon: "LineChart",
-        title: "Performance Tracking",
-        description: "Detailed analytics on open rates, reply rates, and meetings booked.",
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "ICP Definition",
-        description: "Define your ideal customer profile and build a targeted account list that matches your best customers.",
-      },
-      {
-        step: 2,
-        title: "Messaging Development",
-        description: "Create personalized messaging frameworks and sequences that resonate with each persona.",
-      },
-      {
-        step: 3,
-        title: "Campaign Execution",
-        description: "Launch multi-touch outreach campaigns with consistent follow-up and optimization.",
-      },
-      {
-        step: 4,
-        title: "Lead Handoff",
-        description: "Qualified meetings are seamlessly handed off to your sales team with full context.",
-      },
-    ],
-    benefits: [
-      {
-        icon: "Zap",
-        title: "Faster Pipeline",
-        description: "Generate qualified meetings with decision-makers without the long wait of inbound marketing.",
-      },
-      {
-        icon: "Target",
-        title: "Precision Targeting",
-        description: "Focus your efforts on the exact companies and roles most likely to buy.",
-      },
-      {
-        icon: "TrendingUp",
-        title: "Scalable Growth",
-        description: "Systematically expand your market presence without proportionally increasing headcount.",
-      },
-      {
-        icon: "Handshake",
-        title: "Quality Conversations",
-        description: "Start relationships with personalized outreach that demonstrates genuine understanding.",
-      },
-    ],
-    faqs: [
-      {
-        question: "Is cold outreach still effective in B2B?",
-        answer: "Yes, when done right. Personalized, relevant outreach to well-researched prospects consistently generates qualified meetings. The key is quality over quantity and genuine value in your messaging.",
-      },
-      {
-        question: "How do you ensure email deliverability?",
-        answer: "We use proper email authentication (SPF, DKIM, DMARC), warm up new domains gradually, maintain list hygiene, and follow best practices to ensure high inbox placement rates.",
-      },
-      {
-        question: "What response rates should we expect?",
-        answer: "Response rates vary by industry and offer, but our campaigns typically achieve 15-25% response rates with 5-10% positive reply rates. We optimize continuously to improve these metrics.",
-      },
-      {
-        question: "Do you integrate with our CRM?",
-        answer: "Yes, we integrate with Salesforce, HubSpot, and other major CRMs to ensure seamless lead handoff and activity tracking. Your sales team will have full visibility into outreach history.",
-      },
-    ],
-    relatedServices: ["campaigns", "newsletters", "ads"],
-  },
-  campaigns: {
-    headline: "B2B Marketing Campaigns",
-    tagline: "Integrated multi-channel campaigns that generate demand and accelerate your sales pipeline",
-    features: [
-      {
-        icon: "Megaphone",
-        title: "Campaign Strategy",
-        description: "Develop integrated campaign plans aligned with your sales goals and buyer journey.",
-      },
-      {
-        icon: "Layers",
-        title: "Multi-Channel Execution",
-        description: "Coordinate messaging across content, email, social, paid media, and events.",
-      },
-      {
-        icon: "FileText",
-        title: "Content Development",
-        description: "Create campaign assets including landing pages, emails, ads, and sales collateral.",
-      },
-      {
-        icon: "Rocket",
-        title: "Launch Management",
-        description: "Handle all aspects of campaign deployment, coordination, and optimization.",
-      },
-      {
-        icon: "BarChart3",
-        title: "Attribution & ROI",
-        description: "Track campaign performance with multi-touch attribution and revenue impact analysis.",
-      },
-      {
-        icon: "Users",
-        title: "Sales Enablement",
-        description: "Equip your sales team with the tools and content to capitalize on campaign-generated leads.",
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Campaign Planning",
-        description: "Define campaign objectives, target audience, messaging, channels, and success metrics.",
-      },
-      {
-        step: 2,
-        title: "Asset Creation",
-        description: "Develop all creative assets, content, and technical infrastructure needed for the campaign.",
-      },
-      {
-        step: 3,
-        title: "Launch & Optimize",
-        description: "Execute the campaign with continuous monitoring and real-time optimization.",
-      },
-      {
-        step: 4,
-        title: "Report & Learn",
-        description: "Analyze results, document learnings, and provide recommendations for future campaigns.",
-      },
-    ],
-    benefits: [
-      {
-        icon: "TrendingUp",
-        title: "Pipeline Acceleration",
-        description: "Generate a surge of qualified leads and opportunities aligned with sales capacity.",
-      },
-      {
-        icon: "MessageSquare",
-        title: "Unified Messaging",
-        description: "Ensure consistent brand messaging across all touchpoints and channels.",
-      },
-      {
-        icon: "Target",
-        title: "Market Penetration",
-        description: "Make a significant impact in specific segments, verticals, or geographic markets.",
-      },
-      {
-        icon: "Clock",
-        title: "Time to Market",
-        description: "Launch campaigns faster with experienced execution and established processes.",
-      },
-    ],
-    faqs: [
-      {
-        question: "How long does a typical campaign run?",
-        answer: "Campaign duration depends on objectives and complexity. Product launches typically run 6-8 weeks, while always-on demand generation campaigns run continuously with quarterly refreshes. We'll recommend the right approach for your goals.",
-      },
-      {
-        question: "What budget do we need for an effective campaign?",
-        answer: "Effective B2B campaigns typically require $25K-$100K+ depending on scope and channels. This includes creative development, media spend, and management. We'll work with your budget to maximize impact.",
-      },
-      {
-        question: "How do you measure campaign success?",
-        answer: "We track leading indicators (impressions, clicks, form fills) and lagging indicators (MQLs, SQLs, pipeline, revenue). We establish clear KPIs upfront and provide transparent reporting throughout.",
-      },
-      {
-        question: "Can you work with our existing marketing team?",
-        answer: "Absolutely. We can serve as an extension of your team, handling specific aspects of campaign execution, or manage campaigns end-to-end. We adapt to your needs and processes.",
-      },
-    ],
-    relatedServices: ["outreach", "ads", "newsletters"],
-  },
-  ads: {
-    headline: "B2B Advertising Services",
-    tagline: "Precision-targeted paid advertising that reaches your ideal buyers and maximizes ROI",
-    features: [
-      {
-        icon: "Linkedin",
-        title: "LinkedIn Advertising",
-        description: "Reach decision-makers with sponsored content, InMail, and conversation ads.",
-      },
       {
         icon: "Search",
-        title: "Google Ads",
-        description: "Capture high-intent searches with targeted search, display, and YouTube campaigns.",
+        title: "Search Advertising",
+        description: "Google and Bing campaigns targeting investors actively researching opportunities in your sector.",
       },
       {
         icon: "Globe",
         title: "Programmatic Display",
-        description: "Account-based display advertising that reaches target accounts across the web.",
+        description: "Banner and native ads across premium financial websites and investor-focused publications.",
+      },
+      {
+        icon: "Target",
+        title: "Audience Targeting",
+        description: "Custom audiences built from investor databases, trading behavior, and financial interest signals.",
       },
       {
         icon: "RefreshCw",
         title: "Retargeting",
-        description: "Re-engage website visitors and nurture prospects through the buying journey.",
+        description: "Re-engage visitors who viewed your investor presentation but haven't yet taken action.",
       },
       {
         icon: "DollarSign",
         title: "Budget Optimization",
-        description: "Allocate spend across channels to maximize conversions and minimize cost per lead.",
+        description: "Allocate spend across channels to maximize qualified investor visits and minimize cost per acquisition.",
       },
       {
         icon: "BarChart",
-        title: "Conversion Tracking",
-        description: "Implement proper tracking to measure true campaign ROI and optimize effectively.",
+        title: "Performance Tracking",
+        description: "Track campaign performance correlated with trading volume and shareholder growth.",
       },
     ],
     process: [
       {
         step: 1,
-        title: "Audit & Strategy",
-        description: "Assess your current advertising efforts and develop a data-driven media strategy.",
+        title: "Strategy & Targeting",
+        description: "Define your ideal investor profile and build targeting parameters across platforms.",
       },
       {
         step: 2,
         title: "Campaign Setup",
-        description: "Build campaigns with proper targeting, creative, and tracking infrastructure.",
+        description: "Build campaigns with proper tracking, creative assets, and landing page optimization.",
       },
       {
         step: 3,
@@ -572,248 +183,545 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       },
       {
         step: 4,
-        title: "Scale & Iterate",
-        description: "Expand successful campaigns and continuously test new audiences and creative.",
+        title: "Report & Scale",
+        description: "Analyze results, correlate with market activity, and scale successful campaigns.",
       },
     ],
     benefits: [
       {
         icon: "Target",
         title: "Precise Targeting",
-        description: "Reach specific job titles, companies, and industries with laser-focused targeting.",
+        description: "Reach investors actively researching opportunities in your sector and market cap range.",
       },
       {
         icon: "Zap",
         title: "Fast Results",
-        description: "Generate leads quickly while building long-term organic growth strategies.",
+        description: "Generate investor interest immediately while building long-term shareholder awareness.",
       },
       {
         icon: "BarChart3",
         title: "Measurable ROI",
-        description: "Track every dollar spent to its impact on pipeline and revenue.",
+        description: "Track every dollar spent to its impact on trading volume and shareholder acquisition.",
       },
       {
         icon: "Sliders",
         title: "Flexible Scaling",
-        description: "Increase or decrease spend based on business needs and market conditions.",
+        description: "Increase or decrease spend based on corporate catalysts and market conditions.",
       },
     ],
     faqs: [
       {
-        question: "Which advertising platform is best for B2B?",
-        answer: "LinkedIn is typically the most effective for B2B due to its professional targeting capabilities. However, the best mix depends on your audience and goals. We often recommend a combination of LinkedIn for demand generation and Google for capturing existing intent.",
+        question: "What platforms do you advertise on?",
+        answer: "We run campaigns across Google, Bing, and programmatic networks including major financial publishers. Platform mix depends on your target investor profile and budget.",
       },
       {
-        question: "What's a typical cost per lead on LinkedIn?",
-        answer: "B2B LinkedIn CPLs typically range from $50-$200+ depending on targeting, offer, and industry. We focus on cost per qualified lead and cost per opportunity, not just raw lead volume, to ensure true ROI.",
+        question: "How do you target investors specifically?",
+        answer: "We use a combination of keyword targeting, custom audiences from investor databases, interest-based targeting on financial topics, and retargeting of your website visitors.",
       },
       {
-        question: "How much should we budget for paid advertising?",
-        answer: "Effective B2B advertising programs typically start at $10K/month in ad spend plus management fees. This allows for meaningful testing and optimization. We'll recommend a budget based on your goals and market.",
+        question: "What budget do we need for effective campaigns?",
+        answer: "Effective investor acquisition campaigns typically start at $10K/month in ad spend. This allows for meaningful testing and optimization across platforms.",
       },
       {
-        question: "Do you create ad creative and copy?",
-        answer: "Yes, our creative team produces all ad assets including copy, images, and video. We A/B test multiple variations to find what resonates best with your audience and continuously refresh creative to prevent fatigue.",
+        question: "How do you measure campaign success?",
+        answer: "We track qualified website visits, investor presentation views, and broker inquiries. We also correlate campaign timing with trading volume and shareholder count changes.",
       },
     ],
-    relatedServices: ["campaigns", "seo", "outreach"],
+    relatedServices: ["content", "email", "analytics"],
   },
-  seo: {
-    headline: "B2B SEO Services",
-    tagline: "Build sustainable organic visibility that compounds over time and drives qualified traffic",
+  content: {
+    headline: "Content & Publications",
+    tagline: "Build credibility with premium media placement and executive thought leadership",
     features: [
       {
-        icon: "Search",
-        title: "Keyword Strategy",
-        description: "Identify high-value keywords your target buyers are searching for throughout their journey.",
+        icon: "FileText",
+        title: "CEO Interviews",
+        description: "Video and written interviews with your CEO placed on major financial media platforms.",
+      },
+      {
+        icon: "BookOpen",
+        title: "Company Profiles",
+        description: "In-depth company profiles published on investor-focused websites and newsletters.",
+      },
+      {
+        icon: "Newspaper",
+        title: "Press Distribution",
+        description: "Strategic press release distribution to financial media and wire services.",
+      },
+      {
+        icon: "Award",
+        title: "Thought Leadership",
+        description: "Executive bylines and contributed articles in industry publications.",
+      },
+      {
+        icon: "BarChart",
+        title: "Research Coverage",
+        description: "Sponsored research reports and analyst coverage to build institutional awareness.",
+      },
+      {
+        icon: "Globe",
+        title: "Media Relations",
+        description: "Ongoing relationships with financial journalists covering your sector.",
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Story Development",
+        description: "Identify your most compelling investment thesis and key differentiators.",
+      },
+      {
+        step: 2,
+        title: "Content Creation",
+        description: "Produce interview content, profiles, and articles that resonate with investors.",
+      },
+      {
+        step: 3,
+        title: "Media Placement",
+        description: "Secure placements in publications that reach your target investor audience.",
+      },
+      {
+        step: 4,
+        title: "Amplification",
+        description: "Promote content through paid channels and social media for maximum reach.",
+      },
+    ],
+    benefits: [
+      {
+        icon: "TrendingUp",
+        title: "Credibility Building",
+        description: "Third-party coverage builds trust that your own marketing cannot achieve alone.",
+      },
+      {
+        icon: "Users",
+        title: "Broader Reach",
+        description: "Access audiences through established financial media with built-in readership.",
+      },
+      {
+        icon: "Share2",
+        title: "SEO Value",
+        description: "Quality backlinks and brand mentions improve your search visibility over time.",
+      },
+      {
+        icon: "Target",
+        title: "Investor Education",
+        description: "Help potential investors understand your story through in-depth content.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What publications do you work with?",
+        answer: "We have relationships with major financial publishers including Investing News Network, Stockhouse, CEO.ca, and sector-specific outlets covering mining, tech, and life sciences.",
+      },
+      {
+        question: "How long does content production take?",
+        answer: "CEO interviews typically take 2-3 weeks from scheduling to publication. Company profiles take 3-4 weeks including research, writing, and client review.",
+      },
+      {
+        question: "Do you guarantee placements?",
+        answer: "We guarantee placement in our partner publications. For earned media (journalist coverage), we secure opportunities but cannot guarantee specific outlets.",
+      },
+      {
+        question: "Can you ghostwrite for our executives?",
+        answer: "Yes, we provide full ghostwriting services for executive thought leadership articles, ensuring your team's expertise reaches the market without consuming their time.",
+      },
+    ],
+    relatedServices: ["advertising", "social", "email"],
+  },
+  europe: {
+    headline: "European Distribution",
+    tagline: "Reach retail investors across Germany, Austria, and Switzerland",
+    features: [
+      {
+        icon: "Globe",
+        title: "DACH Campaigns",
+        description: "Targeted advertising and content campaigns reaching German-speaking investors.",
       },
       {
         icon: "FileText",
-        title: "Content Strategy",
-        description: "Develop a content roadmap that targets valuable keywords and establishes topical authority.",
+        title: "German Content",
+        description: "Professionally translated and localized content for European audiences.",
+      },
+      {
+        icon: "Users",
+        title: "Database Access",
+        description: "Access to verified European investor databases for email and direct outreach.",
+      },
+      {
+        icon: "Newspaper",
+        title: "EU Media Placement",
+        description: "Content placement in German-language financial publications and portals.",
+      },
+      {
+        icon: "Building",
+        title: "Frankfurt Support",
+        description: "Specialized support for dual-listed companies on Frankfurt exchange.",
+      },
+      {
+        icon: "BarChart3",
+        title: "EU Analytics",
+        description: "Track European investor engagement and trading activity separately.",
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Market Analysis",
+        description: "Assess European investor appetite for your sector and investment thesis.",
+      },
+      {
+        step: 2,
+        title: "Localization",
+        description: "Translate and adapt your investor materials for German-speaking audiences.",
+      },
+      {
+        step: 3,
+        title: "Campaign Launch",
+        description: "Deploy coordinated advertising, content, and email campaigns in DACH region.",
+      },
+      {
+        step: 4,
+        title: "Performance Review",
+        description: "Analyze European investor acquisition and trading activity metrics.",
+      },
+    ],
+    benefits: [
+      {
+        icon: "Globe",
+        title: "New Investor Pool",
+        description: "Access European retail investors who actively trade North American securities.",
+      },
+      {
+        icon: "Clock",
+        title: "Extended Trading",
+        description: "European investors can provide trading activity outside North American hours.",
+      },
+      {
+        icon: "TrendingUp",
+        title: "Diversification",
+        description: "Reduce reliance on any single geographic investor base.",
+      },
+      {
+        icon: "Building",
+        title: "Frankfurt Listing Value",
+        description: "Maximize the investor relations value of your Frankfurt dual-listing.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do I need a Frankfurt listing for European campaigns?",
+        answer: "No, European investors can purchase shares on TSX-V, CSE, and OTC markets directly. However, a Frankfurt listing makes trading more convenient and can increase campaign effectiveness.",
+      },
+      {
+        question: "What languages do you support?",
+        answer: "We produce content in German for DACH markets. We work with professional financial translators to ensure accuracy and appropriate terminology.",
+      },
+      {
+        question: "How large is the European retail investor market?",
+        answer: "Germany alone has over 12 million retail investors, with strong interest in resource and technology sectors. The DACH region represents significant untapped potential for most issuers.",
+      },
+      {
+        question: "How do you track European investor engagement?",
+        answer: "We use geo-targeted analytics, European-specific landing pages, and trading data analysis to measure campaign performance in the DACH region specifically.",
+      },
+    ],
+    relatedServices: ["advertising", "content", "email"],
+  },
+  email: {
+    headline: "Email Marketing",
+    tagline: "Connect directly with verified investor databases",
+    features: [
+      {
+        icon: "Mail",
+        title: "Database Access",
+        description: "Permission-based email campaigns to verified self-directed investor lists.",
+      },
+      {
+        icon: "Users",
+        title: "Audience Segmentation",
+        description: "Target by investment criteria, portfolio size, sector interest, and geography.",
       },
       {
         icon: "PenTool",
         title: "Content Creation",
-        description: "Produce SEO-optimized content that ranks well and converts visitors to leads.",
+        description: "Compelling email content that drives opens, clicks, and investor action.",
       },
       {
-        icon: "Link",
-        title: "Link Building",
-        description: "Earn high-quality backlinks through content marketing, digital PR, and outreach.",
+        icon: "BarChart3",
+        title: "Performance Analytics",
+        description: "Track opens, clicks, website visits, and downstream investor engagement.",
       },
       {
-        icon: "BarChart",
-        title: "Analytics & Reporting",
-        description: "Track rankings, traffic, and conversions with transparent monthly reporting.",
+        icon: "Zap",
+        title: "Automation",
+        description: "Automated sequences for investor nurturing and catalyst announcements.",
       },
       {
-        icon: "TrendingUp",
-        title: "Competitive Analysis",
-        description: "Monitor competitor SEO strategies and identify opportunities to outrank them.",
+        icon: "Shield",
+        title: "Compliance",
+        description: "All campaigns structured for compliance with securities regulations.",
       },
     ],
     process: [
       {
         step: 1,
-        title: "SEO Audit",
-        description: "Comprehensive analysis of your current SEO performance, technical health, and opportunities.",
+        title: "Audience Definition",
+        description: "Define target investor profile and select appropriate database segments.",
       },
       {
         step: 2,
-        title: "Strategy Development",
-        description: "Create a prioritized SEO roadmap based on impact, effort, and business goals.",
+        title: "Content Development",
+        description: "Create compelling email content with clear calls-to-action.",
       },
       {
         step: 3,
-        title: "Implementation",
-        description: "Execute on-page optimization, content creation, and link building initiatives.",
+        title: "Campaign Deployment",
+        description: "Send campaigns with proper tracking and deliverability optimization.",
       },
       {
         step: 4,
-        title: "Monitor & Optimize",
-        description: "Track results, iterate on strategy, and continuously improve organic performance.",
+        title: "Analysis & Follow-up",
+        description: "Analyze engagement metrics and deploy follow-up sequences to engaged investors.",
       },
     ],
     benefits: [
       {
-        icon: "TrendingUp",
-        title: "Compounding Returns",
-        description: "Unlike paid ads, organic traffic builds over time and continues generating leads indefinitely.",
+        icon: "Target",
+        title: "Direct Access",
+        description: "Reach investors directly in their inbox without intermediary platforms.",
       },
       {
         icon: "DollarSign",
-        title: "Lower Cost Per Lead",
-        description: "Organic leads typically cost 60-70% less than paid leads once rankings are established.",
+        title: "Cost Efficiency",
+        description: "Email remains one of the most cost-effective channels for investor outreach.",
       },
       {
-        icon: "Shield",
-        title: "Brand Credibility",
-        description: "Ranking for key terms signals authority and builds trust with potential buyers.",
+        icon: "Repeat",
+        title: "Relationship Building",
+        description: "Nurture investor interest over time through regular communication.",
       },
       {
-        icon: "Target",
-        title: "Intent-Based Traffic",
-        description: "Capture buyers actively searching for solutions like yours at every funnel stage.",
+        icon: "Zap",
+        title: "Catalyst Support",
+        description: "Quickly communicate important news and corporate developments.",
       },
     ],
     faqs: [
       {
-        question: "How long does SEO take to show results?",
-        answer: "SEO is a long-term investment. You'll typically see initial improvements in 3-6 months, with significant results at 6-12 months. The timeline depends on your starting point, competition, and investment level.",
+        question: "How do you ensure email deliverability?",
+        answer: "We use authenticated sending domains, maintain list hygiene, follow best practices for content, and monitor sender reputation to ensure high inbox placement rates.",
       },
       {
-        question: "Do you guarantee rankings?",
-        answer: "No reputable SEO agency can guarantee specific rankings because search algorithms are constantly evolving. We do guarantee transparent, ethical practices and a focus on driving qualified traffic and leads, not just rankings.",
+        question: "What investor databases do you have access to?",
+        answer: "We work with multiple investor database providers covering self-directed investors in North America and Europe, with filtering by sector interest, portfolio size, and trading activity.",
       },
       {
-        question: "What's included in your SEO service?",
-        answer: "Our comprehensive SEO service includes keyword research, on-page optimization, content strategy and creation, technical SEO recommendations, link building, and monthly reporting. We customize the mix based on your needs.",
+        question: "How often can we email investors?",
+        answer: "Campaign frequency depends on your news flow and the specific database. Typically, 1-2 campaigns per month is sustainable without list fatigue, with additional sends for material news.",
       },
       {
-        question: "How do you measure SEO success?",
-        answer: "We track keyword rankings, organic traffic, and most importantly, organic conversions and leads. We set up proper attribution to measure the true business impact of our SEO efforts.",
+        question: "Is investor email marketing compliant with regulations?",
+        answer: "Yes, all campaigns use permission-based lists and include proper disclaimers. We structure campaigns to comply with securities regulations and email marketing laws.",
       },
     ],
-    relatedServices: ["technical-seo", "publications", "campaigns"],
+    relatedServices: ["advertising", "content", "analytics"],
   },
-  "technical-seo": {
-    headline: "Technical SEO Services",
-    tagline: "Build the technical foundation that enables your content to rank and your site to perform",
+  social: {
+    headline: "Social & Video",
+    tagline: "Build executive visibility and investor engagement through social channels",
     features: [
       {
-        icon: "Code",
-        title: "Technical Audits",
-        description: "Comprehensive crawl and analysis to identify issues impacting search performance.",
+        icon: "Linkedin",
+        title: "LinkedIn Strategy",
+        description: "Executive thought leadership and company page optimization for investor visibility.",
       },
       {
-        icon: "Gauge",
-        title: "Core Web Vitals",
-        description: "Optimize LCP, INP, and CLS to meet Google's page experience requirements.",
+        icon: "Video",
+        title: "CEO Video Content",
+        description: "Professional investor presentation videos and executive interview content.",
       },
       {
-        icon: "SiteMap",
-        title: "Site Architecture",
-        description: "Structure your site for optimal crawlability and internal link flow.",
+        icon: "Youtube",
+        title: "YouTube Channel",
+        description: "Build a video library of investor education content and company updates.",
       },
       {
-        icon: "FileCode",
-        title: "Schema Markup",
-        description: "Implement structured data to enhance search listings and enable rich results.",
+        icon: "Twitter",
+        title: "Twitter/X Presence",
+        description: "Strategic posting and engagement for real-time investor communication.",
       },
       {
-        icon: "Globe",
-        title: "International SEO",
-        description: "Proper hreflang implementation and geo-targeting for multi-market sites.",
+        icon: "TrendingUp",
+        title: "Community Building",
+        description: "Build and engage an active community of retail investors and followers.",
       },
       {
-        icon: "Smartphone",
-        title: "Mobile Optimization",
-        description: "Ensure flawless mobile experience that meets Google's mobile-first indexing.",
+        icon: "BarChart3",
+        title: "Social Analytics",
+        description: "Track engagement, reach, and correlation with investor interest.",
       },
     ],
     process: [
       {
         step: 1,
-        title: "Technical Audit",
-        description: "Deep crawl analysis identifying indexation, crawlability, and rendering issues.",
+        title: "Audit & Strategy",
+        description: "Review current social presence and develop platform-specific strategies.",
       },
       {
         step: 2,
-        title: "Prioritized Roadmap",
-        description: "Organize findings by impact and effort to create an actionable improvement plan.",
+        title: "Content Calendar",
+        description: "Plan content mix including videos, posts, and engagement activities.",
       },
       {
         step: 3,
-        title: "Implementation Support",
-        description: "Work with your development team to implement fixes correctly and efficiently.",
+        title: "Production & Publishing",
+        description: "Produce content and maintain consistent publishing schedule.",
       },
       {
         step: 4,
-        title: "Validation & Monitoring",
-        description: "Verify fixes, monitor for regressions, and track performance improvements.",
+        title: "Engagement & Growth",
+        description: "Monitor comments, engage with followers, and grow audience organically.",
       },
     ],
     benefits: [
       {
-        icon: "Zap",
-        title: "Faster Load Times",
-        description: "Improved site speed enhances user experience and reduces bounce rates.",
+        icon: "Users",
+        title: "Executive Visibility",
+        description: "Position your CEO as a thought leader that investors want to follow.",
       },
       {
-        icon: "Search",
-        title: "Better Crawlability",
-        description: "Ensure search engines can discover and index all your important content.",
+        icon: "MessageSquare",
+        title: "Direct Engagement",
+        description: "Respond to investor questions and build relationships at scale.",
       },
       {
-        icon: "TrendingUp",
-        title: "Higher Rankings",
-        description: "Technical health is a foundational ranking factor that enables content to perform.",
+        icon: "Share2",
+        title: "Organic Reach",
+        description: "Quality content gets shared, extending your reach beyond paid channels.",
       },
       {
-        icon: "Shield",
-        title: "Future-Proofing",
-        description: "Stay ahead of algorithm updates by meeting technical best practices.",
+        icon: "Video",
+        title: "Visual Storytelling",
+        description: "Video content communicates your story more effectively than text alone.",
       },
     ],
     faqs: [
       {
-        question: "What's the difference between SEO and technical SEO?",
-        answer: "Technical SEO focuses on the infrastructure that enables search engines to crawl, index, and render your site. Content SEO focuses on creating content that ranks. Both are essential for a complete SEO strategy.",
+        question: "Should our CEO be active on social media?",
+        answer: "Executive social presence, particularly on LinkedIn, can significantly impact investor perception. We help CEOs build authentic presence without consuming excessive time.",
       },
       {
-        question: "Do you implement fixes or just provide recommendations?",
-        answer: "We provide detailed, developer-friendly recommendations and can work directly with your engineering team to ensure proper implementation. For smaller sites, we can handle implementation directly.",
+        question: "What type of video content works best?",
+        answer: "Short-form investor updates, site visit footage, and CEO commentary on industry trends perform well. We also produce longer investor presentation videos for detailed company overviews.",
       },
       {
-        question: "How often should we do a technical SEO audit?",
-        answer: "We recommend a comprehensive technical audit annually, with quarterly monitoring for sites that change frequently. Major site redesigns or platform migrations should always include a technical SEO review.",
+        question: "How do you handle negative comments?",
+        answer: "We monitor all channels and have protocols for responding to legitimate questions while appropriately managing negative or misleading comments.",
       },
       {
-        question: "Will technical SEO improvements break our site?",
-        answer: "When implemented correctly, no. We provide detailed specifications and work closely with your development team to ensure changes are deployed safely. We recommend staging environment testing before production deployment.",
+        question: "Can you manage our social accounts entirely?",
+        answer: "Yes, we offer full social media management including content creation, posting, and engagement. We also offer hybrid models where we provide content for your team to post.",
       },
     ],
-    relatedServices: ["seo", "campaigns", "publications"],
+    relatedServices: ["content", "advertising", "analytics"],
+  },
+  analytics: {
+    headline: "Analytics & Reporting",
+    tagline: "Measure campaign impact on shareholder acquisition and market performance",
+    features: [
+      {
+        icon: "BarChart3",
+        title: "Campaign Dashboards",
+        description: "Real-time visibility into campaign performance across all channels.",
+      },
+      {
+        icon: "Users",
+        title: "Shareholder Tracking",
+        description: "Monitor shareholder count growth and beneficial ownership changes.",
+      },
+      {
+        icon: "TrendingUp",
+        title: "Market Correlation",
+        description: "Correlate marketing activity with trading volume and price movement.",
+      },
+      {
+        icon: "Globe",
+        title: "Geographic Analysis",
+        description: "Understand where your investors are located and how they engage.",
+      },
+      {
+        icon: "FileText",
+        title: "Monthly Reports",
+        description: "Comprehensive monthly reports with insights and recommendations.",
+      },
+      {
+        icon: "Target",
+        title: "ROI Analysis",
+        description: "Calculate cost per acquired shareholder and campaign return on investment.",
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Tracking Setup",
+        description: "Implement comprehensive tracking across website, ads, and email.",
+      },
+      {
+        step: 2,
+        title: "Dashboard Configuration",
+        description: "Build custom dashboards showing metrics that matter to your business.",
+      },
+      {
+        step: 3,
+        title: "Ongoing Monitoring",
+        description: "Continuously monitor campaign performance and market indicators.",
+      },
+      {
+        step: 4,
+        title: "Reporting & Optimization",
+        description: "Deliver regular reports with actionable recommendations for improvement.",
+      },
+    ],
+    benefits: [
+      {
+        icon: "Eye",
+        title: "Full Visibility",
+        description: "See exactly how your IR budget is performing across all channels.",
+      },
+      {
+        icon: "Target",
+        title: "Data-Driven Decisions",
+        description: "Allocate budget to channels and tactics that deliver results.",
+      },
+      {
+        icon: "TrendingUp",
+        title: "Market Insights",
+        description: "Understand how marketing activity correlates with market performance.",
+      },
+      {
+        icon: "DollarSign",
+        title: "ROI Clarity",
+        description: "Know your cost per acquired shareholder and campaign effectiveness.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What metrics do you track?",
+        answer: "We track website traffic, engagement, lead generation, email performance, social metrics, and correlate with shareholder count, trading volume, and market cap changes.",
+      },
+      {
+        question: "How do you attribute market changes to marketing?",
+        answer: "While direct attribution is complex in public markets, we use timing analysis, geographic correlation, and statistical methods to understand marketing impact.",
+      },
+      {
+        question: "Can we access dashboards directly?",
+        answer: "Yes, clients receive login access to real-time dashboards. We also provide training on how to interpret the data and make decisions.",
+      },
+      {
+        question: "How often do you report?",
+        answer: "We provide weekly campaign updates and comprehensive monthly reports with analysis and recommendations. Additional reporting is available for active campaigns.",
+      },
+    ],
+    relatedServices: ["advertising", "email", "social"],
   },
 };

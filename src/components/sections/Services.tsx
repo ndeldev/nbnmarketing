@@ -1,138 +1,154 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { AUDIENCE_SEGMENTS } from "@/lib/constants";
+import { SERVICES, AUDIENCE_SEGMENTS } from "@/lib/constants";
+import {
+  Target,
+  FileText,
+  Globe,
+  Mail,
+  Video,
+  BarChart3,
+} from "lucide-react";
+
+// Map icon names to components
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Target,
+  FileText,
+  Globe,
+  Mail,
+  Video,
+  BarChart3,
+};
 
 // Simplified service list for cleaner sidebar
-const servicesList = [
-  { id: "strategy", label: "Business Strategy" },
-  { id: "planning", label: "Product Planning" },
-  { id: "insights", label: "Market Insights" },
-  { id: "content", label: "Content & Publications" },
-  { id: "outreach", label: "Outreach & Campaigns" },
-  { id: "seo", label: "SEO & Technical SEO" },
-] as const;
+const servicesList = SERVICES.map((s) => ({
+  id: s.id,
+  label: s.title,
+  icon: s.icon,
+}));
 
-// Content for each service by audience
+// Content for each service by audience segment
 const serviceContent: Record<
   string,
   Record<string, { headline: string; emphasis: string; description: string }>
 > = {
   startups: {
-    strategy: {
-      headline: "Turning ideas into",
-      emphasis: "clear direction",
+    advertising: {
+      headline: "Launching your story to",
+      emphasis: "the right investors",
       description:
-        "We help businesses turn complex ideas into clear, actionable strategies. By defining priorities, aligning teams, and structuring decisions, we support sustainable growth from early planning through execution. Every step is guided by clarity, focus, and long-term vision.",
-    },
-    planning: {
-      headline: "Building products with",
-      emphasis: "purpose",
-      description:
-        "Transform your product vision into a concrete roadmap. We help startups prioritize features, validate assumptions, and build products that resonate with your target market from day one.",
-    },
-    insights: {
-      headline: "Understanding markets with",
-      emphasis: "precision",
-      description:
-        "Data-driven market analysis that reveals opportunities others miss. We help you understand your competitive landscape, identify gaps, and position your offering for maximum impact.",
+        "Precision-targeted digital campaigns across Google, Bing, and programmatic networks. We help newly listed companies build initial shareholder awareness with efficient ad spend that reaches active retail investors in your sector.",
     },
     content: {
-      headline: "Creating content that",
-      emphasis: "establishes authority",
+      headline: "Establishing credibility",
+      emphasis: "from day one",
       description:
-        "Launch your brand into the market with compelling content that positions your startup as an industry innovator. Build credibility with investors and customers through strategic thought leadership.",
+        "CEO interviews, company profiles, and editorial features placed in leading financial publications. Build the third-party credibility that turns casual interest into invested shareholders.",
     },
-    outreach: {
-      headline: "Connecting with prospects",
-      emphasis: "at scale",
+    europe: {
+      headline: "Opening European markets",
+      emphasis: "early",
       description:
-        "Strategic outreach sequences designed to get meetings with decision-makers at target accounts. Personalized messaging that opens doors and builds meaningful B2B relationships.",
+        "Whether you're considering a Frankfurt dual-listing or want to tap into DACH region retail investors, we help emerging issuers establish European presence from the start.",
     },
-    seo: {
-      headline: "Building organic growth",
-      emphasis: "from the ground up",
+    email: {
+      headline: "Reaching verified investors",
+      emphasis: "directly",
       description:
-        "Establish the SEO foundation that will compound your organic traffic for years to come. Keyword strategy, technical optimization, and content that ranks.",
+        "Permission-based email campaigns to verified investor databases. Get your story in front of self-directed investors who actively trade junior market equities.",
+    },
+    social: {
+      headline: "Building executive visibility",
+      emphasis: "that attracts capital",
+      description:
+        "LinkedIn thought leadership and CEO video content that positions your leadership team as authorities worth investing in. Build the personal brand that builds shareholder confidence.",
+    },
+    analytics: {
+      headline: "Measuring what matters",
+      emphasis: "from the start",
+      description:
+        "Real-time dashboards that correlate your marketing spend with trading volume and shareholder acquisition. Know your cost per investor and optimize continuously.",
     },
   },
   scaleups: {
-    strategy: {
-      headline: "Scaling with",
-      emphasis: "strategic clarity",
+    advertising: {
+      headline: "Scaling awareness for",
+      emphasis: "your next catalyst",
       description:
-        "Navigate the complexities of rapid growth with proven frameworks. We help scale-ups maintain strategic focus while expanding operations, entering new markets, and building sustainable competitive advantages.",
-    },
-    planning: {
-      headline: "Evolving products for",
-      emphasis: "market leadership",
-      description:
-        "Take your product to the next level with advanced planning methodologies. Balance feature expansion with user experience, and build systems that scale with your growing customer base.",
-    },
-    insights: {
-      headline: "Deepening market",
-      emphasis: "intelligence",
-      description:
-        "Advanced analytics and competitive intelligence that inform strategic decisions. Understand market dynamics, customer segments, and emerging opportunities with sophisticated research.",
+        "Amplify your corporate milestones with coordinated advertising campaigns. Drilling results, resource estimates, product launches—turn news into trading volume with targeted investor reach.",
     },
     content: {
-      headline: "Scaling content",
-      emphasis: "systematically",
+      headline: "Deepening your",
+      emphasis: "investment story",
       description:
-        "Transform your content operation from ad-hoc to systematic with our publication frameworks. Consistent production, multi-format distribution, and industry-leading thought leadership.",
+        "Comprehensive media coverage that educates investors on your growth trajectory. Research reports, analyst coverage, and thought leadership that builds institutional awareness alongside retail.",
     },
-    outreach: {
-      headline: "Account-based engagement",
-      emphasis: "that converts",
+    europe: {
+      headline: "Maximizing your",
+      emphasis: "Frankfurt listing value",
       description:
-        "Sophisticated ABM programs that coordinate across your sales and marketing teams. Multi-threaded account engagement with CRM integration and sales enablement content.",
+        "Full-stack DACH region campaigns for companies ready to build serious European shareholder bases. German-language content, targeted advertising, and investor database access.",
     },
-    seo: {
-      headline: "Dominating your",
-      emphasis: "category",
+    email: {
+      headline: "Nurturing investors through",
+      emphasis: "your growth story",
       description:
-        "Content strategies designed to win the most competitive keywords in your space. Pillar content development, link building campaigns, and international SEO expansion.",
+        "Automated email sequences that keep your shareholder base engaged through corporate developments. Turn one-time visitors into long-term shareholders with strategic communication.",
+    },
+    social: {
+      headline: "Commanding attention",
+      emphasis: "in your sector",
+      description:
+        "Systematic social media presence that positions your company as the sector leader. YouTube investor presentations, Twitter engagement, and community building at scale.",
+    },
+    analytics: {
+      headline: "Optimizing for",
+      emphasis: "market cap growth",
+      description:
+        "Advanced analytics that correlate marketing campaigns with market performance. Attribution modeling, geographic analysis, and ROI reporting that informs strategic decisions.",
     },
   },
   enterprise: {
-    strategy: {
-      headline: "Transforming enterprises with",
-      emphasis: "bold vision",
+    advertising: {
+      headline: "Maintaining visibility with",
+      emphasis: "institutional reach",
       description:
-        "Guide large-scale organizational transformation with executive-level strategic consulting. We help enterprises navigate digital transformation, market evolution, and competitive disruption.",
-    },
-    planning: {
-      headline: "Orchestrating product",
-      emphasis: "portfolios",
-      description:
-        "Manage complex product ecosystems with enterprise-grade planning frameworks. Coordinate across business units, balance innovation with stability, and align products with corporate strategy.",
-    },
-    insights: {
-      headline: "Enterprise-grade",
-      emphasis: "market intelligence",
-      description:
-        "Comprehensive market analysis powered by proprietary data and expert analysis. Strategic intelligence that informs board-level decisions and long-term corporate strategy.",
+        "Sustained advertising programs that keep your company visible to both retail and institutional investors. Programmatic campaigns targeting family offices, fund managers, and high-net-worth individuals.",
     },
     content: {
-      headline: "Executive thought",
-      emphasis: "leadership",
+      headline: "Executive thought leadership",
+      emphasis: "at scale",
       description:
-        "Premium content programs that position your executives as industry authorities. Ghostwritten executive content, premium research partnerships, and global content localization.",
+        "Premium content programs positioning your C-suite as industry authorities. Ghostwritten executive content, premium research partnerships, and global content distribution.",
     },
-    outreach: {
-      headline: "Strategic account",
-      emphasis: "engagement",
+    europe: {
+      headline: "Sustaining European",
+      emphasis: "investor relations",
       description:
-        "Executive-level outreach programs for your most important strategic accounts. C-suite engagement strategies, event integration, and partnership development.",
+        "Ongoing European investor engagement programs. Localized content, sustained media presence, and relationship management across DACH region financial media.",
     },
-    seo: {
-      headline: "Building SEO",
-      emphasis: "centers of excellence",
+    email: {
+      headline: "Strategic shareholder",
+      emphasis: "communication",
       description:
-        "Build internal SEO capabilities while driving immediate organic performance improvements. Team training, process governance, and tool stack optimization.",
+        "Sophisticated email programs for established investor relations. Segmented communications for retail vs. institutional, catalyst announcements, and quarterly update sequences.",
+    },
+    social: {
+      headline: "Managing executive",
+      emphasis: "brand presence",
+      description:
+        "Full social media management for executives and corporate accounts. Consistent presence, community engagement, and crisis communication protocols.",
+    },
+    analytics: {
+      headline: "Enterprise-grade",
+      emphasis: "IR intelligence",
+      description:
+        "Comprehensive analytics dashboards for board-level reporting. Multi-channel attribution, competitive intelligence, and market correlation analysis.",
     },
   },
 };
@@ -165,29 +181,47 @@ function PillTab({
 
 export function Services() {
   const [selectedAudience, setSelectedAudience] = useState("startups");
-  const [selectedService, setSelectedService] = useState("strategy");
+  const [selectedService, setSelectedService] = useState("advertising");
+
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const currentContent =
     serviceContent[selectedAudience]?.[selectedService] ||
-    serviceContent.startups.strategy;
+    serviceContent.startups.advertising;
+
+  const currentService = SERVICES.find((s) => s.id === selectedService);
+  const IconComponent = currentService
+    ? iconMap[currentService.icon]
+    : Target;
 
   return (
-    <section className="py-24 lg:py-32">
+    <section ref={ref} className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header with Pill Tabs */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-12"
+        >
           {/* Left: Title */}
           <div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              What We Offer
+              Full-Stack Investor Relations
             </h2>
             <p className="mt-3 text-muted-foreground max-w-md">
-              Helping teams turn ideas into clear strategies and scalable solutions.
+              Integrated campaigns that build shareholder bases across North America and Europe.
             </p>
           </div>
 
           {/* Right: Pill Tabs */}
-          <div className="flex items-center gap-1 p-1.5 rounded-full pill-tab-container shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-center gap-1 p-1.5 rounded-full pill-tab-container shadow-sm"
+          >
             {AUDIENCE_SEGMENTS.map((segment) => (
               <PillTab
                 key={segment.id}
@@ -197,74 +231,108 @@ export function Services() {
                 {segment.label}
               </PillTab>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Main Content Area */}
         <div className="grid gap-6 md:grid-cols-12">
           {/* Service Selector - Left Sidebar */}
-          <div className="md:col-span-4 xl:col-span-3 order-2 md:order-1">
-            <div className="rounded-2xl bg-card border border-border/50 p-4 shadow-sm md:sticky md:top-24">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="md:col-span-4 xl:col-span-3 order-2 md:order-1"
+          >
+            <div className="rounded-2xl bg-card border border-border/50 p-4 shadow-soft md:sticky md:top-24">
               {/* Mobile: Horizontal scroll, Desktop: Vertical list */}
               <nav className="flex md:flex-col gap-2 md:gap-1 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-1 px-1 md:mx-0 md:px-0">
-                {servicesList.map((service) => (
-                  <button
-                    key={service.id}
-                    onClick={() => setSelectedService(service.id)}
-                    className={cn(
-                      "flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all whitespace-nowrap md:whitespace-normal md:w-full flex-shrink-0 md:flex-shrink",
-                      selectedService === service.id
-                        ? "bg-muted font-medium"
-                        : "hover:bg-muted/50 text-muted-foreground"
-                    )}
-                  >
-                    <span className="text-sm">{service.label}</span>
-                    {selectedService === service.id && (
-                      <span className="indicator-dot ml-2 md:ml-0" />
-                    )}
-                  </button>
-                ))}
+                {servicesList.map((service) => {
+                  const ServiceIcon = iconMap[service.icon] || Target;
+                  return (
+                    <button
+                      key={service.id}
+                      onClick={() => setSelectedService(service.id)}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all whitespace-nowrap md:whitespace-normal md:w-full flex-shrink-0 md:flex-shrink",
+                        selectedService === service.id
+                          ? "bg-muted font-medium"
+                          : "hover:bg-muted/50 text-muted-foreground"
+                      )}
+                    >
+                      <ServiceIcon className="h-4 w-4 flex-shrink-0" />
+                      <span className="text-sm">{service.label}</span>
+                      {selectedService === service.id && (
+                        <span className="indicator-dot ml-auto" />
+                      )}
+                    </button>
+                  );
+                })}
               </nav>
             </div>
-          </div>
+          </motion.div>
 
           {/* Service Details - Main Content */}
-          <div className="md:col-span-8 xl:col-span-9 order-1 md:order-2">
-            <div className="rounded-3xl bg-card border border-border/50 overflow-hidden shadow-sm">
-              {/* Visual Area - Gradient Placeholder */}
-              <div className="h-64 md:h-80 gradient-warm relative">
-                {/* Placeholder for illustration - will be replaced later */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-2xl bg-white/20 backdrop-blur-sm" />
-                </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="md:col-span-8 xl:col-span-9 order-1 md:order-2"
+          >
+            <div className="rounded-3xl bg-card border border-border/50 overflow-hidden shadow-soft">
+              {/* Visual Area - Gradient with Icon */}
+              <div className="h-64 md:h-80 gradient-warm relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedService}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <div className="w-32 h-32 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <IconComponent className="w-16 h-16 text-white/80" />
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* Content Area */}
               <div className="p-8 lg:p-10">
-                {/* Headline with italic emphasis */}
-                <h3 className="text-2xl font-bold">
-                  {currentContent.headline}{" "}
-                  <em className="font-serif">{currentContent.emphasis}</em>
-                </h3>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${selectedAudience}-${selectedService}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Headline with italic emphasis */}
+                    <h3 className="text-2xl font-bold">
+                      {currentContent.headline}{" "}
+                      <em className="font-serif text-fuji-nezu">{currentContent.emphasis}</em>
+                    </h3>
 
-                <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-                  {currentContent.description}
-                </p>
+                    <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+                      {currentContent.description}
+                    </p>
 
-                {/* CTAs matching reference design */}
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Button variant="outline" className="rounded-full px-6" asChild>
-                    <Link href={`/services/${selectedService}`}>
-                      Explore {servicesList.find(s => s.id === selectedService)?.label.toLowerCase()}
-                    </Link>
-                  </Button>
-                  <Button className="rounded-full px-6" asChild>
-                    <Link href="/contact">Schedule a call</Link>
-                  </Button>
-                </div>
+                    {/* CTAs matching reference design */}
+                    <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                      <Button variant="outline" className="rounded-full px-6" asChild>
+                        <Link href={`/services/${selectedService}`}>
+                          Learn more
+                        </Link>
+                      </Button>
+                      <Button className="rounded-full px-6" asChild>
+                        <Link href="/contact">Schedule a call</Link>
+                      </Button>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
