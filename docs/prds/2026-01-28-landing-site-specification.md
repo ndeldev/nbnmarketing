@@ -1,7 +1,7 @@
 # PRD: Meridian Landing Site Specification
 
 **Created:** 2026-01-28
-**Version:** 2.4.3
+**Version:** 2.4.4
 **Status:** Active
 **Last Updated:** 2026-01-28
 
@@ -42,6 +42,7 @@
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.4.4 | 2026-01-28 | Changed Hero background from video to static image (cliff/Milky Way) |
 | 2.4.3 | 2026-01-28 | Fixed header overlay by moving transitional copy outside sticky container |
 | 2.4.0 | 2026-01-28 | Added transitional copy section, updated market cap numbers |
 | 2.3.2 | 2026-01-28 | Gap reduction, dark background fill |
@@ -267,15 +268,47 @@
 | Campaigns executed | 200+ |
 | Continents covered | 3 |
 
-#### Background
+#### Background Options
+
+**Current (v2.4.4): Static Image**
+- **Image:** `/images/hero-bg-temp.jpg`
+- **Overlay:** 40% black opacity
+- **Texture:** Gradient overlay (fuji-nezu to toki-nezu at 30%)
+- **Description:** Night sky with Milky Way, person standing on cliff edge
+
+**Alternative: Animated Video (can revert)**
 - **Video:** `/videos/meridian-hero-v3-loop.mp4` (8s loop)
 - **Overlay:** 60% black opacity
-- **Texture:** Gradient overlay (fuji-nezu to toki-nezu at 30%)
+- **Features:** Video-synced glow animation on metrics card
+- **Documentation:** See `docs/prds/2026-01-27-video-animation-sync.md`
 
-#### Video-Synced Glow Animation
+To revert to video background, replace the image code block with:
+```tsx
+{/* Background video - looping */}
+<div className="absolute inset-0 -z-10">
+  <video
+    ref={videoRef}
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src="/videos/meridian-hero-v3-loop.mp4" type="video/mp4" />
+  </video>
+  {/* Dark opacity overlay - 60% for good text readability */}
+  <div className="absolute inset-0 bg-black/60" />
+  {/* Subtle texture overlay */}
+  <div className="absolute inset-0 opacity-30 mix-blend-soft-light bg-gradient-to-br from-fuji-nezu/10 via-transparent to-toki-nezu/10" />
+</div>
+```
+
+#### Video-Synced Glow Animation (when using video)
 - Card box-shadow pulses with video progress
 - Text shadow intensity follows video keypoints
 - Peak glow at 50% video progress (4 seconds)
+- Uses `requestAnimationFrame` + `video.currentTime` for perfect sync
+- See `docs/prds/2026-01-27-video-animation-sync.md` for full implementation
 
 ---
 

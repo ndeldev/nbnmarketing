@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -13,103 +12,36 @@ const metrics = [
   { value: "3", label: "Continents covered" },
 ];
 
-// Video duration in seconds
-const VIDEO_DURATION = 8;
-
-// Progress keypoints (as 0-1 values based on 8s video)
-const PROGRESS_KEYPOINTS = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1];
-
-// Glow intensity values at each keypoint
-const GLOW_BLUR = [0, 0, 20, 40, 50, 35, 15, 0, 0];
-const GLOW_OPACITY = [0, 0, 0.15, 0.3, 0.35, 0.25, 0.1, 0, 0];
-const TEXT_GLOW_BLUR = [0, 0, 10, 20, 25, 18, 8, 0, 0];
-const TEXT_GLOW_OPACITY = [0, 0, 0.5, 0.8, 0.9, 0.6, 0.3, 0, 0];
-const BG_GLOW_OPACITY = [0.3, 0.3, 0.5, 0.8, 0.9, 0.7, 0.4, 0.3, 0.3];
-const BG_GLOW_SCALE = [1, 1, 1.02, 1.05, 1.06, 1.03, 1.01, 1, 1];
-
-// Interpolate value from keypoints
-function interpolate(progress: number, keypoints: number[], values: number[]): number {
-  if (progress <= 0) return values[0];
-  if (progress >= 1) return values[values.length - 1];
-
-  for (let i = 0; i < keypoints.length - 1; i++) {
-    if (progress >= keypoints[i] && progress <= keypoints[i + 1]) {
-      const t = (progress - keypoints[i]) / (keypoints[i + 1] - keypoints[i]);
-      return values[i] + t * (values[i + 1] - values[i]);
-    }
-  }
-  return values[0];
-}
+/*
+ * VIDEO BACKGROUND CODE (preserved for revert)
+ * To restore video background with glow animation:
+ * 1. Uncomment the video-related imports, constants, and hooks below
+ * 2. Replace the <img> background with the <video> element
+ * See docs/prds/2026-01-28-landing-site-specification.md for full instructions
+ *
+ * Video sync code:
+ * - VIDEO_DURATION = 8
+ * - PROGRESS_KEYPOINTS, GLOW_BLUR, GLOW_OPACITY arrays
+ * - interpolate() function
+ * - videoRef, mounted state, glowState
+ * - useEffect for video.currentTime sync
+ * - cardBoxShadow, textShadow computed styles
+ * See docs/prds/2026-01-27-video-animation-sync.md for full implementation
+ */
 
 export function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [mounted, setMounted] = useState(false);
-  const [glowState, setGlowState] = useState({
-    blur: 0,
-    opacity: 0,
-    textBlur: 0,
-    textOpacity: 0,
-    bgOpacity: 0.3,
-    bgScale: 1,
-  });
-
-  // Mark as mounted (client-side only)
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Sync animation progress to video currentTime
-  useEffect(() => {
-    if (!mounted) return;
-
-    const video = videoRef.current;
-    if (!video) return;
-
-    let animationId: number;
-    const updateGlow = () => {
-      if (video && !video.paused) {
-        const progress = video.currentTime / VIDEO_DURATION;
-        setGlowState({
-          blur: interpolate(progress, PROGRESS_KEYPOINTS, GLOW_BLUR),
-          opacity: interpolate(progress, PROGRESS_KEYPOINTS, GLOW_OPACITY),
-          textBlur: interpolate(progress, PROGRESS_KEYPOINTS, TEXT_GLOW_BLUR),
-          textOpacity: interpolate(progress, PROGRESS_KEYPOINTS, TEXT_GLOW_OPACITY),
-          bgOpacity: interpolate(progress, PROGRESS_KEYPOINTS, BG_GLOW_OPACITY),
-          bgScale: interpolate(progress, PROGRESS_KEYPOINTS, BG_GLOW_SCALE),
-        });
-      }
-      animationId = requestAnimationFrame(updateGlow);
-    };
-    animationId = requestAnimationFrame(updateGlow);
-
-    return () => cancelAnimationFrame(animationId);
-  }, [mounted]);
-
-  // Generate style strings (only apply on client after mount)
-  const cardBoxShadow = mounted
-    ? `0 0 ${glowState.blur}px rgba(255,200,100,${glowState.opacity}), inset 0 0 ${glowState.blur * 2}px rgba(255,200,100,${glowState.opacity * 0.5})`
-    : undefined;
-
-  const textShadow = mounted
-    ? `0 0 ${glowState.textBlur}px rgba(255,200,100,${glowState.textOpacity})`
-    : undefined;
 
   return (
     <section className="relative h-screen overflow-hidden" data-dark-section="true">
-      {/* Background video - looping */}
+      {/* Background image */}
       <div className="absolute inset-0 -z-10">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
+        <img
+          src="/images/hero-bg-temp.jpg"
+          alt=""
           className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/meridian-hero-v3-loop.mp4" type="video/mp4" />
-        </video>
-        {/* Dark opacity overlay - 60% for good text readability */}
-        <div className="absolute inset-0 bg-black/60" />
+        />
+        {/* Dark opacity overlay - 40% for good text readability with this image */}
+        <div className="absolute inset-0 bg-black/40" />
         {/* Subtle texture overlay */}
         <div className="absolute inset-0 opacity-30 mix-blend-soft-light bg-gradient-to-br from-fuji-nezu/10 via-transparent to-toki-nezu/10" />
       </div>
