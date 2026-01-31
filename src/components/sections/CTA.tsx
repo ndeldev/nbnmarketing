@@ -14,6 +14,7 @@ export function CTA() {
     <section
       ref={ref}
       className="relative overflow-hidden bg-primary py-24 lg:py-32"
+      data-dark-section="true"
     >
       {/* Background decoration with floating animation */}
       <div className="absolute inset-0 -z-10">

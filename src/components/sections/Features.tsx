@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { BentoCard, BentoCardWave } from "@/components/ui/bento-card";
+import { BentoCardWave, BentoCardWithImage } from "@/components/ui/bento-card";
 import { Globe, Pickaxe, BarChart3, Sparkles } from "lucide-react";
 
 const waveFeature = {
@@ -43,7 +43,7 @@ export function Features() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 bg-muted/30">
+    <section ref={ref} className="py-24 lg:py-32 bg-fuji-nezu/60">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -85,41 +85,23 @@ export function Features() {
             {/* Right column - 2 stacked cards */}
             <div className="md:w-1/3 flex flex-col gap-4 md:gap-6">
               <motion.div variants={cardVariants} className="flex-1">
-                <BentoCard className="h-full">
-                  <div>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10"
-                    >
-                      <Globe className="h-6 w-6 text-primary" />
-                    </motion.div>
-                    <h3 className="mt-5 text-xl font-semibold">Global Reach</h3>
-                    <p className="mt-2 text-muted-foreground leading-relaxed text-sm">
-                      Active investor networks across North America and Europe.
-                      We reach shareholders where they are.
-                    </p>
-                  </div>
-                </BentoCard>
+                <BentoCardWithImage
+                  title="Global Reach"
+                  description="Active investor networks across North America and Europe. We reach shareholders where they are."
+                  image="/images/features/dedicated-teams.jpg"
+                  icon={<Globe className="h-5 w-5 text-primary" />}
+                  className="h-full"
+                />
               </motion.div>
 
               <motion.div variants={cardVariants} className="flex-1">
-                <BentoCard className="h-full">
-                  <div>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10"
-                    >
-                      <Pickaxe className="h-6 w-6 text-primary" />
-                    </motion.div>
-                    <h3 className="mt-5 text-xl font-semibold">Sector Expertise</h3>
-                    <p className="mt-2 text-muted-foreground leading-relaxed text-sm">
-                      Deep experience with mining, tech, and life sciences. We
-                      speak your industry&apos;s language.
-                    </p>
-                  </div>
-                </BentoCard>
+                <BentoCardWithImage
+                  title="Sector Expertise"
+                  description="Deep experience with mining, tech, and life sciences. We speak your industry's language."
+                  image="/images/features/creative.jpg"
+                  icon={<Pickaxe className="h-5 w-5 text-primary" />}
+                  className="h-full"
+                />
               </motion.div>
             </div>
           </div>
@@ -127,41 +109,23 @@ export function Features() {
           {/* Bottom row: 2 equal cards */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             <motion.div variants={cardVariants} className="md:w-1/2">
-              <BentoCard className="h-full">
-                <div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10"
-                  >
-                    <BarChart3 className="h-6 w-6 text-primary" />
-                  </motion.div>
-                  <h3 className="mt-6 text-xl font-semibold">Measurable Results</h3>
-                  <p className="mt-3 text-muted-foreground leading-relaxed">
-                    We track what matters: shareholder growth, trading volume, and
-                    market cap movement. Real-time dashboards show campaign impact.
-                  </p>
-                </div>
-              </BentoCard>
+              <BentoCardWithImage
+                title="Measurable Results"
+                description="We track what matters: shareholder growth, trading volume, and market cap movement. Real-time dashboards show campaign impact."
+                image="/images/features/transparency.jpg"
+                icon={<BarChart3 className="h-5 w-5 text-primary" />}
+                className="h-full"
+              />
             </motion.div>
 
             <motion.div variants={cardVariants} className="md:w-1/2">
-              <BentoCard className="h-full">
-                <div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10"
-                  >
-                    <Sparkles className="h-6 w-6 text-primary" />
-                  </motion.div>
-                  <h3 className="mt-6 text-xl font-semibold">Compliance Aware</h3>
-                  <p className="mt-3 text-muted-foreground leading-relaxed">
-                    We understand regulatory requirements for TSX-V, CSE, and Frankfurt.
-                    All campaigns are structured for compliance.
-                  </p>
-                </div>
-              </BentoCard>
+              <BentoCardWithImage
+                title="Compliance Aware"
+                description="We understand regulatory requirements for TSX-V, CSE, and Frankfurt. All campaigns are structured for compliance."
+                image="/images/features/security.jpg"
+                icon={<Sparkles className="h-5 w-5 text-primary" />}
+                className="h-full"
+              />
             </motion.div>
           </div>
         </motion.div>

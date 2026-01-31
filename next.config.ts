@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   // Enable standalone output for Docker deployment
   output: "standalone",
 
+  // Disable dev indicators (the N badge in bottom right)
+  devIndicators: false,
+
   // Enable AVIF and WebP image formats for better compression
   images: {
     formats: ["image/avif", "image/webp"],

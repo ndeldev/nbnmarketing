@@ -64,6 +64,56 @@ export function BentoCardFeatured({
   );
 }
 
+// Card with image header
+interface BentoCardWithImageProps {
+  title: string;
+  description: string;
+  image: string;
+  icon?: React.ReactNode;
+  className?: string;
+}
+
+export function BentoCardWithImage({
+  title,
+  description,
+  image,
+  icon,
+  className,
+}: BentoCardWithImageProps) {
+  return (
+    <div
+      className={cn(
+        "rounded-2xl border border-border/50 bg-card overflow-hidden shadow-soft card-hover",
+        className
+      )}
+    >
+      {/* Image area */}
+      <div className="relative h-32 md:h-40">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+        {icon && (
+          <div className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-sm">
+            {icon}
+          </div>
+        )}
+      </div>
+      {/* Content */}
+      <div className="p-5 md:p-6">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="mt-2 text-muted-foreground leading-relaxed text-sm">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // Wave card with image and animated wave effect
 interface BentoCardWaveProps {
   title: string;

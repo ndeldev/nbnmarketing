@@ -1,25 +1,25 @@
 # Meridian Marketing Site
 
-**Version:** 1.1.0
+**Version:** 2.2.0
 **Status:** Production Ready
 
-B2B marketing agency website built with Next.js 16, optimized for SEO and performance.
+Capital markets communications website built with Next.js 16, featuring AI-powered image and video generation.
 
-## Version 1.0.0 Features
+## Features
 
+### Core Site
 - **Homepage** - Hero, Services preview, Features, Stats, CTA sections
-- **Services Overview** (`/services`) - Grid of all 7 services
-- **Individual Service Pages** - 7 detail pages with:
-  - Features grid
-  - Process section (numbered steps)
-  - Benefits section
-  - FAQ with JSON-LD schema
-  - Related services
-- **About Page** - Company information
-- **Contact Page** - Contact form
-- **Case Studies Page** - Portfolio showcase
+- **Services Overview** (`/services`) - IR-focused service offerings
+- **Individual Service Pages** - Detail pages with features, process, FAQ
+- **Blog** - Content marketing articles
+- **Resources** - Investor relations resources
 - **SEO Infrastructure** - Sitemap, robots.txt, JSON-LD structured data
 - **Docker Support** - Dockerfile and docker-compose.yml
+
+### AI Media Generation (v2.1.0)
+- **Gemini Image Generation** - Text-to-image, image editing, multi-turn sessions
+- **Imagen Generation** - High-fidelity text-to-image (Standard/Ultra/Fast)
+- **Veo Video Generation** - AI video generation with seamless loops
 
 ## Quick Start
 
@@ -86,7 +86,55 @@ export const SITE_URL = "https://yourdomain.com";
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+
+# AI Image Generation (optional)
+GOOGLE_AI_API_KEY=your-google-ai-api-key
+ENABLE_GEMINI_GENERATION=true
+ENABLE_IMAGEN_GENERATION=true
+ENABLE_VEO_GENERATION=true
 ```
+
+## AI Image Generation API
+
+Generate images using Google's Gemini and Imagen models.
+
+### Generate with Gemini (Nano Banana)
+
+```bash
+curl -X POST http://localhost:7777/api/image/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "service": "gemini",
+    "prompt": "A mountain landscape at sunset",
+    "model": "gemini-3-pro-image-preview",
+    "aspectRatio": "16:9",
+    "imageSize": "2K"
+  }'
+```
+
+### Generate with Imagen
+
+```bash
+curl -X POST http://localhost:7777/api/image/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "service": "imagen",
+    "prompt": "A coffee mug on a wooden table",
+    "model": "imagen-4.0-generate-001",
+    "numberOfImages": 4
+  }'
+```
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/image/generate` | POST | Generate images (Gemini or Imagen) |
+| `/api/image/edit` | POST | Edit images with text (Gemini only) |
+| `/api/image/status/[jobId]` | GET | Poll job status |
+| `/api/image/download?jobId=&index=` | GET | Download generated image |
+| `/api/video/generate` | POST | Generate video (Veo) |
+| `/api/video/status/[jobId]` | GET | Poll video job status |
 
 ## Features
 

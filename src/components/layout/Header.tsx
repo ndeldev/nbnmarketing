@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BRAND_NAME, NAV_LINKS } from "@/lib/constants";
@@ -11,6 +11,38 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [language, setLanguage] = useState<"en" | "de">("en");
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [onDarkSection, setOnDarkSection] = useState(false); // Start false, detect on mount
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger pill form after scrolling past ~80% of viewport height (hero section)
+      const heroThreshold = window.innerHeight * 0.8;
+      setScrolled(window.scrollY > heroThreshold);
+
+      // Detect if header is over a dark section
+      const headerY = scrolled ? 40 : 60; // Approximate header center position
+
+      // Get all dark sections (marked with data attribute)
+      const darkSections = document.querySelectorAll('[data-dark-section="true"]');
+      let isOverDark = false;
+
+      // Check each dark section to see if header overlaps
+      darkSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= headerY && rect.bottom >= headerY) {
+          isOverDark = true;
+        }
+      });
+
+      setOnDarkSection(isOverDark);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Check initial state
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrolled]);
 
   const toggleLanguage = () => {
     setLanguage(language === "en" ? "de" : "en");
@@ -18,20 +50,47 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-transparent">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+    <header
+      className={cn(
+        "fixed z-50 w-full transition-all duration-300",
+        scrolled ? "top-4 px-6 lg:px-8" : "top-0"
+      )}
+    >
+      <nav
+        className={cn(
+          "mx-auto flex items-center justify-between transition-all duration-300",
+          scrolled
+            ? "max-w-4xl px-8 py-2.5 rounded-full bg-white/20 backdrop-blur-xl shadow-lg shadow-black/5 border border-white/20"
+            : "max-w-7xl px-6 py-5 lg:px-8"
+        )}
+      >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight text-white">{BRAND_NAME}</span>
+          <span
+            className={cn(
+              "text-xl font-bold tracking-tight transition-colors duration-300",
+              onDarkSection ? "text-white" : "text-foreground"
+            )}
+          >
+            {BRAND_NAME}
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:items-center lg:gap-x-10">
+        <div className={cn(
+          "hidden lg:flex lg:items-center transition-all duration-300",
+          scrolled ? "lg:gap-x-6" : "lg:gap-x-10"
+        )}>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="nav-link-underline text-sm font-medium text-white/70 transition-colors hover:text-white"
+              className={cn(
+                "nav-link-underline text-sm font-medium transition-colors",
+                onDarkSection
+                  ? "text-white/90 hover:text-white"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
             >
               {link.label}
             </Link>
@@ -44,7 +103,12 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1 px-2 py-1 text-sm text-white/70 hover:text-white transition-colors"
+              className={cn(
+                "flex items-center gap-1 px-2 py-1 text-sm transition-colors",
+                onDarkSection
+                  ? "text-white/90 hover:text-white"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
             >
               {language.toUpperCase()}
               <ChevronDown className={cn("h-3 w-3 transition-transform", langMenuOpen && "rotate-180")} />
@@ -79,7 +143,15 @@ export function Header() {
           </div>
 
           {/* CTA */}
-          <Button className="rounded-full px-6 bg-white text-shikoku hover:bg-white/90" asChild>
+          <Button
+            className={cn(
+              "rounded-full px-6 transition-colors duration-300",
+              onDarkSection
+                ? "bg-white text-shikoku hover:bg-white/90"
+                : "bg-shikoku text-white hover:bg-shikoku/90"
+            )}
+            asChild
+          >
             <Link href="/contact">Get Started</Link>
           </Button>
         </div>
@@ -87,7 +159,12 @@ export function Header() {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="lg:hidden p-2 -mr-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+          className={cn(
+            "lg:hidden p-2 -mr-2 rounded-lg transition-colors",
+            onDarkSection
+              ? "text-white hover:bg-white/10"
+              : "text-foreground hover:bg-muted"
+          )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -102,7 +179,8 @@ export function Header() {
       {/* Mobile Navigation - Full screen overlay */}
       <div
         className={cn(
-          "fixed inset-0 top-[73px] z-40 lg:hidden transition-all duration-200",
+          "fixed inset-0 z-40 lg:hidden transition-all duration-200",
+          scrolled ? "top-[72px]" : "top-[73px]",
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"

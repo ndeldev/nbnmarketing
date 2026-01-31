@@ -5,6 +5,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-01-28
+
+### Added - Abstract Hero Image Concepts
+- Digital Advertising hero image prompt concepts (6 abstract variations)
+- Focus on animated backgrounds without people
+- Concepts: Precision Grid, Signal Ripples, Neural Constellation, Beacon Archipelago, Focus Lens, Magnetic Field
+
+---
+
+## [2.1.0] - 2026-01-27
+
+### Added - AI Image Generation Services
+
+Integrated Google's Gemini and Imagen APIs for AI-powered image generation.
+
+**New Services:**
+| Service | Models | Use Case |
+|---------|--------|----------|
+| Gemini (Nano Banana) | `gemini-3-pro-image-preview`, `gemini-2.5-flash-image` | Image editing, multi-turn, complex compositions |
+| Imagen | `imagen-4.0-generate-001`, `imagen-4.0-ultra-generate-001`, `imagen-4.0-fast-generate-001` | Fast text-to-image generation |
+
+**API Endpoints:**
+- `POST /api/image/generate` - Generate images (supports both Gemini and Imagen)
+- `POST /api/image/edit` - Edit existing images (Gemini only)
+- `GET /api/image/status/[jobId]` - Poll job status
+- `GET /api/image/download` - Download generated images
+
+**Gemini Features:**
+- Text-to-image generation with up to 4K resolution
+- Image-to-image editing with text instructions
+- Multi-turn editing sessions for iterative refinement
+- Thinking mode for complex compositions (configurable token budget)
+- Up to 14 reference images for composition
+- Google Search grounding for real-time data
+
+**Imagen Features:**
+- High-fidelity text-to-image generation
+- Multiple model variants (Standard, Ultra, Fast)
+- Up to 4 images per request
+- Aspect ratios: 1:1, 3:4, 4:3, 9:16, 16:9
+
+**New Files:**
+```
+src/lib/services/gemini/    # Gemini service layer
+src/lib/services/imagen/    # Imagen service layer
+src/app/api/image/          # Image generation API routes
+```
+
+**Environment Variables:**
+```bash
+GOOGLE_AI_API_KEY=your-api-key
+ENABLE_GEMINI_GENERATION=true
+ENABLE_IMAGEN_GENERATION=true
+```
+
+---
+
 ## [2.0.1] - 2026-01-26
 
 ### Fixed - Theme & Styling Restoration

@@ -1,4 +1,5 @@
 export { Hero } from "./Hero";
+export { AudienceSelector } from "./AudienceSelector";
 export { Services } from "./Services";
 export { Features } from "./Features";
 export { CTA } from "./CTA";

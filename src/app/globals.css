@@ -186,6 +186,15 @@
   }
 }
 
+/* Subtle scroll snap for sections */
+html {
+  scroll-snap-type: y proximity;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+}
+
 /* Gradient Placeholders for Visual Areas */
 .gradient-warm {
   background: linear-gradient(
