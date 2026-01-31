@@ -8,6 +8,7 @@ This folder contains all project documentation for the Meridian marketing site.
 - **[STYLING.md](../STYLING.md)** - Design system and CSS utilities
 - **[CONTRIBUTING.md](../CONTRIBUTING.md)** - Git workflow and contribution guidelines
 - **[CHANGELOG.md](../CHANGELOG.md)** - Version history
+- **Deployment:** Auto-deploys to Vercel on push to main ([meridian-sigma-three.vercel.app](https://meridian-sigma-three.vercel.app))
 
 ## Folder Structure
 

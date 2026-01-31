@@ -21,6 +21,30 @@ docker compose up -d              # Build and run
 docker build -t marketing-site .  # Manual build
 ```
 
+## Deployment
+
+**GitHub Repository:** [ndeldev/meridian](https://github.com/ndeldev/meridian)
+
+**Vercel Deployment:**
+- Production URL: https://meridian-sigma-three.vercel.app
+- Auto-deploys on push to `main` branch
+- Preview deployments for pull requests
+
+**Vercel Project Details:**
+- Project: `meridian`
+- Team: `ndels-projects-7138abea`
+- Framework: Next.js (auto-detected)
+- Node version: 24.x
+
+**Checking Deployment Status:**
+```bash
+# Via Vercel MCP (if connected)
+mcp__vercel__get_project teamId="ndels-projects-7138abea" projectId="meridian"
+
+# Via Vercel CLI
+vercel list
+```
+
 ## Architecture
 
 ### Data Flow
