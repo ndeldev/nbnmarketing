@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.5] - 2026-01-31
+
+### Fixed
+- Hero.tsx build error: Removed undefined variable references (`cardBoxShadow`, `textShadow`, `mounted`, `glowState`) left over from video-to-image switch
+
+### Added - Deployment Documentation
+- Added Deployment section to CLAUDE.md with GitHub repo URL and Vercel project details
+- Added deployment quick link to docs/README.md
+- GitHub repo: ndeldev/meridian
+- Vercel production URL: meridian-sigma-three.vercel.app
+- Auto-deploys on push to main branch
+
+See: `docs/changelogs/2026-01-31-deployment-setup.md` for full details.
+
+---
+
 ## [2.2.0] - 2026-01-28
 
 ### Added - Abstract Hero Image Concepts

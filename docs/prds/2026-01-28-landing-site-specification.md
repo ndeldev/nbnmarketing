@@ -1,9 +1,9 @@
 # PRD: Meridian Landing Site Specification
 
 **Created:** 2026-01-28
-**Version:** 2.4.4
+**Version:** 2.4.5
 **Status:** Active
-**Last Updated:** 2026-01-28
+**Last Updated:** 2026-01-31
 
 ---
 
@@ -42,6 +42,7 @@
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.4.5 | 2026-01-31 | Fixed Hero build error, added deployment documentation (GitHub + Vercel) |
 | 2.4.4 | 2026-01-28 | Changed Hero background from video to static image (cliff/Milky Way) |
 | 2.4.3 | 2026-01-28 | Fixed header overlay by moving transitional copy outside sticky container |
 | 2.4.0 | 2026-01-28 | Added transitional copy section, updated market cap numbers |
