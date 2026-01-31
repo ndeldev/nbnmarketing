@@ -128,21 +128,14 @@ export function Hero() {
               {/* Glassmorphism card with video-synced glow */}
               <motion.div
                 className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-5"
-                style={{ boxShadow: cardBoxShadow }}
               >
-                {/* Card header with glow */}
-                <motion.p
-                  className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/70"
-                  style={{ textShadow }}
-                >
+                {/* Card header */}
+                <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/70">
                   Performance Data
-                </motion.p>
-                <motion.h3
-                  className="mt-0.5 text-sm font-semibold text-white/90"
-                  style={{ textShadow }}
-                >
+                </p>
+                <h3 className="mt-0.5 text-sm font-semibold text-white/90">
                   Client Results
-                </motion.h3>
+                </h3>
 
                 {/* Metrics with text glow synced to video */}
                 <div className="mt-5 space-y-4">
@@ -153,18 +146,12 @@ export function Hero() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
                     >
-                      <motion.p
-                        className="text-2xl font-bold text-white"
-                        style={{ textShadow }}
-                      >
+                      <p className="text-2xl font-bold text-white">
                         {metric.value}
-                      </motion.p>
-                      <motion.p
-                        className="text-[11px] text-white/80"
-                        style={{ textShadow }}
-                      >
+                      </p>
+                      <p className="text-[11px] text-white/80">
                         {metric.label}
-                      </motion.p>
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -176,14 +163,8 @@ export function Hero() {
                 </p>
               </motion.div>
 
-              {/* Decorative glow - video synced */}
-              <div
-                className="absolute -inset-8 -z-10 rounded-3xl bg-fuji-nezu/10 blur-3xl"
-                style={mounted ? {
-                  opacity: glowState.bgOpacity,
-                  transform: `scale(${glowState.bgScale})`,
-                } : undefined}
-              />
+              {/* Decorative glow */}
+              <div className="absolute -inset-8 -z-10 rounded-3xl bg-fuji-nezu/10 blur-3xl opacity-50" />
             </div>
           </motion.div>
         </div>
