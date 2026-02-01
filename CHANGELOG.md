@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-02-01
+
+### Refactoring - Codebase Cleanup & Infrastructure
+
+Major refactoring release focused on maintainability and production readiness.
+
+**Code Organization:**
+- Extracted Stats sub-components (AnimatedNumber, StatCard, PillTab)
+- Created centralized `src/lib/icons.ts` with 47 icons
+- Created `src/lib/animations.ts` with shared animation constants
+- Created reusable `PageHero` component (used by 6 pages)
+- Created reusable `SectionHeader` component
+- Moved service content/images to constants.ts
+
+**Dead Code Removal:**
+- Deleted unused `AudienceSelector.tsx`
+- Removed unused `getPostsByTag()` from blog.ts
+- Removed ~45 lines of unused CSS
+
+**Infrastructure:**
+- Added `error.tsx` global error boundary
+- Added `not-found.tsx` custom 404 page
+- Added `loading.tsx` global loading spinner
+- Added skeleton loading states for dynamic routes
+- Added HTML sanitization to blog content renderer
+
+**Styling:**
+- Standardized card hover effects using `.card-hover` class
+- Added `.text-shadow-hero`, `.text-shadow-dark`, `.eyebrow` utilities
+
+**Metrics:**
+- Stats.tsx: 322 → ~175 lines (-46%)
+- Services.tsx: 370 → ~220 lines (-41%)
+- Lint issues: 20 → 14 (-30%)
+
+See: `docs/changelogs/2026-02-01-codebase-refactor.md` for full details.
+
+---
+
 ## [2.4.5] - 2026-01-31
 
 ### Fixed

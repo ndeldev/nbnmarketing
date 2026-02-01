@@ -1,19 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  Target,
-  FileText,
-  Globe,
-  Mail,
-  Video,
-  BarChart3,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CTA } from "@/components/sections";
+import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { SERVICES } from "@/lib/constants";
+import { getIcon } from "@/lib/icons";
 
 export const metadata: Metadata = genMeta({
   title: "Investor Relations Services",
@@ -23,44 +16,24 @@ export const metadata: Metadata = genMeta({
   image: "/og-services.jpg",
 });
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Target,
-  FileText,
-  Globe,
-  Mail,
-  Video,
-  BarChart3,
-};
-
 export default function ServicesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-muted/30 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Investor Relations Services
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              From digital advertising to analytics reporting, we offer
-              full-stack IR services designed to build shareholder bases across
-              North America and Europe.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Investor Relations Services"
+        description="From digital advertising to analytics reporting, we offer full-stack IR services designed to build shareholder bases across North America and Europe."
+      />
 
       {/* Services Grid */}
       <section className="py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((service) => {
-              const Icon = iconMap[service.icon] || Target;
+              const Icon = getIcon(service.icon);
               return (
                 <Card
                   key={service.id}
-                  className="group relative overflow-hidden transition-shadow hover:shadow-lg"
+                  className="group relative overflow-hidden card-hover"
                 >
                   <CardContent className="p-8">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20">

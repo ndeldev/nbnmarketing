@@ -15,7 +15,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
 
   if (featured) {
     return (
-      <Card className="group overflow-hidden transition-shadow hover:shadow-lg">
+      <Card className="group overflow-hidden card-hover">
         <Link href={`/blog/${post.slug}`}>
           <div className="grid md:grid-cols-2 gap-6">
             {post.image && (
@@ -62,7 +62,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   }
 
   return (
-    <Card className="group overflow-hidden transition-shadow hover:shadow-lg">
+    <Card className="group overflow-hidden card-hover">
       <Link href={`/blog/${post.slug}`}>
         {post.image && (
           <div className="aspect-video bg-muted overflow-hidden">

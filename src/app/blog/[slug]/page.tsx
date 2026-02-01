@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BlogHeader, BlogCard } from "@/components/blog";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd } from "@/components/seo";
 import { CTA } from "@/components/sections";
 import {
   generateMetadata as genMeta,
@@ -53,27 +53,45 @@ export async function generateMetadata({
   });
 }
 
-// Simple markdown to HTML converter for basic content
+/**
+ * Escape HTML entities to prevent XSS
+ * Note: Blog content comes from hardcoded TypeScript in lib/blog.ts (trusted),
+ * but we sanitize as defense-in-depth in case content source changes.
+ */
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
+}
+
+/**
+ * Simple markdown to HTML converter for basic content
+ * Security: Content is escaped first, then markdown patterns are converted to safe HTML.
+ * Only allows specific HTML structures (headers, lists, emphasis) - no raw HTML passthrough.
+ */
 function renderContent(content: string): string {
-  let html = content
+  // First escape any HTML to prevent injection
+  let html = escapeHtml(content)
     // Headers
-    .replace(/^### (.+)$/gm, '<h3 id="heading-$1" class="text-xl font-semibold mt-8 mb-4">$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2 id="heading-$1" class="text-2xl font-bold mt-10 mb-4">$1</h2>')
+    .replace(/^### (.+)$/gm, '<h3 class="text-xl font-semibold mt-8 mb-4">$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold mt-10 mb-4">$1</h2>')
     // Bold
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     // Italic
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     // Unordered lists
     .replace(/^- (.+)$/gm, '<li class="ml-4">$1</li>')
-    // Ordered lists with checkboxes
-    .replace(/^- \[ \] (.+)$/gm, '<li class="ml-4 flex items-center gap-2"><input type="checkbox" disabled /> $1</li>')
-    .replace(/^- \[x\] (.+)$/gm, '<li class="ml-4 flex items-center gap-2"><input type="checkbox" checked disabled /> $1</li>')
     // Paragraphs (double newlines)
     .replace(/\n\n/g, '</p><p class="text-muted-foreground mb-4">')
     // Single newlines in lists
     .replace(/(<\/li>)\n(<li)/g, "$1$2");
 
-  // Wrap lists - use non-dotall regex for compatibility
+  // Wrap lists
   html = html.replace(
     /(<li[^>]*>[^<]*<\/li>)+/g,
     '<ul class="list-disc pl-6 mb-4 space-y-2 text-muted-foreground">$&</ul>'

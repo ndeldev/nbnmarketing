@@ -276,23 +276,6 @@ html {
   box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.08);
 }
 
-/* Pill Tab Container */
-.pill-tab-container {
-  background: oklch(0.97 0 0);
-  border: 1px solid oklch(0.92 0 0);
-}
-
-/* Featured Card Gradient Enhancement */
-.gradient-featured {
-  background: linear-gradient(
-    135deg,
-    oklch(0.96 0.04 280) 0%,
-    oklch(0.94 0.06 320) 40%,
-    oklch(0.92 0.08 350) 70%,
-    oklch(0.94 0.05 30) 100%
-  );
-}
-
 /* Shadow Utility Classes */
 .shadow-soft {
   box-shadow: var(--shadow-soft);
@@ -302,28 +285,19 @@ html {
   box-shadow: var(--shadow-crisp);
 }
 
-/* Brand Color Backgrounds */
-.bg-brand-primary {
-  background-color: var(--shikoku);
+/* Text Shadow Utilities (for text over images/video) */
+.text-shadow-hero {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.bg-brand-accent {
-  background-color: var(--fuji-nezu);
+.text-shadow-dark {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.bg-brand-soft {
-  background-color: var(--toki-nezu);
-}
-
-/* Brand Color Text */
-.text-brand-primary {
-  color: var(--shikoku);
-}
-
-.text-brand-accent {
-  color: var(--fuji-nezu);
-}
-
-.text-brand-soft {
-  color: var(--toki-nezu);
+/* Eyebrow Text (uppercase label style) */
+.eyebrow {
+  font-size: 0.625rem; /* 10px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }

@@ -2,8 +2,13 @@
 
 **Date:** 2026-01-27
 **Author:** Design Team
-**Status:** Implemented
-**Implementation:** `src/components/sections/Hero.tsx`
+**Status:** DEPRECATED (v2.4.4 switched Hero to static image)
+**Original Implementation:** `src/components/sections/Hero.tsx`
+
+> **Note (2026-02-01):** This technique was implemented but later removed in v2.4.4 when
+> the Hero component switched from video background to static image. This document is
+> preserved for reference in case video functionality is restored in the future.
+> See `docs/changelogs/2026-01-31-deployment-setup.md` for details on v2.4.4/v2.4.5 changes.
 
 ---
 

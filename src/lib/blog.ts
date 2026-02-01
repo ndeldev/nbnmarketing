@@ -226,15 +226,6 @@ export function getPostsByCategory(categorySlug: string): BlogPost[] {
 }
 
 /**
- * Get posts by tag
- */
-export function getPostsByTag(tag: string): BlogPost[] {
-  return getAllPosts().filter((post) =>
-    post.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
-  );
-}
-
-/**
  * Get related posts (same category, excluding current)
  */
 export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPost[] {

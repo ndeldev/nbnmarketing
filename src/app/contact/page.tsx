@@ -5,7 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd } from "@/components/seo";
+import { PageHero } from "@/components/sections";
 import { generateMetadata as genMeta, generateLocalBusinessSchema } from "@/lib/metadata";
 import { BRAND_NAME, CONTACT_EMAIL } from "@/lib/constants";
 
@@ -21,20 +22,10 @@ export default function ContactPage() {
     <>
       <JsonLd data={generateLocalBusinessSchema()} />
 
-      {/* Hero */}
-      <section className="bg-muted/30 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Let&apos;s Talk Growth
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              Ready to accelerate your B2B marketing? Book a free strategy call
-              or send us a message.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Let's Talk Growth"
+        description="Ready to accelerate your B2B marketing? Book a free strategy call or send us a message."
+      />
 
       {/* Contact Section */}
       <section className="py-24 lg:py-32">

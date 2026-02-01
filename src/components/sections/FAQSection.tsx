@@ -6,7 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd } from "@/components/seo";
+import { generateFAQSchema } from "@/lib/metadata";
 
 export interface FAQ {
   question: string;
@@ -17,21 +18,6 @@ interface FAQSectionProps {
   title?: string;
   subtitle?: string;
   faqs: FAQ[];
-}
-
-function generateFAQSchema(faqs: FAQ[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
 }
 
 export function FAQSection({

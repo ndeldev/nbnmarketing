@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "@/components/blog";
-import { CTA } from "@/components/sections";
+import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { getAllPosts, BLOG_CATEGORIES } from "@/lib/blog";
 import { BRAND_NAME } from "@/lib/constants";
@@ -19,20 +19,10 @@ export default function BlogPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-muted/30 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Marketing Insights
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              Practical B2B marketing strategies, insights, and best practices
-              from our team of experts.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Marketing Insights"
+        description="Practical B2B marketing strategies, insights, and best practices from our team of experts."
+      />
 
       {/* Featured Post */}
       {featuredPost && (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FileText, Download, BookOpen, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CTA } from "@/components/sections";
+import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { BRAND_NAME } from "@/lib/constants";
 
@@ -67,20 +67,10 @@ const resources = [
 export default function ResourcesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-muted/30 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Marketing Resources
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              Free guides, templates, and tools to help you build a
-              high-performing B2B marketing program.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Marketing Resources"
+        description="Free guides, templates, and tools to help you build a high-performing B2B marketing program."
+      />
 
       {/* Resources Grid */}
       <section className="py-24 lg:py-32">
@@ -91,7 +81,7 @@ export default function ResourcesPage() {
               return (
                 <Card
                   key={resource.title}
-                  className="group relative overflow-hidden transition-shadow hover:shadow-lg"
+                  className="group relative overflow-hidden card-hover"
                 >
                   <CardContent className="p-8">
                     <div className="flex items-center justify-between">

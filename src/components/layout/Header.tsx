@@ -16,9 +16,9 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger pill form after scrolling past ~80% of viewport height (hero section)
-      const heroThreshold = window.innerHeight * 0.8;
-      setScrolled(window.scrollY > heroThreshold);
+      // Trigger pill form as soon as user starts scrolling
+      const scrollThreshold = 20;
+      setScrolled(window.scrollY > scrollThreshold);
 
       // Detect if header is over a dark section
       const headerY = scrolled ? 40 : 60; // Approximate header center position

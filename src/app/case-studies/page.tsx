@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CTA } from "@/components/sections";
+import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { BRAND_NAME } from "@/lib/constants";
 
@@ -71,20 +71,10 @@ const caseStudies = [
 export default function CaseStudiesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-muted/30 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Real Results for B2B Companies
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              See how we&apos;ve helped companies like yours achieve measurable
-              marketing outcomes.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Real Results for B2B Companies"
+        description="See how we've helped companies like yours achieve measurable marketing outcomes."
+      />
 
       {/* Case Studies Grid */}
       <section className="py-24 lg:py-32">
@@ -93,7 +83,7 @@ export default function CaseStudiesPage() {
             {caseStudies.map((study) => (
               <Card
                 key={study.id}
-                className="group overflow-hidden transition-shadow hover:shadow-lg"
+                className="group overflow-hidden card-hover"
               >
                 <CardContent className="p-0">
                   {/* Image placeholder */}

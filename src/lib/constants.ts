@@ -94,6 +94,158 @@ export const AUDIENCE_SEGMENTS = [
   },
 ] as const;
 
+// Business information (for schema.org and contact pages)
+export const BUSINESS_INFO = {
+  phone: "+1-555-123-4567",
+  address: {
+    street: "123 Marketing Street",
+    city: "San Francisco",
+    state: "CA",
+    zip: "94105",
+    country: "US",
+  },
+} as const;
+
+// Image paths for OG/meta
+export const IMAGE_PATHS = {
+  logo: "/logo.png",
+  ogDefault: "/og-image.jpg",
+  ogServices: "/og-services.jpg",
+  ogContact: "/og-contact.jpg",
+  ogAbout: "/og-about.jpg",
+} as const;
+
+// Service images for display
+export const SERVICE_IMAGES: Record<string, string> = {
+  advertising: "/images/services/business-strategy.jpg",
+  content: "/images/services/content-publications.jpg",
+  europe: "/images/services/market-insights.jpg",
+  email: "/images/services/outreach-campaigns.jpg",
+  social: "/images/services/product-planning.jpg",
+  analytics: "/images/services/seo-technical.jpg",
+};
+
+// Service content by audience segment (for Services section)
+export const SERVICE_CONTENT: Record<
+  string,
+  Record<string, { headline: string; emphasis: string; description: string }>
+> = {
+  startups: {
+    advertising: {
+      headline: "Launching your story to",
+      emphasis: "the right investors",
+      description:
+        "Precision-targeted digital campaigns across Google, Bing, and programmatic networks. We help newly listed companies build initial shareholder awareness with efficient ad spend that reaches active retail investors in your sector.",
+    },
+    content: {
+      headline: "Establishing credibility",
+      emphasis: "from day one",
+      description:
+        "CEO interviews, company profiles, and editorial features placed in leading financial publications. Build the third-party credibility that turns casual interest into invested shareholders.",
+    },
+    europe: {
+      headline: "Opening European markets",
+      emphasis: "early",
+      description:
+        "Whether you're considering a Frankfurt dual-listing or want to tap into DACH region retail investors, we help emerging issuers establish European presence from the start.",
+    },
+    email: {
+      headline: "Reaching verified investors",
+      emphasis: "directly",
+      description:
+        "Permission-based email campaigns to verified investor databases. Get your story in front of self-directed investors who actively trade junior market equities.",
+    },
+    social: {
+      headline: "Building executive visibility",
+      emphasis: "that attracts capital",
+      description:
+        "LinkedIn thought leadership and CEO video content that positions your leadership team as authorities worth investing in. Build the personal brand that builds shareholder confidence.",
+    },
+    analytics: {
+      headline: "Measuring what matters",
+      emphasis: "from the start",
+      description:
+        "Real-time dashboards that correlate your marketing spend with trading volume and shareholder acquisition. Know your cost per investor and optimize continuously.",
+    },
+  },
+  scaleups: {
+    advertising: {
+      headline: "Scaling awareness for",
+      emphasis: "your next catalyst",
+      description:
+        "Amplify your corporate milestones with coordinated advertising campaigns. Drilling results, resource estimates, product launches—turn news into trading volume with targeted investor reach.",
+    },
+    content: {
+      headline: "Deepening your",
+      emphasis: "investment story",
+      description:
+        "Comprehensive media coverage that educates investors on your growth trajectory. Research reports, analyst coverage, and thought leadership that builds institutional awareness alongside retail.",
+    },
+    europe: {
+      headline: "Maximizing your",
+      emphasis: "Frankfurt listing value",
+      description:
+        "Full-stack DACH region campaigns for companies ready to build serious European shareholder bases. German-language content, targeted advertising, and investor database access.",
+    },
+    email: {
+      headline: "Nurturing investors through",
+      emphasis: "your growth story",
+      description:
+        "Automated email sequences that keep your shareholder base engaged through corporate developments. Turn one-time visitors into long-term shareholders with strategic communication.",
+    },
+    social: {
+      headline: "Commanding attention",
+      emphasis: "in your sector",
+      description:
+        "Systematic social media presence that positions your company as the sector leader. YouTube investor presentations, Twitter engagement, and community building at scale.",
+    },
+    analytics: {
+      headline: "Optimizing for",
+      emphasis: "market cap growth",
+      description:
+        "Advanced analytics that correlate marketing campaigns with market performance. Attribution modeling, geographic analysis, and ROI reporting that informs strategic decisions.",
+    },
+  },
+  enterprise: {
+    advertising: {
+      headline: "Maintaining visibility with",
+      emphasis: "institutional reach",
+      description:
+        "Sustained advertising programs that keep your company visible to both retail and institutional investors. Programmatic campaigns targeting family offices, fund managers, and high-net-worth individuals.",
+    },
+    content: {
+      headline: "Executive thought leadership",
+      emphasis: "at scale",
+      description:
+        "Premium content programs positioning your C-suite as industry authorities. Ghostwritten executive content, premium research partnerships, and global content distribution.",
+    },
+    europe: {
+      headline: "Sustaining European",
+      emphasis: "investor relations",
+      description:
+        "Ongoing European investor engagement programs. Localized content, sustained media presence, and relationship management across DACH region financial media.",
+    },
+    email: {
+      headline: "Strategic shareholder",
+      emphasis: "communication",
+      description:
+        "Sophisticated email programs for established investor relations. Segmented communications for retail vs. institutional, catalyst announcements, and quarterly update sequences.",
+    },
+    social: {
+      headline: "Managing executive",
+      emphasis: "brand presence",
+      description:
+        "Full social media management for executives and corporate accounts. Consistent presence, community engagement, and crisis communication protocols.",
+    },
+    analytics: {
+      headline: "Enterprise-grade",
+      emphasis: "IR intelligence",
+      description:
+        "Comprehensive analytics dashboards for board-level reporting. Multi-channel attribution, competitive intelligence, and market correlation analysis.",
+    },
+  },
+};
+
 // Social links
 export const SOCIAL_LINKS = {
   linkedin: "https://linkedin.com/company/meridian-agency",

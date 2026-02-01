@@ -1,52 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  FileText,
-  Mail,
-  Users,
-  Megaphone,
-  Target,
-  Search,
-  Code,
-  Circle,
-  BookOpen,
-  Newspaper,
-  Award,
-  BarChart,
-  Globe,
-  TrendingUp,
-  Share2,
-  PenTool,
-  BarChart3,
-  Zap,
-  Shield,
-  MessageSquare,
-  Heart,
-  DollarSign,
-  Repeat,
-  UserPlus,
-  MessageCircle,
-  RefreshCw,
-  Calendar,
-  LineChart,
-  Handshake,
-  Layers,
-  Rocket,
-  Clock,
-  Sliders,
-  Link as LinkIcon,
-  Gauge,
-  FileCode,
-  Smartphone,
-  Video,
-  Eye,
-  Building,
-  Linkedin,
-  Youtube,
-  Twitter,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,7 +11,7 @@ import {
   RelatedServices,
   CTA,
 } from "@/components/sections";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd } from "@/components/seo";
 import {
   generateMetadata as genMeta,
   generateServiceSchema,
@@ -65,54 +19,7 @@ import {
   generateFAQSchema,
 } from "@/lib/metadata";
 import { SERVICES, SERVICE_DETAILS, SITE_URL, BRAND_NAME } from "@/lib/constants";
-
-// Icon map for dynamic icon lookup
-const iconMap: Record<string, LucideIcon> = {
-  FileText,
-  Mail,
-  Users,
-  Megaphone,
-  Target,
-  Search,
-  Code,
-  Circle,
-  BookOpen,
-  Newspaper,
-  Award,
-  BarChart,
-  Globe,
-  TrendingUp,
-  Share2,
-  PenTool,
-  BarChart3,
-  Zap,
-  Shield,
-  MessageSquare,
-  Heart,
-  DollarSign,
-  Repeat,
-  UserPlus,
-  MessageCircle,
-  RefreshCw,
-  Calendar,
-  LineChart,
-  Handshake,
-  Layers,
-  Rocket,
-  Clock,
-  Sliders,
-  Link: LinkIcon,
-  Gauge,
-  FileCode,
-  Smartphone,
-  Video,
-  Eye,
-  Building,
-  Linkedin,
-  Youtube,
-  Twitter,
-  SiteMap: Globe, // Alias - SiteMap doesn't exist, use Globe
-};
+import { getIcon } from "@/lib/icons";
 
 // Generate static params for all services
 export function generateStaticParams() {
@@ -146,11 +53,6 @@ export async function generateMetadata({
   });
 }
 
-// Helper to get icon component from string name
-function getIcon(iconName: string): LucideIcon {
-  return iconMap[iconName] || Circle;
-}
-
 export default async function ServicePage({
   params,
 }: {
@@ -164,7 +66,9 @@ export default async function ServicePage({
     notFound();
   }
 
-  const ServiceIcon = getIcon(service.icon);
+  // Get the icon component for this service
+  // Note: This is a Server Component so icon lookup happens at build/request time
+  const Icon = getIcon(service.icon);
 
   // Generate Service schema
   const serviceSchema = generateServiceSchema({
@@ -222,7 +126,7 @@ export default async function ServicePage({
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-              <ServiceIcon className="h-8 w-8 text-primary" />
+              <Icon className="h-8 w-8 text-primary" />
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               {details.headline}
@@ -266,7 +170,7 @@ export default async function ServicePage({
               return (
                 <Card
                   key={index}
-                  className="group relative overflow-hidden transition-shadow hover:shadow-lg"
+                  className="group relative overflow-hidden card-hover"
                 >
                   <CardContent className="p-6">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20">

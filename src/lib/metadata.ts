@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { BRAND_NAME, SITE_URL, SITE_DESCRIPTION } from "./constants";
+import {
+  BRAND_NAME,
+  SITE_URL,
+  SITE_DESCRIPTION,
+  BUSINESS_INFO,
+  IMAGE_PATHS,
+  CONTACT_EMAIL,
+  SOCIAL_LINKS,
+} from "./constants";
 
 type GenerateMetadataOptions = {
   title: string;
@@ -19,7 +27,7 @@ export function generateMetadata({
   title,
   description = SITE_DESCRIPTION,
   path = "",
-  image = "/og-image.jpg",
+  image = IMAGE_PATHS.ogDefault,
   noIndex = false,
 }: GenerateMetadataOptions): Metadata {
   const url = `${SITE_URL}${path}`;
@@ -192,17 +200,17 @@ export function generateLocalBusinessSchema() {
     "@type": "LocalBusiness",
     "@id": `${SITE_URL}/#organization`,
     name: BRAND_NAME,
-    image: `${SITE_URL}/og-image.jpg`,
+    image: `${SITE_URL}${IMAGE_PATHS.ogDefault}`,
     url: SITE_URL,
-    telephone: "+1-555-123-4567",
-    email: "hello@meridian.agency",
+    telephone: BUSINESS_INFO.phone,
+    email: CONTACT_EMAIL,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "123 Marketing Street",
-      addressLocality: "San Francisco",
-      addressRegion: "CA",
-      postalCode: "94105",
-      addressCountry: "US",
+      streetAddress: BUSINESS_INFO.address.street,
+      addressLocality: BUSINESS_INFO.address.city,
+      addressRegion: BUSINESS_INFO.address.state,
+      postalCode: BUSINESS_INFO.address.zip,
+      addressCountry: BUSINESS_INFO.address.country,
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -215,10 +223,7 @@ export function generateLocalBusinessSchema() {
       opens: "09:00",
       closes: "18:00",
     },
-    sameAs: [
-      "https://linkedin.com/company/meridian-agency",
-      "https://twitter.com/meridianagency",
-    ],
+    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter],
   };
 }
 

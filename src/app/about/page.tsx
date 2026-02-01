@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { CTA } from "@/components/sections";
+import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { BRAND_NAME } from "@/lib/constants";
 
@@ -61,21 +59,10 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-muted/30 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Built by B2B Marketers, for B2B Marketers
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              We&apos;ve been in your shoes. We know the pressure to hit pipeline
-              targets, prove ROI, and do more with less. That&apos;s why we built{" "}
-              {BRAND_NAME}.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Built by B2B Marketers, for B2B Marketers"
+        description={`We've been in your shoes. We know the pressure to hit pipeline targets, prove ROI, and do more with less. That's why we built ${BRAND_NAME}.`}
+      />
 
       {/* Story */}
       <section className="py-24 lg:py-32">

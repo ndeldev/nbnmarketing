@@ -12,23 +12,6 @@ const metrics = [
   { value: "3", label: "Continents covered" },
 ];
 
-/*
- * VIDEO BACKGROUND CODE (preserved for revert)
- * To restore video background with glow animation:
- * 1. Uncomment the video-related imports, constants, and hooks below
- * 2. Replace the <img> background with the <video> element
- * See docs/prds/2026-01-28-landing-site-specification.md for full instructions
- *
- * Video sync code:
- * - VIDEO_DURATION = 8
- * - PROGRESS_KEYPOINTS, GLOW_BLUR, GLOW_OPACITY arrays
- * - interpolate() function
- * - videoRef, mounted state, glowState
- * - useEffect for video.currentTime sync
- * - cardBoxShadow, textShadow computed styles
- * See docs/prds/2026-01-27-video-animation-sync.md for full implementation
- */
-
 export function Hero() {
 
   return (

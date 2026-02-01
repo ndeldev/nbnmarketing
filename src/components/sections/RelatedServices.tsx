@@ -40,7 +40,7 @@ export function RelatedServices({
           {relatedServices.map((service) => (
             <Card
               key={service.id}
-              className="group relative overflow-hidden transition-shadow hover:shadow-lg"
+              className="group relative overflow-hidden card-hover"
             >
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold">{service.title}</h3>

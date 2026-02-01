@@ -1,24 +1,24 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView, useScroll, useMotionValueEvent, useSpring } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useAudience } from "@/lib/hooks/useAudienceContext";
 import { AUDIENCE_SEGMENTS } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { StatCard } from "./stats/StatCard";
+import { PillTab } from "./stats/PillTab";
 
 // Audience IDs for scroll-based switching
 const audienceIds = AUDIENCE_SEGMENTS.map((s) => s.id);
 
-// Stats data per audience segment (targeting $10M-$100M market cap companies)
-// Using consistent stat types across audiences for smooth number transitions
-const statsConfig = [
-  { key: "marketCap", label: "Avg. Market Cap Lift", prefix: "$", suffix: "M+" },
-  { key: "clients", label: "Clients Served", prefix: "", suffix: "+" },
-  { key: "volume", label: "Avg. Volume Increase", prefix: "", suffix: "x" },
-  { key: "metric4", label: "", prefix: "", suffix: "" }, // Dynamic label
-];
-
-const statsValues: Record<string, { marketCap: number; clients: number; volume: number; metric4: number; metric4Label: string; metric4Suffix: string }> = {
+// Stats values per audience segment
+const statsValues: Record<string, {
+  marketCap: number;
+  clients: number;
+  volume: number;
+  metric4: number;
+  metric4Label: string;
+  metric4Suffix: string;
+}> = {
   startups: { marketCap: 12, clients: 45, volume: 2.1, metric4: 90, metric4Label: "Days to First Results", metric4Suffix: "" },
   scaleups: { marketCap: 52, clients: 60, volume: 3.4, metric4: 85, metric4Label: "Client Retention Rate", metric4Suffix: "%" },
   enterprise: { marketCap: 115, clients: 25, volume: 4.2, metric4: 98, metric4Label: "Compliance Rate", metric4Suffix: "%" },
@@ -40,109 +40,6 @@ const audienceCopy: Record<string, { headline: string; description: string }> = 
   },
 };
 
-function AnimatedNumber({
-  value,
-  prefix = "",
-  suffix = "",
-  decimals = 0,
-}: {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-}) {
-  const spring = useSpring(value, { stiffness: 100, damping: 30 });
-  const [displayValue, setDisplayValue] = useState(value);
-
-  useEffect(() => {
-    spring.set(value);
-  }, [spring, value]);
-
-  useEffect(() => {
-    const unsubscribe = spring.on("change", (latest) => {
-      setDisplayValue(latest);
-    });
-    return unsubscribe;
-  }, [spring]);
-
-  const formatted = decimals > 0
-    ? displayValue.toFixed(decimals)
-    : Math.round(displayValue).toString();
-
-  return (
-    <span>
-      {prefix}{formatted}{suffix}
-    </span>
-  );
-}
-
-function StatCard({
-  value,
-  label,
-  prefix,
-  suffix,
-  decimals = 0,
-  index,
-}: {
-  value: number;
-  label: string;
-  prefix: string;
-  suffix: string;
-  decimals?: number;
-  index: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        delay: index * 0.1,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      className="text-center"
-    >
-      <div className="text-4xl font-bold tracking-tight lg:text-5xl text-white">
-        <AnimatedNumber value={value} prefix={prefix} suffix={suffix} decimals={decimals} />
-      </div>
-      <motion.div
-        key={label}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="mt-3 text-sm text-white/60"
-      >
-        {label}
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function PillTab({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
-        active
-          ? "bg-white shadow-sm text-shikoku"
-          : "text-white/60 hover:text-white"
-      )}
-    >
-      {children}
-      {active && <span className="indicator-dot" />}
-    </button>
-  );
-}
-
 export function Stats() {
   const { selectedAudience, setSelectedAudience } = useAudience();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -154,7 +51,6 @@ export function Stats() {
     const handleScroll = () => {
       if (!stickyRef.current) return;
       const rect = stickyRef.current.getBoundingClientRect();
-      // Sticky when top is at or near 72px (header height)
       setIsSticky(rect.top <= 73);
     };
 
@@ -173,13 +69,11 @@ export function Stats() {
 
   // Update selected audience based on scroll position (only moves forward)
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    // Map scroll progress to audience index (0 = Emerging, 1 = Growth, 2 = Established)
     const audienceIndex = Math.min(
       audienceIds.length - 1,
       Math.max(0, Math.floor(progress * audienceIds.length))
     );
 
-    // Only update if we've progressed further (never go backwards)
     if (audienceIndex > maxAudienceIndexRef.current) {
       maxAudienceIndexRef.current = audienceIndex;
       const newAudience = audienceIds[audienceIndex];
@@ -191,11 +85,8 @@ export function Stats() {
 
   const currentValues = statsValues[selectedAudience] || statsValues.startups;
   const currentCopy = audienceCopy[selectedAudience] || audienceCopy.startups;
-
-  // Calculate container height: 25vh per audience segment for proper scroll animation
   const containerHeight = `${audienceIds.length * 25}vh`;
 
-  // Handle manual audience selection
   const handleAudienceClick = (audienceId: string) => {
     setSelectedAudience(audienceId);
   };
@@ -206,7 +97,7 @@ export function Stats() {
       className="relative bg-shikoku"
       style={{ height: containerHeight }}
     >
-      {/* Invisible snap targets - one per audience for subtle scroll pausing */}
+      {/* Invisible snap targets */}
       {audienceIds.map((_, index) => (
         <div
           key={`snap-${index}`}
@@ -216,13 +107,12 @@ export function Stats() {
         />
       ))}
 
-      {/* Sticky content - includes audience selector and stats (below header) */}
+      {/* Sticky content */}
       <div
         ref={stickyRef}
         className="sticky top-[72px] bg-shikoku relative"
         data-dark-section="true"
       >
-        {/* Dark background extension that covers behind the header - only when sticky */}
         {isSticky && (
           <div className="absolute left-0 right-0 bottom-full h-[72px] bg-shikoku" data-dark-section="true" />
         )}
@@ -231,12 +121,10 @@ export function Stats() {
         <div className="py-6 lg:py-8">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-22">
-              {/* Section heading */}
               <h2 className="text-lg lg:text-xl font-semibold tracking-tight text-white whitespace-nowrap">
                 Strategic partnerships · Results-driven approach
               </h2>
 
-              {/* Pill selector */}
               <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
                 {AUDIENCE_SEGMENTS.map((segment) => (
                   <PillTab
@@ -256,7 +144,6 @@ export function Stats() {
         <div className="py-16 lg:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
             <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 lg:gap-12">
-              {/* Market Cap */}
               <StatCard
                 value={currentValues.marketCap}
                 label="Avg. Market Cap Lift"
@@ -264,7 +151,6 @@ export function Stats() {
                 suffix="M+"
                 index={0}
               />
-              {/* Clients */}
               <StatCard
                 value={currentValues.clients}
                 label="Clients Served"
@@ -272,7 +158,6 @@ export function Stats() {
                 suffix="+"
                 index={1}
               />
-              {/* Volume */}
               <StatCard
                 value={currentValues.volume}
                 label="Avg. Volume Increase"
@@ -281,7 +166,6 @@ export function Stats() {
                 decimals={1}
                 index={2}
               />
-              {/* Dynamic 4th metric */}
               <StatCard
                 value={currentValues.metric4}
                 label={currentValues.metric4Label}
@@ -294,7 +178,7 @@ export function Stats() {
         </div>
       </div>
 
-      {/* Transitional Copy Section - Outside sticky container so it scrolls normally */}
+      {/* Transitional Copy Section */}
       <div className="py-12 lg:py-16 bg-shikoku" data-dark-section="true">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <motion.h3

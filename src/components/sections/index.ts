@@ -1,5 +1,5 @@
 export { Hero } from "./Hero";
-export { AudienceSelector } from "./AudienceSelector";
+export { PageHero } from "./PageHero";
 export { Services } from "./Services";
 export { Features } from "./Features";
 export { CTA } from "./CTA";

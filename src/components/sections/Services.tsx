@@ -1,41 +1,14 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { SERVICES } from "@/lib/constants";
+import { SERVICES, SERVICE_IMAGES, SERVICE_CONTENT } from "@/lib/constants";
 import { useAudience } from "@/lib/hooks/useAudienceContext";
-import {
-  Target,
-  FileText,
-  Globe,
-  Mail,
-  Video,
-  BarChart3,
-} from "lucide-react";
-
-// Map icon names to components
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Target,
-  FileText,
-  Globe,
-  Mail,
-  Video,
-  BarChart3,
-};
-
-// Map service IDs to stock images
-const serviceImages: Record<string, string> = {
-  advertising: "/images/services/business-strategy.jpg",
-  content: "/images/services/content-publications.jpg",
-  europe: "/images/services/market-insights.jpg",
-  email: "/images/services/outreach-campaigns.jpg",
-  social: "/images/services/product-planning.jpg",
-  analytics: "/images/services/seo-technical.jpg",
-};
+import { getIcon } from "@/lib/icons";
 
 // Simplified service list for cleaner sidebar
 const servicesList = SERVICES.map((s) => ({
@@ -43,127 +16,6 @@ const servicesList = SERVICES.map((s) => ({
   label: s.title,
   icon: s.icon,
 }));
-
-// Content for each service by audience segment
-const serviceContent: Record<
-  string,
-  Record<string, { headline: string; emphasis: string; description: string }>
-> = {
-  startups: {
-    advertising: {
-      headline: "Launching your story to",
-      emphasis: "the right investors",
-      description:
-        "Precision-targeted digital campaigns across Google, Bing, and programmatic networks. We help newly listed companies build initial shareholder awareness with efficient ad spend that reaches active retail investors in your sector.",
-    },
-    content: {
-      headline: "Establishing credibility",
-      emphasis: "from day one",
-      description:
-        "CEO interviews, company profiles, and editorial features placed in leading financial publications. Build the third-party credibility that turns casual interest into invested shareholders.",
-    },
-    europe: {
-      headline: "Opening European markets",
-      emphasis: "early",
-      description:
-        "Whether you're considering a Frankfurt dual-listing or want to tap into DACH region retail investors, we help emerging issuers establish European presence from the start.",
-    },
-    email: {
-      headline: "Reaching verified investors",
-      emphasis: "directly",
-      description:
-        "Permission-based email campaigns to verified investor databases. Get your story in front of self-directed investors who actively trade junior market equities.",
-    },
-    social: {
-      headline: "Building executive visibility",
-      emphasis: "that attracts capital",
-      description:
-        "LinkedIn thought leadership and CEO video content that positions your leadership team as authorities worth investing in. Build the personal brand that builds shareholder confidence.",
-    },
-    analytics: {
-      headline: "Measuring what matters",
-      emphasis: "from the start",
-      description:
-        "Real-time dashboards that correlate your marketing spend with trading volume and shareholder acquisition. Know your cost per investor and optimize continuously.",
-    },
-  },
-  scaleups: {
-    advertising: {
-      headline: "Scaling awareness for",
-      emphasis: "your next catalyst",
-      description:
-        "Amplify your corporate milestones with coordinated advertising campaigns. Drilling results, resource estimates, product launches—turn news into trading volume with targeted investor reach.",
-    },
-    content: {
-      headline: "Deepening your",
-      emphasis: "investment story",
-      description:
-        "Comprehensive media coverage that educates investors on your growth trajectory. Research reports, analyst coverage, and thought leadership that builds institutional awareness alongside retail.",
-    },
-    europe: {
-      headline: "Maximizing your",
-      emphasis: "Frankfurt listing value",
-      description:
-        "Full-stack DACH region campaigns for companies ready to build serious European shareholder bases. German-language content, targeted advertising, and investor database access.",
-    },
-    email: {
-      headline: "Nurturing investors through",
-      emphasis: "your growth story",
-      description:
-        "Automated email sequences that keep your shareholder base engaged through corporate developments. Turn one-time visitors into long-term shareholders with strategic communication.",
-    },
-    social: {
-      headline: "Commanding attention",
-      emphasis: "in your sector",
-      description:
-        "Systematic social media presence that positions your company as the sector leader. YouTube investor presentations, Twitter engagement, and community building at scale.",
-    },
-    analytics: {
-      headline: "Optimizing for",
-      emphasis: "market cap growth",
-      description:
-        "Advanced analytics that correlate marketing campaigns with market performance. Attribution modeling, geographic analysis, and ROI reporting that informs strategic decisions.",
-    },
-  },
-  enterprise: {
-    advertising: {
-      headline: "Maintaining visibility with",
-      emphasis: "institutional reach",
-      description:
-        "Sustained advertising programs that keep your company visible to both retail and institutional investors. Programmatic campaigns targeting family offices, fund managers, and high-net-worth individuals.",
-    },
-    content: {
-      headline: "Executive thought leadership",
-      emphasis: "at scale",
-      description:
-        "Premium content programs positioning your C-suite as industry authorities. Ghostwritten executive content, premium research partnerships, and global content distribution.",
-    },
-    europe: {
-      headline: "Sustaining European",
-      emphasis: "investor relations",
-      description:
-        "Ongoing European investor engagement programs. Localized content, sustained media presence, and relationship management across DACH region financial media.",
-    },
-    email: {
-      headline: "Strategic shareholder",
-      emphasis: "communication",
-      description:
-        "Sophisticated email programs for established investor relations. Segmented communications for retail vs. institutional, catalyst announcements, and quarterly update sequences.",
-    },
-    social: {
-      headline: "Managing executive",
-      emphasis: "brand presence",
-      description:
-        "Full social media management for executives and corporate accounts. Consistent presence, community engagement, and crisis communication protocols.",
-    },
-    analytics: {
-      headline: "Enterprise-grade",
-      emphasis: "IR intelligence",
-      description:
-        "Comprehensive analytics dashboards for board-level reporting. Multi-channel attribution, competitive intelligence, and market correlation analysis.",
-    },
-  },
-};
 
 // Service IDs in order for scroll-based switching
 const serviceIds: string[] = servicesList.map((s) => s.id);
@@ -213,13 +65,10 @@ export function Services() {
   };
 
   const currentContent =
-    serviceContent[selectedAudience]?.[selectedService] ||
-    serviceContent.startups.advertising;
+    SERVICE_CONTENT[selectedAudience]?.[selectedService] ||
+    SERVICE_CONTENT.startups.advertising;
 
   const currentService = SERVICES.find((s) => s.id === selectedService);
-  const IconComponent = currentService
-    ? iconMap[currentService.icon]
-    : Target;
 
   // Calculate container height: 100vh per service
   const containerHeight = `${serviceIds.length * 100}vh`;
@@ -269,7 +118,7 @@ export function Services() {
                 {/* Mobile: Horizontal scroll, Desktop: Vertical list */}
                 <nav className="flex md:flex-col gap-2 md:gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-1 px-1 md:mx-0 md:px-0 flex-1 md:justify-center">
                   {servicesList.map((service) => {
-                    const ServiceIcon = iconMap[service.icon] || Target;
+                    const ServiceIcon = getIcon(service.icon);
                     return (
                       <button
                         key={service.id}
@@ -313,7 +162,7 @@ export function Services() {
                       className="absolute inset-0"
                     >
                       <Image
-                        src={serviceImages[selectedService] || serviceImages.advertising}
+                        src={SERVICE_IMAGES[selectedService] || SERVICE_IMAGES.advertising}
                         alt={currentService?.title || "Service"}
                         fill
                         className="object-cover"
