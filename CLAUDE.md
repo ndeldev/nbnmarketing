@@ -26,7 +26,8 @@ docker build -t marketing-site .  # Manual build
 **GitHub Repository:** [ndeldev/meridian](https://github.com/ndeldev/meridian)
 
 **Vercel Deployment:**
-- Production URL: https://meridian-sigma-three.vercel.app
+- Production URL: https://nbnmarketing.com
+- Vercel URL: https://meridian-sigma-three.vercel.app
 - Auto-deploys on push to `main` branch
 - Preview deployments for pull requests
 

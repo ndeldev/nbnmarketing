@@ -3,7 +3,7 @@ export const BRAND_NAME = "Meridian";
 export const BRAND_TAGLINE = "Capital Markets Communications";
 
 // Site configuration
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://meridian.agency";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nbnmarketing.com";
 export const SITE_DESCRIPTION = `Full-stack investor relations for public companies. We help issuers build market value through strategic communications across North America and Europe.`;
 
 // SEO Keywords for capital markets positioning
