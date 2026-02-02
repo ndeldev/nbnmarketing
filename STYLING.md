@@ -237,6 +237,96 @@ const isInView = useInView(ref, { once: true, amount: 0.3 });
 </motion.div>
 ```
 
+#### Scroll-Driven Animations (Performance Critical)
+
+For scroll-driven animations using `useScroll` + `useTransform`, follow these patterns for buttery smooth performance:
+
+**1. Smooth Scroll Values with useSpring**
+
+Raw scroll values can be jittery. Wrap with `useSpring` for smooth interpolation:
+
+```tsx
+import { useScroll, useTransform, useSpring } from "framer-motion";
+
+const { scrollYProgress } = useScroll({ target: containerRef });
+
+// Add spring physics for smooth interpolation
+const smoothProgress = useSpring(scrollYProgress, {
+  stiffness: 100,
+  damping: 30,
+  restDelta: 0.001,
+});
+
+// Use smoothProgress for all transforms
+const opacity = useTransform(smoothProgress, [0, 0.5], [0, 1]);
+const y = useTransform(smoothProgress, [0, 0.5], [30, 0]);
+```
+
+**2. Add will-change Hints**
+
+Tell the browser which properties will animate:
+
+```tsx
+<motion.div
+  className="will-change-[opacity,transform]"
+  style={{ opacity, y }}
+>
+  Content
+</motion.div>
+```
+
+**3. Avoid CSS Transition Conflicts**
+
+Remove `card-hover` or other transition classes from scroll-animated elements. CSS transitions fight with scroll-driven animations:
+
+```tsx
+// ❌ Bad - CSS transitions conflict with scroll animations
+<div className="card-hover" style={{ width: animatedWidth }}>
+
+// ✅ Good - No conflicting transitions
+<div className="shadow-soft" style={{ width: animatedWidth }}>
+```
+
+**4. Sticky Positioning with Fixed Headers**
+
+When using `sticky` with a fixed header, offset by header height:
+
+```tsx
+// Header is ~80px when scrolled (top-20 = 5rem = 80px)
+<div className="sticky top-20 min-h-screen">
+  {/* Content stays below fixed header */}
+</div>
+```
+
+**5. Layout vs GPU-Accelerated Properties**
+
+| Property | Performance | Notes |
+|----------|-------------|-------|
+| `opacity` | ✅ GPU | Always smooth |
+| `transform` (scale, translate, rotate) | ✅ GPU | Always smooth |
+| `x`, `y` (Framer Motion) | ✅ GPU | Maps to translateX/Y |
+| `width`, `height` | ❌ Layout | Causes reflow, use with `will-change` |
+| `left`, `top`, `right`, `bottom` | ❌ Layout | Use `transform` instead |
+
+When animating `width` is necessary (e.g., reveal effects where layout must change):
+- Add `will-change-[width]` CSS hint
+- Use `useSpring` for smooth interpolation
+- Remove competing CSS transitions
+
+**6. Tall Container Pattern for Scroll Distance**
+
+Create scroll distance by making section taller than viewport:
+
+```tsx
+<section style={{ height: "300vh" }}>
+  <div className="sticky top-20 min-h-screen">
+    {/* Animated content */}
+  </div>
+</section>
+```
+
+---
+
 ### CSS Animations
 
 #### Card Hover

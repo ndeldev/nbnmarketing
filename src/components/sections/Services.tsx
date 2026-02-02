@@ -64,8 +64,10 @@ export function Services() {
     });
   };
 
+  // Fallback to "startups" if selectedAudience is undefined (initial render)
+  const audience = selectedAudience || "startups";
   const currentContent =
-    SERVICE_CONTENT[selectedAudience]?.[selectedService] ||
+    SERVICE_CONTENT[audience]?.[selectedService] ||
     SERVICE_CONTENT.startups.advertising;
 
   const currentService = SERVICES.find((s) => s.id === selectedService);

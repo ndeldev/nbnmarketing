@@ -5,6 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.2] - 2026-02-01
+
+### Improved - Animation Performance Optimizations
+
+Buttery smooth scroll-driven animations in Features section.
+
+**Performance Fixes:**
+- Added `useSpring` wrapper for smooth scroll value interpolation (stiffness: 100, damping: 30)
+- Added `will-change-[opacity,transform]` hints to all animated elements
+- Removed `card-hover` CSS transitions from scroll-animated BentoCardWave
+- Fixed header overlap with `top-20` sticky positioning
+
+**Documentation:**
+- Added "Scroll-Driven Animation Performance" section to STYLING.md
+- Documented best practices for GPU-accelerated vs layout-triggering properties
+
+See: `docs/changelogs/2026-02-01-features-animation.md` for full details.
+
+---
+
+## [2.5.1] - 2026-02-01
+
+### Added - Features Section Scroll Animation
+
+Scroll-driven bento card reveal animation in the "Why Choose Meridian" section.
+
+**Animation Effects:**
+- Full-Stack Coverage card starts at full width, shrinks to 2/3 as user scrolls
+- Right column cards (Global Reach, Sector Expertise) fade in with stagger effect
+- Bottom cards slide in from opposite sides (Measurable Results from left, Compliance Aware from right)
+- Section title overlays on card and scrolls up/fades as user scrolls
+
+**Technical Implementation:**
+- 300vh tall container with sticky positioning for scroll animation distance
+- Framer Motion `useScroll` + `useTransform` for scroll-driven transforms
+- `will-change-[width]` hint for smoother width animations
+- Constrained bento container with `max-w-5xl` for better viewport fit
+
+**Files Changed:**
+- `src/components/sections/Features.tsx` - Major restructure with scroll animations
+- `src/components/ui/bento-card.tsx` - BentoCardWave flex-based layout
+
+See: `docs/changelogs/2026-02-01-features-animation.md` for full details.
+
+---
+
 ## [2.5.0] - 2026-02-01
 
 ### Refactoring - Codebase Cleanup & Infrastructure
