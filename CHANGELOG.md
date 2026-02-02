@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.5] - 2026-02-02
+
+### Changed - Complete Rebrand to NBN Marketing
+
+Full rebrand from "Meridian" to "NBN Marketing" with new domain and infrastructure updates.
+
+**Brand Updates:**
+- Brand name: Meridian → NBN Marketing
+- Domain: nbnmarketing.com (production)
+- Contact email: info@nbnmarketing.com
+- Social links: Temporarily hidden (accounts pending)
+
+**Code Changes:**
+- Updated `BRAND_NAME`, `SITE_URL`, `CONTACT_EMAIL` in constants.ts
+- Updated metadata.ts to use constants for email
+- Footer conditionally renders social icons when URLs are configured
+- Updated site.webmanifest, docker-compose.yml
+
+**Documentation:**
+- Updated README, CLAUDE.md, SITE-SPEC.md, STYLING.md, CONTRIBUTING.md
+- Created rebrand PRD: `docs/prds/2026-02-02-nbn-marketing-rebrand.md`
+
+**Infrastructure (Manual):**
+- GitHub repository rename: meridian → nbn-marketing
+- Vercel project rename: meridian → nbn-marketing
+
+**Files Changed:**
+- `src/lib/constants.ts`
+- `src/lib/metadata.ts`
+- `src/components/layout/Footer.tsx`
+- `src/components/sections/Features.tsx`
+- `public/site.webmanifest`
+- `docker-compose.yml`
+- All documentation files
+
+See: `docs/prds/2026-02-02-nbn-marketing-rebrand.md` for full details.
+
+---
+
 ## [2.5.4] - 2026-02-01
 
 ### Added - Stats Section Scroll-Pause Behavior

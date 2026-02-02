@@ -246,14 +246,14 @@ export const SERVICE_CONTENT: Record<
   },
 };
 
-// Social links
+// Social links (empty until accounts are created)
 export const SOCIAL_LINKS = {
-  linkedin: "https://linkedin.com/company/meridian-agency",
-  twitter: "https://twitter.com/meridianagency",
+  linkedin: "",
+  twitter: "",
 } as const;
 
 // Contact info
-export const CONTACT_EMAIL = "hello@meridian.agency";
+export const CONTACT_EMAIL = "info@nbnmarketing.com";
 
 // Detailed service data for individual service pages
 export interface ServiceDetail {

@@ -79,13 +79,10 @@ export function generateOrganizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     description: SITE_DESCRIPTION,
-    sameAs: [
-      "https://linkedin.com/company/meridian-agency",
-      "https://twitter.com/meridianagency",
-    ],
+    sameAs: [],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "hello@meridian.agency",
+      email: CONTACT_EMAIL,
       contactType: "sales",
     },
   };
