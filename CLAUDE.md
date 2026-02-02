@@ -151,6 +151,15 @@ For significant changes:
 3. Add entry to `CHANGELOG.md`
 4. Create detailed changelog in `docs/changelogs/`
 
+## Analytics
+
+Google Analytics 4 is integrated via the `GoogleAnalytics` component in `src/components/analytics/`.
+
+**Environment Variable:**
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` - GA4 measurement ID (format: `G-XXXXXXXXXX`)
+
+Set in Vercel project settings for production. Analytics only loads when the env var is present.
+
 ## Conventions
 
 - Commit messages follow conventional format: `feat:`, `fix:`, `docs:`, `refactor:`
