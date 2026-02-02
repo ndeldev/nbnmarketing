@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { GoogleAnalytics } from "@/components/analytics";
 import { generateOrganizationSchema } from "@/lib/metadata";
 import { BRAND_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 
@@ -68,6 +69,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} light`} style={{ colorScheme: 'light' }}>
       <head>
         <JsonLd data={generateOrganizationSchema()} />
+        <GoogleAnalytics />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <div className="relative flex min-h-screen flex-col">
