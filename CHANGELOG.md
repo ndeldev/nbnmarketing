@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.4] - 2026-02-01
+
+### Added - Stats Section Scroll-Pause Behavior
+
+Scroll-driven audience switching in the Stats section ("Strategic partnerships"). As users scroll, the section pauses at each audience segment (Emerging, Growth, Established) similar to the Features section behavior.
+
+**Implementation:**
+- Container height increased to 300vh (100vh per audience segment)
+- Sticky content fills viewport while scroll progresses through segments
+- Bidirectional audience switching based on scroll position
+- Pill tabs automatically highlight current audience during scroll
+
+**Technical Details:**
+- Uses Framer Motion `useScroll` with `["start start", "end end"]` offset
+- `useMotionValueEvent` maps scroll progress to audience index
+- Each audience gets a dedicated 100vh scroll zone
+- Consistent `#2E2930` background color throughout section
+
+**Files Changed:**
+- `src/components/sections/Stats.tsx`
+
+---
+
 ## [2.5.3] - 2026-02-01
 
 ### Improved - CTA & Footer Layout

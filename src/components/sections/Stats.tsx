@@ -61,31 +61,26 @@ export function Stats() {
   // Track scroll progress within the tall container
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start start", "end end"],
   });
 
-  // Track the highest audience index reached (only progress forward)
-  const maxAudienceIndexRef = useRef(0);
-
-  // Update selected audience based on scroll position (only moves forward)
+  // Update selected audience based on scroll position (bidirectional)
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     const audienceIndex = Math.min(
       audienceIds.length - 1,
       Math.max(0, Math.floor(progress * audienceIds.length))
     );
 
-    if (audienceIndex > maxAudienceIndexRef.current) {
-      maxAudienceIndexRef.current = audienceIndex;
-      const newAudience = audienceIds[audienceIndex];
-      if (newAudience && newAudience !== selectedAudience) {
-        setSelectedAudience(newAudience);
-      }
+    const newAudience = audienceIds[audienceIndex];
+    if (newAudience && newAudience !== selectedAudience) {
+      setSelectedAudience(newAudience);
     }
   });
 
   const currentValues = statsValues[selectedAudience] || statsValues.startups;
   const currentCopy = audienceCopy[selectedAudience] || audienceCopy.startups;
-  const containerHeight = `${audienceIds.length * 25}vh`;
+  // 100vh per audience segment for scroll-pause effect (300vh total for 3 segments)
+  const containerHeight = `${audienceIds.length * 100}vh`;
 
   const handleAudienceClick = (audienceId: string) => {
     setSelectedAudience(audienceId);
@@ -94,33 +89,34 @@ export function Stats() {
   return (
     <section
       ref={containerRef}
-      className="relative bg-shikoku"
-      style={{ height: containerHeight }}
+      className="relative"
+      style={{ height: containerHeight, backgroundColor: '#2E2930' }}
     >
-      {/* Invisible snap targets */}
+      {/* Invisible snap targets - 100vh per audience segment */}
       {audienceIds.map((_, index) => (
         <div
           key={`snap-${index}`}
           className="absolute snap-section pointer-events-none"
-          style={{ top: `${index * 25}vh`, height: '25vh' }}
+          style={{ top: `${index * 100}vh`, height: '100vh' }}
           aria-hidden="true"
         />
       ))}
 
-      {/* Sticky content */}
+      {/* Sticky content - fills viewport minus header */}
       <div
         ref={stickyRef}
-        className="sticky top-[72px] bg-shikoku relative"
+        className="sticky top-[72px] relative h-[calc(100vh-72px)] flex flex-col justify-center overflow-hidden"
+        style={{ backgroundColor: '#2E2930' }}
         data-dark-section="true"
       >
         {isSticky && (
-          <div className="absolute left-0 right-0 bottom-full h-[72px] bg-shikoku" data-dark-section="true" />
+          <div className="absolute left-0 right-0 bottom-full h-[72px]" style={{ backgroundColor: '#2E2930' }} data-dark-section="true" />
         )}
 
         {/* Audience Selector Bar */}
-        <div className="py-6 lg:py-8">
+        <div className="py-4 lg:py-6">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-22">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-22">
               <h2 className="text-lg lg:text-xl font-semibold tracking-tight text-white whitespace-nowrap">
                 Strategic partnerships · Results-driven approach
               </h2>
@@ -141,9 +137,9 @@ export function Stats() {
         </div>
 
         {/* Stats Grid */}
-        <div className="py-16 lg:py-20">
+        <div className="py-8 lg:py-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
-            <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 lg:gap-12">
+            <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
               <StatCard
                 value={currentValues.marketCap}
                 label="Avg. Market Cap Lift"
@@ -176,29 +172,29 @@ export function Stats() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Transitional Copy Section */}
-      <div className="py-12 lg:py-16 bg-shikoku" data-dark-section="true">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
-          <motion.h3
-            key={currentCopy.headline}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-2xl lg:text-3xl font-semibold text-white mb-4"
-          >
-            {currentCopy.headline}
-          </motion.h3>
-          <motion.p
-            key={currentCopy.description}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-base lg:text-lg text-white/70 leading-relaxed"
-          >
-            {currentCopy.description}
-          </motion.p>
+        {/* Transitional Copy Section - inside sticky */}
+        <div className="py-6 lg:py-8">
+          <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
+            <motion.h3
+              key={currentCopy.headline}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-2xl lg:text-3xl font-semibold text-white mb-3"
+            >
+              {currentCopy.headline}
+            </motion.h3>
+            <motion.p
+              key={currentCopy.description}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="text-base lg:text-lg text-white/70 leading-relaxed"
+            >
+              {currentCopy.description}
+            </motion.p>
+          </div>
         </div>
       </div>
     </section>
