@@ -51,7 +51,7 @@ export default function ServicesPage() {
                       asChild
                     >
                       <Link href={`/services/${service.id}`}>
-                        Learn more
+                        Learn more about {service.title}
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>

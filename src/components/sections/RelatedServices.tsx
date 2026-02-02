@@ -53,7 +53,7 @@ export function RelatedServices({
                   asChild
                 >
                   <Link href={`/services/${service.id}`}>
-                    Learn more
+                    Learn more about {service.title}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </Button>

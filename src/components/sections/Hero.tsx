@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -18,10 +19,14 @@ export function Hero() {
     <section className="relative h-screen overflow-hidden" data-dark-section="true">
       {/* Background image */}
       <div className="absolute inset-0 -z-10">
-        <img
-          src="/images/hero-bg-temp.jpg"
+        <Image
+          src="/images/hero-bg.webp"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+          quality={85}
         />
         {/* Dark opacity overlay - 40% for good text readability with this image */}
         <div className="absolute inset-0 bg-black/40" />
@@ -116,9 +121,9 @@ export function Hero() {
                 <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/70">
                   Performance Data
                 </p>
-                <h3 className="mt-0.5 text-sm font-semibold text-white/90">
+                <p className="mt-0.5 text-sm font-semibold text-white/90">
                   Client Results
-                </h3>
+                </p>
 
                 {/* Metrics with text glow synced to video */}
                 <div className="mt-5 space-y-4">

@@ -201,7 +201,7 @@ export function Services() {
                       <div className="mt-6 flex flex-col sm:flex-row gap-3">
                         <Button variant="outline" className="rounded-full px-6 text-sm" asChild>
                           <Link href={`/services/${selectedService}`}>
-                            Learn more
+                            Learn more about {currentService?.title}
                           </Link>
                         </Button>
                         <Button className="rounded-full px-6 text-sm" asChild>

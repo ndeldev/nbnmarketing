@@ -10,7 +10,7 @@ const waveFeature = {
   description:
     "From digital advertising to investor outreach, we handle every aspect of your IR campaign. One team, one strategy, seamless execution across all channels.",
   badge: "Integrated",
-  image: "/images/features/data-driven.jpg",
+  image: "/images/features/data-driven.webp",
   bgColorHex: "#A6A5C4", // Fuji Nezu
 };
 
@@ -109,7 +109,7 @@ export function Features() {
                   <BentoCardWithImage
                     title="Global Reach"
                     description="Active investor networks across North America and Europe. We reach shareholders where they are."
-                    image="/images/features/dedicated-teams.jpg"
+                    image="/images/features/dedicated-teams.webp"
                     icon={<Globe className="h-5 w-5 text-primary" />}
                     className="h-full"
                   />
@@ -125,7 +125,7 @@ export function Features() {
                   <BentoCardWithImage
                     title="Sector Expertise"
                     description="Deep experience with mining, tech, and life sciences. We speak your industry's language."
-                    image="/images/features/creative.jpg"
+                    image="/images/features/creative.webp"
                     icon={<Pickaxe className="h-5 w-5 text-primary" />}
                     className="h-full"
                   />
@@ -145,7 +145,7 @@ export function Features() {
                 <BentoCardWithImage
                   title="Measurable Results"
                   description="We track what matters: shareholder growth, trading volume, and market cap movement. Real-time dashboards show campaign impact."
-                  image="/images/features/transparency.jpg"
+                  image="/images/features/transparency.webp"
                   icon={<BarChart3 className="h-5 w-5 text-primary" />}
                   className="h-full"
                 />
@@ -161,7 +161,7 @@ export function Features() {
                 <BentoCardWithImage
                   title="Compliance Aware"
                   description="We understand regulatory requirements for TSX-V, CSE, and Frankfurt. All campaigns are structured for compliance."
-                  image="/images/features/security.jpg"
+                  image="/images/features/security.webp"
                   icon={<Sparkles className="h-5 w-5 text-primary" />}
                   className="h-full"
                 />
