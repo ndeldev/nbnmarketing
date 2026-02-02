@@ -26,7 +26,7 @@ export function Hero() {
           priority
           className="object-cover"
           sizes="100vw"
-          quality={65}
+          quality={85}
         />
         {/* Dark opacity overlay - 40% for good text readability with this image */}
         <div className="absolute inset-0 bg-black/40" />
@@ -48,14 +48,17 @@ export function Hero() {
               Capital Markets Communications
             </motion.p>
 
-            {/* Headline - single line per phrase - NO animation delay for LCP */}
-            <h1
+            {/* Headline - single line per phrase */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
             >
               <span className="whitespace-nowrap">Build awareness.</span>
               <br />
               <span className="whitespace-nowrap text-fuji-nezu drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">Build value.</span>
-            </h1>
+            </motion.h1>
 
             {/* Subtitle with label */}
             <motion.div
