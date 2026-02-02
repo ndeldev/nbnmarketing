@@ -13,7 +13,7 @@ export function CTA() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-primary py-24 lg:py-32"
+      className="relative overflow-hidden bg-primary py-20 lg:py-24"
       data-dark-section="true"
     >
       {/* Background decoration with floating animation */}
@@ -63,7 +63,7 @@ export function CTA() {
       </div>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl text-center pt-16 lg:pt-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -117,9 +117,9 @@ export function CTA() {
             >
               <Button
                 size="lg"
-                variant="outline"
+                variant="ghost"
                 asChild
-                className="rounded-full px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground hover:border-primary-foreground/50"
+                className="rounded-full px-8 border border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground hover:border-primary-foreground/70"
               >
                 <Link href="/case-studies">See Our Work</Link>
               </Button>

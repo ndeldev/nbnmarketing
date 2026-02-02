@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.3] - 2026-02-01
+
+### Improved - CTA & Footer Layout
+
+Optimized CTA and Footer sections to fit within a single viewport when scrolled to bottom.
+
+**CTA Section:**
+- Adjusted padding for better viewport fit (`py-20 lg:py-24`)
+- Added inner content padding (`pt-16 lg:pt-20`) to push text below header
+- Fixed "See Our Work" button visibility (changed to `variant="ghost"` with explicit border)
+
+**Footer:**
+- Reduced padding (`py-8 lg:py-10`)
+- Compacted link spacing (`mt-3 space-y-2`)
+- Reduced separator margins (`mt-4 mb-2`)
+
+**Files Changed:**
+- `src/components/sections/CTA.tsx`
+- `src/components/layout/Footer.tsx`
+
+---
+
 ## [2.5.2] - 2026-02-01
 
 ### Improved - Animation Performance Optimizations

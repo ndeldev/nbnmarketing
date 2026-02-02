@@ -29,17 +29,17 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-muted/30">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="text-xl font-bold tracking-tight">
               {BRAND_NAME}
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               Capital markets communications for public companies across North America and Europe.
             </p>
-            <div className="mt-6 flex gap-4">
+            <div className="mt-4 flex gap-4">
               <a
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
@@ -64,7 +64,7 @@ export function Footer() {
           {/* Services Column */}
           <div>
             <h3 className="text-sm font-semibold">Services</h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-3 space-y-2">
               {footerLinks.services.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -81,7 +81,7 @@ export function Footer() {
           {/* Company Column */}
           <div>
             <h3 className="text-sm font-semibold">Company</h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-3 space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -98,7 +98,7 @@ export function Footer() {
           {/* Contact Column */}
           <div>
             <h3 className="text-sm font-semibold">Contact</h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-3 space-y-2">
               <li>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
@@ -121,13 +121,11 @@ export function Footer() {
           </div>
         </div>
 
-        <Separator className="my-8" />
+        <Separator className="mt-4 mb-2" />
 
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} {BRAND_NAME}. All rights reserved.
-          </p>
-        </div>
+        <p className="text-sm text-muted-foreground">
+          &copy; {currentYear} {BRAND_NAME}. All rights reserved.
+        </p>
       </div>
     </footer>
   );
