@@ -11,7 +11,7 @@ import { BRAND_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
+  display: "optional", // Eliminates CLS - font loads fast or stays as system font
 });
 
 export const metadata: Metadata = {
