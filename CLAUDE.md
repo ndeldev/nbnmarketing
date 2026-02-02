@@ -23,16 +23,16 @@ docker build -t marketing-site .  # Manual build
 
 ## Deployment
 
-**GitHub Repository:** [ndeldev/meridian](https://github.com/ndeldev/meridian)
+**GitHub Repository:** [ndeldev/nbnmarketing](https://github.com/ndeldev/nbnmarketing)
 
 **Vercel Deployment:**
 - Production URL: https://nbnmarketing.com
-- Vercel URL: https://meridian-sigma-three.vercel.app
+- Vercel URL: https://nbnmarketing.vercel.app
 - Auto-deploys on push to `main` branch
 - Preview deployments for pull requests
 
 **Vercel Project Details:**
-- Project: `meridian`
+- Project: `nbnmarketing`
 - Team: `ndels-projects-7138abea`
 - Framework: Next.js (auto-detected)
 - Node version: 24.x
@@ -40,7 +40,7 @@ docker build -t marketing-site .  # Manual build
 **Checking Deployment Status:**
 ```bash
 # Via Vercel MCP (if connected)
-mcp__vercel__get_project teamId="ndels-projects-7138abea" projectId="meridian"
+mcp__vercel__get_project teamId="ndels-projects-7138abea" projectId="nbnmarketing"
 
 # Via Vercel CLI
 vercel list
