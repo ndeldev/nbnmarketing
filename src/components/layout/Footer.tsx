@@ -28,7 +28,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-muted/30">
+    <footer className="border-t border-border bg-muted/30" style={{ minHeight: '280px' }}>
       <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {/* Brand Column */}
