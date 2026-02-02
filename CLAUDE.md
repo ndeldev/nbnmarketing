@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Meridian is a B2B marketing agency website built with Next.js 16 (App Router). The site targets capital markets and investor relations services for public companies. It features a sophisticated Japanese-inspired color palette ("Japanese Greydients"), SEO infrastructure with JSON-LD structured data, and Framer Motion animations.
+NBN Marketing is a capital markets communications website built with Next.js 16 (App Router). The site targets investor relations services for public companies. It features a sophisticated Japanese-inspired color palette ("Japanese Greydients"), SEO infrastructure with JSON-LD structured data, and Framer Motion animations.
 
 ## Commands
 

@@ -70,7 +70,7 @@ export function Features() {
               }}
             >
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-white drop-shadow-lg">
-                Why Choose <em className="font-serif not-italic">Meridian</em>
+                Why Choose <em className="font-serif not-italic">NBN Marketing</em>
               </h2>
               <p className="mt-4 text-lg text-white/90 drop-shadow-md max-w-2xl mx-auto">
                 We understand the unique challenges of junior capital markets and

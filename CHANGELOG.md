@@ -74,7 +74,7 @@ See: `docs/changelogs/2026-02-01-features-animation.md` for full details.
 
 ### Added - Features Section Scroll Animation
 
-Scroll-driven bento card reveal animation in the "Why Choose Meridian" section.
+Scroll-driven bento card reveal animation in the "Why Choose NBN Marketing" section.
 
 **Animation Effects:**
 - Full-Stack Coverage card starts at full width, shrinks to 2/3 as user scrolls

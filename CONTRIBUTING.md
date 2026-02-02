@@ -1,6 +1,6 @@
-# Contributing to Meridian
+# Contributing to NBN Marketing
 
-This guide outlines the git workflow and contribution practices for the Meridian marketing site.
+This guide outlines the git workflow and contribution practices for the NBN Marketing marketing site.
 
 ---
 

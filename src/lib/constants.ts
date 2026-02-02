@@ -1,5 +1,5 @@
 // Brand name - easy to find/replace when brand is finalized
-export const BRAND_NAME = "Meridian";
+export const BRAND_NAME = "NBN Marketing";
 export const BRAND_TAGLINE = "Capital Markets Communications";
 
 // Site configuration

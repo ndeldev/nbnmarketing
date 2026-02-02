@@ -1,6 +1,6 @@
-# Meridian Documentation
+# NBN Marketing Documentation
 
-This folder contains all project documentation for the Meridian marketing site.
+This folder contains all project documentation for the NBN Marketing marketing site.
 
 ## Quick Links
 

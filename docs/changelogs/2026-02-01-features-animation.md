@@ -5,7 +5,7 @@
 
 ## Summary
 
-Added scroll-driven bento card reveal animation to the "Why Choose Meridian" Features section. The Full-Stack Coverage card starts at full width and shrinks as the user scrolls, revealing additional cards with staggered animations.
+Added scroll-driven bento card reveal animation to the "Why Choose NBN Marketing" Features section. The Full-Stack Coverage card starts at full width and shrinks as the user scrolls, revealing additional cards with staggered animations.
 
 ## Changes
 
@@ -70,7 +70,7 @@ Added scroll-driven bento card reveal animation to the "Why Choose Meridian" Fea
 
 ### Title Overlay Feature
 
-Section title "Why Choose Meridian" is positioned as an absolute overlay on the Full-Stack Coverage card:
+Section title "Why Choose NBN Marketing" is positioned as an absolute overlay on the Full-Stack Coverage card:
 - Centered text with `z-10` for proper stacking
 - White text with `drop-shadow-lg` for readability over image
 - Scrolls up 120px and fades out during first 25% of scroll progress

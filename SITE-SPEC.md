@@ -1,10 +1,10 @@
-# Meridian Site Specification
+# NBN Marketing Site Specification
 
 **Version:** 2.0.1
 **Last Updated:** 2026-01-26
 **Status:** Production
 
-This document is the single source of truth for the Meridian marketing site's styling, components, and content structure.
+This document is the single source of truth for the NBN Marketing site's styling, components, and content structure.
 
 ---
 
@@ -28,9 +28,9 @@ This document is the single source of truth for the Meridian marketing site's st
 
 | Property | Value |
 |----------|-------|
-| Brand Name | Meridian |
+| Brand Name | NBN Marketing |
 | Tagline | Capital Markets Communications |
-| Site URL | https://meridian.agency |
+| Site URL | https://nbnmarketing.com |
 | Description | Full-stack investor relations for public companies. We help issuers build market value through strategic communications across North America and Europe. |
 
 ### 1.2 Color Palette - Japanese Greydients

@@ -1,6 +1,6 @@
 # Styling Guide
 
-This document outlines the styling conventions, brand colors, and design patterns used throughout the Meridian marketing site.
+This document outlines the styling conventions, brand colors, and design patterns used throughout the NBN Marketing marketing site.
 
 ## Brand Color Palette: Japanese Greydients
 
