@@ -25,8 +25,8 @@ export function Hero() {
           fill
           priority
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 100vw"
-          quality={50}
+          sizes="100vw"
+          quality={65}
         />
         {/* Dark opacity overlay - 40% for good text readability with this image */}
         <div className="absolute inset-0 bg-black/40" />

@@ -21,31 +21,6 @@ This file captures patterns and mistakes to avoid. Updated after corrections.
 - Standard fade-in pattern: `initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}`
 - Duration: 0.6s for content, 1.5s+ for decorative/ambient animations
 
-### Scroll Animation Performance
-**Problem**: Animating `width`, `height`, `top`, `left` causes layout thrashing (jank)
-
-**Solution**: Use GPU-accelerated properties only:
-- ✅ `transform: scale()`, `scaleX()`, `scaleY()` - for size changes
-- ✅ `transform: translate()`, `translateX()`, `translateY()` - for position changes
-- ✅ `opacity` - for visibility changes
-- ❌ `width`, `height` - triggers layout recalculation every frame
-- ❌ `top`, `left`, `right`, `bottom` - triggers layout recalculation
-
-**Example** (Features.tsx):
-```tsx
-// BAD - causes jank
-const waveCardWidth = useTransform(scrollYProgress, [0, 0.5], ["100%", "66.67%"]);
-<motion.div style={{ width: waveCardWidth }}>
-
-// GOOD - GPU-accelerated, smooth 60fps
-const waveCardScaleX = useTransform(scrollYProgress, [0, 0.5], [1, 0.6667]);
-<motion.div className="w-full origin-left" style={{ scaleX: waveCardScaleX }}>
-```
-
-**Caveat**: `scaleX`/`scaleY` scales content too. For natural resize without content distortion, consider:
-- `clip-path` animation (smooth but clips content)
-- Container with fixed aspect ratio + translate
-
 ### Component Size Guidelines
 - Section components should stay under 200 lines
 - If a component has 3+ internal sub-components, extract them
@@ -84,4 +59,3 @@ const waveCardScaleX = useTransform(scrollYProgress, [0, 0.5], [1, 0.6667]);
 | Date | Correction | Pattern Added |
 |------|------------|---------------|
 | 2026-02-01 | Initial codebase review | Established baseline patterns |
-| 2026-02-01 | Width animation causing jank | Scroll Animation Performance (use scaleX) |

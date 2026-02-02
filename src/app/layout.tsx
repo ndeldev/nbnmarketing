@@ -12,7 +12,6 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  adjustFontFallback: true, // Reduce CLS from font loading
 });
 
 export const metadata: Metadata = {

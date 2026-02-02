@@ -10,9 +10,6 @@ const nextConfig: NextConfig = {
   // Enable AVIF and WebP image formats for better compression
   images: {
     formats: ["image/avif", "image/webp"],
-    // Reduce default quality for smaller images
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
     // Add domains for external images if needed
     remotePatterns: [
       {
@@ -21,9 +18,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  // Transpile only for modern browsers (reduces bundle size ~14KB)
-  transpilePackages: [],
 
   // Enable experimental features for better performance
   experimental: {
