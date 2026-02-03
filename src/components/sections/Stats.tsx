@@ -10,6 +10,10 @@ import { PillTab } from "./stats/PillTab";
 // Audience IDs for scroll-based switching
 const audienceIds = AUDIENCE_SEGMENTS.map((s) => s.id);
 
+// Scroll height multiplier per segment (shorter on mobile for easier scrolling)
+const SCROLL_HEIGHT_MOBILE = 60; // vh per segment on mobile
+const SCROLL_HEIGHT_DESKTOP = 100; // vh per segment on desktop
+
 // Stats values per audience segment
 const statsValues: Record<string, {
   marketCap: number;
@@ -45,6 +49,15 @@ export function Stats() {
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Track when the section becomes sticky
   useEffect(() => {
@@ -79,8 +92,9 @@ export function Stats() {
 
   const currentValues = statsValues[selectedAudience] || statsValues.startups;
   const currentCopy = audienceCopy[selectedAudience] || audienceCopy.startups;
-  // 100vh per audience segment for scroll-pause effect (300vh total for 3 segments)
-  const containerHeight = `${audienceIds.length * 100}vh`;
+  // Shorter scroll distance on mobile for easier navigation
+  const scrollHeightPerSegment = isMobile ? SCROLL_HEIGHT_MOBILE : SCROLL_HEIGHT_DESKTOP;
+  const containerHeight = `${audienceIds.length * scrollHeightPerSegment}vh`;
 
   const handleAudienceClick = (audienceId: string) => {
     setSelectedAudience(audienceId);
@@ -92,12 +106,12 @@ export function Stats() {
       className="relative"
       style={{ height: containerHeight, backgroundColor: '#2E2930' }}
     >
-      {/* Invisible snap targets - 100vh per audience segment */}
+      {/* Invisible snap targets - variable height per audience segment */}
       {audienceIds.map((_, index) => (
         <div
           key={`snap-${index}`}
           className="absolute snap-section pointer-events-none"
-          style={{ top: `${index * 100}vh`, height: '100vh' }}
+          style={{ top: `${index * scrollHeightPerSegment}vh`, height: `${scrollHeightPerSegment}vh` }}
           aria-hidden="true"
         />
       ))}

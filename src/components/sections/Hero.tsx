@@ -62,7 +62,8 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-xs font-medium uppercase tracking-[0.25em] text-fuji-nezu mb-6 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+              className="text-xs font-medium uppercase tracking-[0.25em] text-fuji-nezu mb-6"
+              style={{ textShadow: '0 0 2px rgba(255,255,255,0.8), 0 0 16px rgba(166, 165, 196, 1), 0 0 32px rgba(166, 165, 196, 0.8), 0 0 48px rgba(166, 165, 196, 0.5), 0 1px 4px rgba(0,0,0,0.8)' }}
             >
               Capital Markets Communications
             </motion.p>
@@ -83,7 +84,10 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-10"
             >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-4">
+              <p
+                className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-4"
+                style={{ textShadow: '0 0 2px rgba(255,255,255,0.8), 0 0 16px rgba(166, 165, 196, 1), 0 0 32px rgba(166, 165, 196, 0.8), 0 0 48px rgba(166, 165, 196, 0.5), 0 1px 4px rgba(0,0,0,0.8)' }}
+              >
                 Full-Stack Investor Relations
               </p>
               <p className="max-w-sm text-base leading-relaxed text-white/80">
