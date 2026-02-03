@@ -78,47 +78,49 @@ export function Services() {
   return (
     <section
       ref={containerRef}
-      className="relative"
-      style={{ height: containerHeight }}
+      className="relative bg-toki-nezu/60 md:[height:var(--container-height)]"
+      style={{ '--container-height': containerHeight } as React.CSSProperties}
     >
-      {/* Invisible snap targets - one per service for subtle scroll pausing */}
+      {/* Invisible snap targets - desktop only */}
       {serviceIds.map((_, index) => (
         <div
           key={`snap-${index}`}
-          className="absolute snap-section pointer-events-none"
+          className="absolute snap-section pointer-events-none hidden md:block"
           style={{ top: `${index * 100}vh`, height: '100vh' }}
           aria-hidden="true"
         />
       ))}
 
-      {/* Sticky container that stays in viewport while scrolling */}
+      {/* Mobile: static, Desktop: sticky */}
       <div
         ref={stickyRef}
-        className="sticky top-0 h-screen flex items-center overflow-hidden bg-toki-nezu/60"
+        className="md:sticky md:top-0 md:h-screen flex items-center overflow-hidden py-12 md:py-0"
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
-          {/* Main Content Area - Use explicit height to fill viewport */}
-          <div className="grid gap-6 md:grid-cols-12" style={{ height: 'calc(90vh - 120px)' }}>
-            {/* Left Column - Header + Service Selector */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+          {/* Main Content Area - stacked on mobile, grid on desktop */}
+          <div className="flex flex-col md:grid md:grid-cols-12 gap-6 md:h-[calc(90vh-120px)]">
+            {/* Section Header + Service Selector - appears SECOND on mobile (below card) */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="md:col-span-4 xl:col-span-3 order-2 md:order-1 flex flex-col h-full"
+              className="md:col-span-4 xl:col-span-3 order-2 md:order-1 flex flex-col"
             >
-              {/* Section Header - Constrained to left column */}
-              <div className="mb-6">
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              {/* Section Header */}
+              <div className="mb-4 md:mb-6">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight md:text-4xl">
                   Full-Stack Investor Relations
                 </h2>
-                <p className="mt-3 text-muted-foreground">
+                <p className="mt-2 md:mt-3 text-sm md:text-base text-muted-foreground">
                   Integrated campaigns that build shareholder bases across North America and Europe.
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-card border border-border/50 p-4 shadow-soft flex-1 flex flex-col min-h-0">
-                {/* Mobile: Horizontal scroll, Desktop: Vertical list */}
-                <nav className="flex md:flex-col gap-2 md:gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-1 px-1 md:mx-0 md:px-0 flex-1 md:justify-center">
+              {/* Service Selector - horizontal scroll on mobile */}
+              <div className="rounded-2xl bg-card border border-border/50 p-2 md:p-4 shadow-soft md:flex-1 md:flex md:flex-col md:min-h-0 relative overflow-hidden">
+                {/* Fade hint for scroll - mobile only */}
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-card to-transparent pointer-events-none z-10 md:hidden" />
+                <nav className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-1 md:pb-0 pr-8 md:pr-0 md:flex-1 md:justify-center scrollbar-hide">
                   {servicesList.map((service) => {
                     const ServiceIcon = getIcon(service.icon);
                     return (
@@ -126,16 +128,16 @@ export function Services() {
                         key={service.id}
                         onClick={() => handleServiceClick(service.id)}
                         className={cn(
-                          "flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all whitespace-nowrap md:whitespace-normal md:w-full flex-shrink-0 md:flex-shrink",
+                          "flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-full md:rounded-xl text-left transition-all whitespace-nowrap md:whitespace-normal md:w-full flex-shrink-0 md:flex-shrink text-xs md:text-sm",
                           selectedService === service.id
-                            ? "bg-muted font-medium"
-                            : "hover:bg-muted/50 text-muted-foreground"
+                            ? "bg-shikoku text-white md:bg-muted md:text-foreground font-medium"
+                            : "bg-muted/50 md:bg-transparent hover:bg-muted/80 md:hover:bg-muted/50 text-muted-foreground"
                         )}
                       >
-                        <ServiceIcon className="h-4 w-4 flex-shrink-0" />
-                        <span className="text-sm">{service.label}</span>
+                        <ServiceIcon className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+                        <span>{service.label}</span>
                         {selectedService === service.id && (
-                          <span className="indicator-dot ml-auto" />
+                          <span className="indicator-dot ml-auto hidden md:block" />
                         )}
                       </button>
                     );
@@ -144,16 +146,16 @@ export function Services() {
               </div>
             </motion.div>
 
-            {/* Service Details - Main Content */}
+            {/* Service Details Card - appears FIRST on mobile (above header) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="md:col-span-8 xl:col-span-9 order-1 md:order-2 h-full"
+              className="md:col-span-8 xl:col-span-9 order-1 md:order-2 md:h-full"
             >
-              <div className="rounded-3xl bg-card border border-border/50 overflow-hidden shadow-soft h-full flex flex-col">
+              <div className="rounded-2xl md:rounded-3xl bg-card border border-border/50 overflow-hidden shadow-soft md:h-full flex flex-col">
                 {/* Visual Area - Stock Image */}
-                <div className="flex-1 min-h-[200px] relative overflow-hidden">
+                <div className="h-48 sm:h-56 md:flex-1 md:min-h-[200px] relative overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedService}
@@ -178,7 +180,7 @@ export function Services() {
                 </div>
 
                 {/* Content Area */}
-                <div className="p-6 lg:p-8">
+                <div className="p-4 sm:p-6 lg:p-8">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={`${selectedAudience}-${selectedService}`}
@@ -188,23 +190,23 @@ export function Services() {
                       transition={{ duration: 0.3 }}
                     >
                       {/* Headline with italic emphasis */}
-                      <h3 className="text-lg md:text-xl font-bold">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold">
                         {currentContent.headline}{" "}
                         <em className="font-serif text-fuji-nezu">{currentContent.emphasis}</em>
                       </h3>
 
-                      <p className="mt-3 text-muted-foreground text-sm md:text-base leading-relaxed">
+                      <p className="mt-2 md:mt-3 text-muted-foreground text-sm md:text-base leading-relaxed">
                         {currentContent.description}
                       </p>
 
-                      {/* CTAs matching reference design */}
-                      <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                        <Button variant="outline" className="rounded-full px-6 text-sm" asChild>
+                      {/* CTAs - stacked on mobile */}
+                      <div className="mt-4 md:mt-6 flex flex-col gap-2 sm:flex-row sm:gap-3">
+                        <Button variant="outline" className="rounded-full px-4 sm:px-6 text-xs sm:text-sm" asChild>
                           <Link href={`/services/${selectedService}`}>
                             Learn more about {currentService?.title}
                           </Link>
                         </Button>
-                        <Button className="rounded-full px-6 text-sm" asChild>
+                        <Button className="rounded-full px-4 sm:px-6 text-xs sm:text-sm" asChild>
                           <Link href="/contact">Schedule a call</Link>
                         </Button>
                       </div>

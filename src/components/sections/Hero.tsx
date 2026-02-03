@@ -1,10 +1,11 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 // Stats for the floating metrics card
 const metrics = [
@@ -14,28 +15,46 @@ const metrics = [
 ];
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Track scroll progress for parallax effect
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax: image moves slower than scroll (0.3x speed)
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  // Optional: scale up slightly as user scrolls for depth effect
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   return (
-    <section className="relative h-screen overflow-hidden" data-dark-section="true">
-      {/* Background image */}
-      <div className="absolute inset-0 -z-10">
+    <section ref={sectionRef} className="relative h-screen overflow-hidden" data-dark-section="true">
+      {/* Background image with parallax */}
+      <motion.div
+        className="absolute inset-0 -z-10"
+        style={{
+          y: imageY,
+          scale: imageScale,
+        }}
+      >
         <Image
-          src="/images/hero-bg.webp"
-          alt=""
+          src="/images/explorer-milky-way-canyon.webp"
+          alt="Explorer surveying vast canyon beneath the Milky Way"
           fill
           priority
           className="object-cover"
           sizes="100vw"
-          quality={65}
+          quality={85}
         />
-        {/* Dark opacity overlay - 40% for good text readability with this image */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Dark opacity overlay - reduced to 30% for lighter image */}
+        <div className="absolute inset-0 bg-black/30" />
         {/* Subtle texture overlay */}
         <div className="absolute inset-0 opacity-30 mix-blend-soft-light bg-gradient-to-br from-fuji-nezu/10 via-transparent to-toki-nezu/10" />
-      </div>
+      </motion.div>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-screen py-12 lg:py-0">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-screen pt-24 pb-12 lg:py-0">
           {/* Left content - takes 6 columns */}
           <div className="lg:col-span-6 max-w-xl">
             {/* Eyebrow text */}
@@ -73,12 +92,41 @@ export function Hero() {
               </p>
             </motion.div>
 
+            {/* Mobile metrics card - between subtitle and CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mt-8 lg:hidden"
+            >
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-5 max-w-[280px]">
+                <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/70">
+                  Performance Data
+                </p>
+                <p className="mt-0.5 text-sm font-semibold text-white/90">
+                  Client Results
+                </p>
+                <div className="mt-4 flex gap-6">
+                  {metrics.map((metric) => (
+                    <div key={metric.label}>
+                      <p className="text-xl font-bold text-white">
+                        {metric.value}
+                      </p>
+                      <p className="text-[10px] text-white/80">
+                        {metric.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
             {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-10 flex flex-wrap gap-4"
+              className="mt-8 lg:mt-10 flex flex-wrap gap-4"
             >
               <Button
                 size="lg"
@@ -102,12 +150,12 @@ export function Hero() {
 
           </div>
 
-          {/* Right side - Floating metrics card - takes 4 columns */}
+          {/* Right side - Floating metrics card - desktop only */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="lg:col-span-4 lg:col-start-9 flex justify-center lg:justify-end"
+            className="hidden lg:flex lg:col-span-4 lg:col-start-9 justify-end"
           >
             <div className="relative w-full max-w-[240px]">
               {/* Glassmorphism card with video-synced glow */}

@@ -176,30 +176,24 @@ export function Header() {
         </button>
       </nav>
 
-      {/* Mobile Navigation - Full screen overlay */}
+      {/* Mobile Navigation - Glass UI dropdown */}
       <div
         className={cn(
-          "fixed inset-0 z-40 lg:hidden transition-all duration-200",
-          scrolled ? "top-[72px]" : "top-[73px]",
+          "absolute left-4 right-4 z-40 lg:hidden transition-all duration-300 ease-out",
+          scrolled ? "top-[60px]" : "top-[73px]",
           mobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
         )}
       >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0 bg-background/95 backdrop-blur-sm"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-
-        {/* Menu content */}
-        <div className="relative bg-background border-b border-border">
-          <div className="px-6 py-8 space-y-2">
+        {/* Glass menu content */}
+        <div className="rounded-2xl bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10 overflow-hidden">
+          <div className="px-4 py-5 space-y-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-3 text-lg font-medium rounded-xl transition-colors hover:bg-muted"
+                className="block px-4 py-3 text-base font-medium rounded-xl transition-colors text-shikoku hover:bg-black/5"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
@@ -213,7 +207,7 @@ export function Header() {
                 onClick={() => setLanguage("en")}
                 className={cn(
                   "px-3 py-1 text-sm rounded-full transition-colors",
-                  language === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
+                  language === "en" ? "bg-shikoku text-white" : "text-muted-foreground hover:bg-black/5"
                 )}
               >
                 EN
@@ -222,15 +216,15 @@ export function Header() {
                 onClick={() => setLanguage("de")}
                 className={cn(
                   "px-3 py-1 text-sm rounded-full transition-colors",
-                  language === "de" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
+                  language === "de" ? "bg-shikoku text-white" : "text-muted-foreground hover:bg-black/5"
                 )}
               >
                 DE
               </button>
             </div>
 
-            <div className="pt-6">
-              <Button className="w-full rounded-full" size="lg" asChild>
+            <div className="pt-4 px-4">
+              <Button className="w-full rounded-full bg-shikoku hover:bg-shikoku/90" size="lg" asChild>
                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                   Get Started
                 </Link>
