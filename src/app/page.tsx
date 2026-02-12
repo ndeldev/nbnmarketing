@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import { Hero, Services, Features, CTA, Stats } from "@/components/sections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateWebPageSchema } from "@/lib/metadata";
 import { BRAND_NAME, BRAND_TAGLINE, SITE_URL, SITE_DESCRIPTION } from "@/lib/constants";
 import { AudienceProvider } from "@/lib/hooks/useAudienceContext";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   const webPageSchema = generateWebPageSchema({
