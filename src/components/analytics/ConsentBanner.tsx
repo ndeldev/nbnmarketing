@@ -15,11 +15,10 @@ declare global {
 }
 
 function updateConsent(granted: boolean) {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("consent", "update", {
-      analytics_storage: granted ? "granted" : "denied",
-    });
-  }
+  if (typeof window === "undefined" || !window.gtag) return;
+  window.gtag("consent", "update", {
+    analytics_storage: granted ? "granted" : "denied",
+  });
 }
 
 export function ConsentBanner() {
