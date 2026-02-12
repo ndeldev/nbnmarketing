@@ -71,7 +71,7 @@ export const BLOG_POSTS: BlogPost[] = [
     content: `
 ## Introduction
 
-Content marketing remains one of the most effective strategies for B2B companies to attract, engage, and convert their target audience. In this comprehensive guide, we'll explore the latest trends and best practices for 2026.
+Content marketing remains one of the most effective strategies for B2B companies to attract, engage, and convert their target audience. In this comprehensive guide, we'll explore the latest trends and best practices for 2026. If you're looking for help building a [content strategy for investor relations](/services/content), start with the fundamentals below.
 
 ## Why Content Marketing Matters for B2B
 
@@ -82,12 +82,12 @@ B2B buyers consume an average of 13 pieces of content before making a purchasing
 1. **Audience-First Approach**: Understand your buyer personas deeply
 2. **Topic Clusters**: Build topical authority through interconnected content
 3. **Multi-Format Content**: Repurpose content across blogs, videos, and podcasts
-4. **Distribution Strategy**: Don't just create, distribute strategically
+4. **Distribution Strategy**: Don't just create — [distribute strategically through digital advertising](/services/advertising)
 
 ## Measuring Success
 
 Track these key metrics:
-- Organic traffic growth
+- [Organic traffic growth](/blog/technical-seo-checklist-b2b) through SEO
 - Lead generation from content
 - Content engagement rates
 - Pipeline attribution
@@ -112,7 +112,7 @@ A well-executed content marketing strategy is a competitive advantage in B2B mar
     content: `
 ## Why Technical SEO Matters
 
-Before your content can rank, your site needs to be technically sound. Here's what to check.
+Before your [content can rank](/services/content), your site needs to be technically sound. Here's what to check.
 
 ## Core Web Vitals
 
@@ -125,7 +125,7 @@ Before your content can rank, your site needs to be technically sound. Here's wh
 - [ ] Robots.txt properly configured
 - [ ] XML sitemap submitted to GSC
 - [ ] No orphan pages
-- [ ] Proper internal linking structure
+- [ ] Proper [internal linking structure](/blog/b2b-content-marketing-guide-2026)
 
 ## Indexability
 
@@ -141,7 +141,7 @@ Before your content can rank, your site needs to be technically sound. Here's wh
 
 ## Conclusion
 
-Regular technical audits ensure your content has the best chance to rank.
+Regular technical audits ensure your content has the best chance to rank. Pair this with [analytics and reporting](/services/analytics) to track your progress.
     `,
   },
   {
@@ -159,12 +159,12 @@ Regular technical audits ensure your content has the best chance to rank.
     content: `
 ## Why LinkedIn for B2B?
 
-LinkedIn offers unparalleled professional targeting capabilities for B2B marketers.
+LinkedIn offers unparalleled professional targeting capabilities for B2B marketers. Our [social and video services](/services/social) help companies maximize their LinkedIn presence.
 
 ## Campaign Objectives
 
 Choose the right objective:
-- **Brand Awareness**: For top-of-funnel
+- **[Brand Awareness](/services/advertising)**: For top-of-funnel
 - **Consideration**: For mid-funnel engagement
 - **Conversions**: For bottom-funnel lead gen
 
@@ -197,7 +197,7 @@ Track beyond platform metrics:
 
 ## Conclusion
 
-LinkedIn ads are expensive but effective when executed properly.
+LinkedIn ads are expensive but effective when executed properly. Combine paid LinkedIn with a strong [content marketing strategy](/blog/b2b-content-marketing-guide-2026) for the best results.
     `,
   },
 ];

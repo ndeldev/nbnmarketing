@@ -246,7 +246,9 @@ export const SERVICE_CONTENT: Record<
   },
 };
 
-// Social links (empty until accounts are created)
+// Social links — add URLs when accounts are created
+// LinkedIn: https://www.linkedin.com/company/your-slug
+// Twitter/X: https://x.com/your-handle
 export const SOCIAL_LINKS = {
   linkedin: "",
   twitter: "",

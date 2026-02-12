@@ -79,7 +79,7 @@ export function generateOrganizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     description: SITE_DESCRIPTION,
-    sameAs: [],
+    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter].filter(Boolean),
     contactPoint: {
       "@type": "ContactPoint",
       email: CONTACT_EMAIL,

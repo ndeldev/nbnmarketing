@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BlogHeader, BlogCard } from "@/components/blog";
+import { BlogHeader, BlogCard, ShareButtons } from "@/components/blog";
 import { JsonLd } from "@/components/seo";
 import { CTA } from "@/components/sections";
 import {
@@ -84,6 +84,8 @@ function renderContent(content: string): string {
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     // Italic
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
+    // Internal links - [text](/path)
+    .replace(/\[([^\]]+)\]\((\/[^)]+)\)/g, '<a href="$2" class="text-primary underline underline-offset-4 hover:text-primary/80">$1</a>')
     // Unordered lists
     .replace(/^- (.+)$/gm, '<li class="ml-4">$1</li>')
     // Paragraphs (double newlines)
@@ -145,6 +147,11 @@ export default async function BlogPostPage({
             className="prose prose-gray max-w-none"
             dangerouslySetInnerHTML={{ __html: renderContent(post.content) }}
           />
+
+          {/* Share */}
+          <div className="mt-12 pt-8 border-t flex items-center justify-between">
+            <ShareButtons url={getPostUrl(slug)} title={post.title} />
+          </div>
 
           {/* Tags */}
           {post.tags.length > 0 && (
