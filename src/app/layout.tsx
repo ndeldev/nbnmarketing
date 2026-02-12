@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { GoogleAnalytics } from "@/components/analytics";
+import { GoogleAnalytics, ConsentBanner } from "@/components/analytics";
 import { generateOrganizationSchema } from "@/lib/metadata";
 import { BRAND_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 
@@ -80,6 +80,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <ConsentBanner />
       </body>
     </html>
   );

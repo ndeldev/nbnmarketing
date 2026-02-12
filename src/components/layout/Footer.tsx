@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Linkedin, Twitter } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { CookieSettingsButton } from "@/components/analytics/CookieSettingsButton";
 import { BRAND_NAME, SOCIAL_LINKS, CONTACT_EMAIL } from "@/lib/constants";
 
 const footerLinks = {
@@ -123,6 +124,9 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <CookieSettingsButton />
+              </li>
             </ul>
           </div>
         </div>
