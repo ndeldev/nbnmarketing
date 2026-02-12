@@ -44,6 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@NBNMarketing",
+    creator: "@NBNMarketing",
     title: `${BRAND_NAME} | B2B Marketing Agency`,
     description: SITE_DESCRIPTION,
   },

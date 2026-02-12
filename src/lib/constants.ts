@@ -246,12 +246,11 @@ export const SERVICE_CONTENT: Record<
   },
 };
 
-// Social links — add URLs when accounts are created
-// LinkedIn: https://www.linkedin.com/company/your-slug
-// Twitter/X: https://x.com/your-handle
+// Social links
+// LinkedIn: requires 2+ connections to create company page (see PRD)
 export const SOCIAL_LINKS = {
   linkedin: "",
-  twitter: "",
+  twitter: "https://x.com/NBNMarketing",
 } as const;
 
 // Contact info
