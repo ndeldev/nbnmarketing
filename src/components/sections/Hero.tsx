@@ -1,20 +1,22 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-
-// Stats for the floating metrics card
-const metrics = [
-  { value: "$50M+", label: "Market cap generated" },
-  { value: "200+", label: "Campaigns executed" },
-  { value: "3", label: "Continents covered" },
-];
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("home.hero");
+  const tCta = useTranslations("common.cta");
+
+  const metrics = [
+    { value: "$50M+", label: t("metrics.marketCap") },
+    { value: "200+", label: t("metrics.campaigns") },
+    { value: "3", label: t("metrics.continents") },
+  ];
   const sectionRef = useRef<HTMLElement>(null);
 
   // Track scroll progress for parallax effect
@@ -65,16 +67,16 @@ export function Hero() {
               className="text-xs font-medium uppercase tracking-[0.25em] text-fuji-nezu mb-6"
               style={{ textShadow: '0 0 2px rgba(255,255,255,0.8), 0 0 16px rgba(166, 165, 196, 1), 0 0 32px rgba(166, 165, 196, 0.8), 0 0 48px rgba(166, 165, 196, 0.5), 0 1px 4px rgba(0,0,0,0.8)' }}
             >
-              Capital Markets Communications
+              {t("eyebrow")}
             </motion.p>
 
             {/* Headline - single line per phrase - NO animation delay for LCP */}
             <h1
               className="text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
             >
-              <span className="whitespace-nowrap">Build awareness.</span>
+              <span className="whitespace-nowrap">{t("headline1")}</span>
               <br />
-              <span className="whitespace-nowrap text-fuji-nezu drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">Build value.</span>
+              <span className="whitespace-nowrap text-fuji-nezu drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">{t("headline2")}</span>
             </h1>
 
             {/* Subtitle with label */}
@@ -85,14 +87,13 @@ export function Hero() {
               className="mt-10"
             >
               <p
-                className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-4"
+                className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-4"
                 style={{ textShadow: '0 0 2px rgba(255,255,255,0.8), 0 0 16px rgba(166, 165, 196, 1), 0 0 32px rgba(166, 165, 196, 0.8), 0 0 48px rgba(166, 165, 196, 0.5), 0 1px 4px rgba(0,0,0,0.8)' }}
               >
-                Full-Stack Investor Relations
+                {t("subtitle")}
               </p>
               <p className="max-w-sm text-base leading-relaxed text-white/80">
-                We help public companies build shareholder bases across North America
-                and Europe. Turn corporate milestones into market cap.
+                {t("description")}
               </p>
             </motion.div>
 
@@ -104,11 +105,11 @@ export function Hero() {
               className="mt-8 lg:hidden"
             >
               <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-5 max-w-[280px]">
-                <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/70">
-                  Performance Data
+                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/70">
+                  {t("performanceData")}
                 </p>
                 <p className="mt-0.5 text-sm font-semibold text-white/90">
-                  Client Results
+                  {t("clientResults")}
                 </p>
                 <div className="mt-4 flex gap-6">
                   {metrics.map((metric) => (
@@ -116,7 +117,7 @@ export function Hero() {
                       <p className="text-xl font-bold text-white">
                         {metric.value}
                       </p>
-                      <p className="text-[10px] text-white/80">
+                      <p className="text-[11px] text-white/80">
                         {metric.label}
                       </p>
                     </div>
@@ -138,7 +139,7 @@ export function Hero() {
                 asChild
               >
                 <Link href="/contact">
-                  Launch Your Campaign
+                  {tCta("launchCampaign")}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -148,7 +149,7 @@ export function Hero() {
                 className="rounded-full px-8 text-white/80 hover:text-white hover:bg-white/10"
                 asChild
               >
-                <Link href="/case-studies">View Case Studies</Link>
+                <Link href="/case-studies">{tCta("viewCaseStudies")}</Link>
               </Button>
             </motion.div>
 
@@ -167,11 +168,11 @@ export function Hero() {
                 className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-5"
               >
                 {/* Card header */}
-                <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/70">
-                  Performance Data
+                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/70">
+                  {t("performanceData")}
                 </p>
                 <p className="mt-0.5 text-sm font-semibold text-white/90">
-                  Client Results
+                  {t("clientResults")}
                 </p>
 
                 {/* Metrics with text glow synced to video */}
@@ -194,9 +195,8 @@ export function Hero() {
                 </div>
 
                 {/* Footnote */}
-                <p className="mt-5 pt-4 border-t border-white/[0.06] text-[9px] leading-relaxed text-white/60">
-                  *Median results across active client campaigns comparing
-                  pre-engagement to post-engagement metrics.
+                <p className="mt-5 pt-4 border-t border-white/[0.06] text-[11px] leading-relaxed text-white/60">
+                  {t("footnote")}
                 </p>
               </motion.div>
 

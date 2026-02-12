@@ -24,7 +24,7 @@ export const SITE_KEYWORDS = [
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Resources", href: "/resources" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -95,16 +95,8 @@ export const AUDIENCE_SEGMENTS = [
 ] as const;
 
 // Business information (for schema.org and contact pages)
-export const BUSINESS_INFO = {
-  phone: "+1-555-123-4567",
-  address: {
-    street: "123 Marketing Street",
-    city: "San Francisco",
-    state: "CA",
-    zip: "94105",
-    country: "US",
-  },
-} as const;
+// Note: Physical address/phone removed — remote-first business, email only
+export const BUSINESS_INFO = {} as const;
 
 // Image paths for OG/meta
 export const IMAGE_PATHS = {

@@ -3,7 +3,6 @@ import {
   BRAND_NAME,
   SITE_URL,
   SITE_DESCRIPTION,
-  BUSINESS_INFO,
   IMAGE_PATHS,
   CONTACT_EMAIL,
   SOCIAL_LINKS,
@@ -34,7 +33,7 @@ export function generateMetadata({
   const fullTitle = path === "" ? `${BRAND_NAME} | ${title}` : `${title} | ${BRAND_NAME}`;
 
   return {
-    title: fullTitle,
+    title,
     description,
     metadataBase: new URL(SITE_URL),
     alternates: {
@@ -189,38 +188,20 @@ export function generateFAQSchema(faqs: { question: string; answer: string }[]) 
 }
 
 /**
- * Generate JSON-LD structured data for LocalBusiness
+ * Generate JSON-LD structured data for ProfessionalService
+ * Uses ProfessionalService (not LocalBusiness) since there's no physical office
  */
 export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
     "@id": `${SITE_URL}/#organization`,
     name: BRAND_NAME,
     image: `${SITE_URL}${IMAGE_PATHS.ogDefault}`,
     url: SITE_URL,
-    telephone: BUSINESS_INFO.phone,
     email: CONTACT_EMAIL,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: BUSINESS_INFO.address.street,
-      addressLocality: BUSINESS_INFO.address.city,
-      addressRegion: BUSINESS_INFO.address.state,
-      postalCode: BUSINESS_INFO.address.zip,
-      addressCountry: BUSINESS_INFO.address.country,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 37.7749,
-      longitude: -122.4194,
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter],
+    description: SITE_DESCRIPTION,
+    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter].filter(Boolean),
   };
 }
 

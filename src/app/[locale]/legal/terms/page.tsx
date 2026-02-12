@@ -1,14 +1,27 @@
-import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { BRAND_NAME, CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
 
-export const metadata: Metadata = genMeta({
-  title: "Terms of Service",
-  description: `${BRAND_NAME} terms of service. Read our terms and conditions for using our website and services.`,
-  path: "/legal/terms",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return genMeta({
+    title: "Terms of Service",
+    description: `${BRAND_NAME} terms of service. Read our terms and conditions for using our website and services.`,
+    path: "/legal/terms",
+  });
+}
 
-export default function TermsOfServicePage() {
+export default async function TermsOfServicePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const lastUpdated = "January 26, 2026";
 
   return (
@@ -197,10 +210,6 @@ export default function TermsOfServicePage() {
               <strong>{BRAND_NAME}</strong>
               <br />
               Email: {CONTACT_EMAIL}
-              <br />
-              123 Marketing Street
-              <br />
-              San Francisco, CA 94105
             </p>
           </section>
         </div>

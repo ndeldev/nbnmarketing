@@ -1,12 +1,15 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export function CTA() {
+  const t = useTranslations("home.ctaSection");
+  const tCta = useTranslations("common.cta");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -70,7 +73,7 @@ export function CTA() {
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl"
           >
-            Ready to build your shareholder base?
+            {t("title")}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -82,8 +85,7 @@ export function CTA() {
             }}
             className="mt-6 text-lg text-primary-foreground/80"
           >
-            Let&apos;s discuss how we can amplify your next financing, corporate
-            milestone, or market catalyst.
+            {t("description")}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +104,7 @@ export function CTA() {
               className="group rounded-full px-8"
             >
               <Link href="/contact">
-                Schedule a Strategy Call
+                {tCta("scheduleCall")}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -121,7 +123,7 @@ export function CTA() {
                 asChild
                 className="rounded-full px-8 border border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground hover:border-primary-foreground/70"
               >
-                <Link href="/case-studies">See Our Work</Link>
+                <Link href="/case-studies">{tCta("seeOurWork")}</Link>
               </Button>
             </motion.div>
           </motion.div>

@@ -2,15 +2,23 @@ import { MetadataRoute } from "next";
 import { SITE_URL, SERVICES } from "@/lib/constants";
 import { getAllPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_URL;
+const locales = ["en", "de"] as const;
 
-  // Static pages
+function createAlternates(path: string) {
+  return {
+    languages: {
+      en: `${SITE_URL}${path}`,
+      de: `${SITE_URL}/de${path}`,
+      "x-default": `${SITE_URL}${path}`,
+    },
+  };
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     "",
     "/services",
     "/case-studies",
-    "/resources",
     "/about",
     "/contact",
     "/blog",
@@ -18,29 +26,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/legal/terms",
   ];
 
-  const staticRoutes = staticPages.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : route === "/blog" ? 0.9 : 0.8,
-  }));
+  const entries: MetadataRoute.Sitemap = [];
 
-  // Service pages
-  const serviceRoutes = SERVICES.map((service) => ({
-    url: `${baseUrl}/services/${service.id}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  // Static pages for each locale
+  for (const locale of locales) {
+    for (const path of staticPages) {
+      const url = locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/de${path}`;
+      entries.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: path === "" ? 1 : path === "/blog" ? 0.9 : 0.8,
+        alternates: createAlternates(path),
+      });
+    }
+  }
 
-  // Blog posts
+  // Service pages for each locale
+  for (const locale of locales) {
+    for (const service of SERVICES) {
+      const path = `/services/${service.id}`;
+      const url = locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/de${path}`;
+      entries.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: createAlternates(path),
+      });
+    }
+  }
+
+  // Blog posts for each locale
   const blogPosts = getAllPosts();
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  for (const locale of locales) {
+    for (const post of blogPosts) {
+      const path = `/blog/${post.slug}`;
+      const url = locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/de${path}`;
+      entries.push({
+        url,
+        lastModified: new Date(post.date),
+        changeFrequency: "monthly",
+        priority: 0.6,
+        alternates: createAlternates(path),
+      });
+    }
+  }
 
-  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
+  return entries;
 }

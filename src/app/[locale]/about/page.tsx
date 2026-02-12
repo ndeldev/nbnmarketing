@@ -1,14 +1,24 @@
-import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { JsonLd } from "@/components/seo";
 import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
+import { generateOrganizationSchema } from "@/lib/metadata";
 import { BRAND_NAME } from "@/lib/constants";
 
-export const metadata: Metadata = genMeta({
-  title: "About Us",
-  description: `${BRAND_NAME} is a B2B marketing agency built by marketers who understand the unique challenges of selling to businesses. Learn about our team and approach.`,
-  path: "/about",
-  image: "/og-about.jpg",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return genMeta({
+    title: t("about.title"),
+    description: t("about.description", { brandName: BRAND_NAME }),
+    path: "/about",
+    image: "/og-about.jpg",
+  });
+}
 
 const team = [
   {
@@ -33,61 +43,51 @@ const team = [
   },
 ];
 
-const values = [
-  {
-    title: "Results Over Activity",
-    description:
-      "We measure success by business outcomes, not vanity metrics. Every campaign is designed with ROI in mind.",
-  },
-  {
-    title: "Radical Transparency",
-    description:
-      "No black boxes. We share our strategies, data, and learnings openly so you always know what we're doing and why.",
-  },
-  {
-    title: "Partnership Mindset",
-    description:
-      "We're an extension of your team, not just a vendor. Your success is our success.",
-  },
-  {
-    title: "Continuous Learning",
-    description:
-      "B2B marketing evolves constantly. We stay ahead by testing, learning, and adapting.",
-  },
-];
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("about");
 
-export default function AboutPage() {
+  const values = [
+    {
+      title: t("values.resultsOverActivity.title"),
+      description: t("values.resultsOverActivity.description"),
+    },
+    {
+      title: t("values.radicalTransparency.title"),
+      description: t("values.radicalTransparency.description"),
+    },
+    {
+      title: t("values.partnershipMindset.title"),
+      description: t("values.partnershipMindset.description"),
+    },
+    {
+      title: t("values.continuousLearning.title"),
+      description: t("values.continuousLearning.description"),
+    },
+  ];
+
   return (
     <>
+      <JsonLd data={generateOrganizationSchema()} />
       <PageHero
-        title="Built by B2B Marketers, for B2B Marketers"
-        description={`We've been in your shoes. We know the pressure to hit pipeline targets, prove ROI, and do more with less. That's why we built ${BRAND_NAME}.`}
+        title={t("page.title")}
+        description={t("page.description", { brandName: BRAND_NAME })}
       />
 
       {/* Story */}
       <section className="py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight">Our Story</h2>
+            <h2 className="text-3xl font-bold tracking-tight">{t("story.title")}</h2>
             <div className="mt-8 space-y-6 text-lg text-muted-foreground">
-              <p>
-                {BRAND_NAME} was founded with a simple premise: B2B marketing
-                doesn&apos;t have to be complicated, but it does have to be
-                strategic.
-              </p>
-              <p>
-                After years of working in-house at fast-growing startups and
-                enterprise companies, our founders saw the same problems
-                repeated: agencies that didn&apos;t understand B2B, strategies built
-                on vanity metrics, and a disconnect between marketing activities
-                and business outcomes.
-              </p>
-              <p>
-                We built {BRAND_NAME} to be different. Every strategy we
-                develop, every campaign we run, and every piece of content we
-                create is designed with one goal: driving measurable business
-                growth.
-              </p>
+              <p>{t("story.p1", { brandName: BRAND_NAME })}</p>
+              <p>{t("story.p2")}</p>
+              <p>{t("story.p3", { brandName: BRAND_NAME })}</p>
             </div>
           </div>
         </div>
@@ -97,9 +97,9 @@ export default function AboutPage() {
       <section className="bg-muted/30 py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight">Our Values</h2>
+            <h2 className="text-3xl font-bold tracking-tight">{t("values.title")}</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              The principles that guide how we work with clients.
+              {t("values.subtitle")}
             </p>
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2">
@@ -120,10 +120,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight">
-              Leadership Team
+              {t("team.title")}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Experienced marketers who&apos;ve been where you are.
+              {t("team.subtitle")}
             </p>
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

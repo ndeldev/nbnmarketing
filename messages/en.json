@@ -1,0 +1,295 @@
+{
+  "common": {
+    "nav": {
+      "services": "Services",
+      "caseStudies": "Case Studies",
+      "blog": "Blog",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "cta": {
+      "getStarted": "Get Started",
+      "sendMessage": "Send Message",
+      "launchCampaign": "Launch Your Campaign",
+      "viewCaseStudies": "View Case Studies",
+      "scheduleCall": "Schedule a Strategy Call",
+      "seeOurWork": "See Our Work",
+      "learnMore": "Learn more about",
+      "subscribe": "Subscribe to Newsletter",
+      "readArticle": "Read article",
+      "viewAll": "View all",
+      "download": "Download"
+    },
+    "footer": {
+      "services": "Services",
+      "company": "Company",
+      "contact": "Contact",
+      "legal": "Legal",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookieSettings": "Cookie Settings",
+      "copyright": "All rights reserved.",
+      "tagline": "Capital markets communications for public companies across North America and Europe."
+    },
+    "blog": {
+      "backToBlog": "Back to blog",
+      "minRead": "min read",
+      "featuredArticle": "Featured Article",
+      "latestArticles": "Latest Articles",
+      "allPosts": "All Posts",
+      "moreArticlesComing": "More articles coming soon. Subscribe to our newsletter to be notified.",
+      "relatedArticles": "Related Articles",
+      "topics": "Topics",
+      "share": "Share",
+      "expertBio": "Expert in B2B marketing strategy and execution.",
+      "stayUpdated": "Stay Updated",
+      "stayUpdatedDescription": "Get the latest B2B marketing insights delivered to your inbox."
+    },
+    "consent": {
+      "message": "We use cookies to analyze site traffic and optimize your experience. By accepting, you consent to our use of cookies.",
+      "accept": "Accept",
+      "decline": "Decline",
+      "learnMore": "Learn more",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "language": "Language"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Capital Markets Communications",
+      "headline1": "Build awareness.",
+      "headline2": "Build value.",
+      "subtitle": "Full-Stack Investor Relations",
+      "description": "We help public companies build shareholder bases across North America and Europe. Turn corporate milestones into market cap.",
+      "performanceData": "Performance Data",
+      "clientResults": "Client Results",
+      "footnote": "*Median results across active client campaigns comparing pre-engagement to post-engagement metrics.",
+      "metrics": {
+        "marketCap": "Market cap generated",
+        "campaigns": "Campaigns executed",
+        "continents": "Continents covered"
+      }
+    },
+    "stats": {
+      "sectionTitle": "Strategic partnerships · Results-driven approach",
+      "segments": {
+        "emerging": "Emerging",
+        "growth": "Growth",
+        "established": "Established"
+      },
+      "labels": {
+        "avgMarketCapLift": "Avg. Market Cap Lift",
+        "clientsServed": "Clients Served",
+        "avgVolumeIncrease": "Avg. Volume Increase",
+        "daysToFirstResults": "Days to First Results",
+        "clientRetentionRate": "Client Retention Rate",
+        "complianceRate": "Compliance Rate"
+      },
+      "copy": {
+        "startups": {
+          "headline": "Breaking through the noise",
+          "description": "Small-cap visibility is hard-won. We help emerging companies cut through to the right investors with targeted campaigns that turn first milestones into real momentum."
+        },
+        "scaleups": {
+          "headline": "We scale with you",
+          "description": "As your company grows, so should your investor base. We expand your reach across North America and Europe, building the shareholder foundation for your next phase."
+        },
+        "enterprise": {
+          "headline": "Transform milestones into market cap",
+          "description": "At scale, every announcement matters. We optimize your communications strategy to maintain institutional confidence and maximize the impact of corporate catalysts."
+        }
+      }
+    },
+    "features": {
+      "title": "Why Choose",
+      "brandName": "NBN Marketing",
+      "subtitle": "We understand the unique challenges of junior capital markets and tailor our approach accordingly.",
+      "fullStack": {
+        "title": "Full-Stack Coverage",
+        "description": "From digital advertising to investor outreach, we handle every aspect of your IR campaign. One team, one strategy, seamless execution across all channels.",
+        "badge": "Integrated"
+      },
+      "globalReach": {
+        "title": "Global Reach",
+        "description": "Active investor networks across North America and Europe. We reach shareholders where they are."
+      },
+      "sectorExpertise": {
+        "title": "Sector Expertise",
+        "description": "Deep experience with mining, tech, and life sciences. We speak your industry's language."
+      },
+      "measurableResults": {
+        "title": "Measurable Results",
+        "description": "We track what matters: shareholder growth, trading volume, and market cap movement. Real-time dashboards show campaign impact."
+      },
+      "complianceAware": {
+        "title": "Compliance Aware",
+        "description": "We understand regulatory requirements for TSX-V, CSE, and Frankfurt. All campaigns are structured for compliance."
+      }
+    },
+    "ctaSection": {
+      "title": "Ready to build your shareholder base?",
+      "description": "Let's discuss how we can amplify your next financing, corporate milestone, or market catalyst."
+    }
+  },
+  "services": {
+    "page": {
+      "title": "Investor Relations Services",
+      "description": "From digital advertising to analytics reporting, we offer full-stack IR services designed to build shareholder bases across North America and Europe."
+    },
+    "cards": {
+      "advertising": {
+        "title": "Digital Advertising",
+        "shortDescription": "Reach investors with precision-targeted campaigns",
+        "description": "Multi-platform digital advertising across Google, Bing, and programmatic networks targeting self-directed investors."
+      },
+      "content": {
+        "title": "Content & Publications",
+        "shortDescription": "Build credibility through premium media placement",
+        "description": "CEO interviews, company profiles, and editorial features placed in leading financial publications."
+      },
+      "europe": {
+        "title": "European Distribution",
+        "shortDescription": "Expand your reach to DACH region investors",
+        "description": "Targeted campaigns for Frankfurt-listed issuers and companies seeking European retail investor exposure."
+      },
+      "email": {
+        "title": "Email Marketing",
+        "shortDescription": "Connect directly with active investors",
+        "description": "Permission-based email campaigns to verified investor databases, segmented by criteria and sector interest."
+      },
+      "social": {
+        "title": "Social & Video",
+        "shortDescription": "Build executive visibility and thought leadership",
+        "description": "LinkedIn thought leadership, YouTube investor presentations, and CEO video content that attracts attention."
+      },
+      "analytics": {
+        "title": "Analytics & Reporting",
+        "shortDescription": "Measure campaign impact on market performance",
+        "description": "Real-time dashboards, shareholder acquisition tracking, and ROI analysis correlated with trading metrics."
+      }
+    },
+    "serviceDetail": {
+      "features": "Features",
+      "process": "Our Process",
+      "benefits": "Benefits",
+      "faq": "Frequently Asked Questions",
+      "relatedServices": "Related Services",
+      "step": "Step"
+    },
+    "audienceContent": {
+      "startups": {
+        "advertising": { "headline": "Launching your story to", "emphasis": "the right investors", "description": "Precision-targeted digital campaigns across Google, Bing, and programmatic networks. We help newly listed companies build initial shareholder awareness with efficient ad spend that reaches active retail investors in your sector." },
+        "content": { "headline": "Establishing credibility", "emphasis": "from day one", "description": "CEO interviews, company profiles, and editorial features placed in leading financial publications. Build the third-party credibility that turns casual interest into invested shareholders." },
+        "europe": { "headline": "Opening European markets", "emphasis": "early", "description": "Whether you're considering a Frankfurt dual-listing or want to tap into DACH region retail investors, we help emerging issuers establish European presence from the start." },
+        "email": { "headline": "Reaching verified investors", "emphasis": "directly", "description": "Permission-based email campaigns to verified investor databases. Get your story in front of self-directed investors who actively trade junior market equities." },
+        "social": { "headline": "Building executive visibility", "emphasis": "that attracts capital", "description": "LinkedIn thought leadership and CEO video content that positions your leadership team as authorities worth investing in. Build the personal brand that builds shareholder confidence." },
+        "analytics": { "headline": "Measuring what matters", "emphasis": "from the start", "description": "Real-time dashboards that correlate your marketing spend with trading volume and shareholder acquisition. Know your cost per investor and optimize continuously." }
+      },
+      "scaleups": {
+        "advertising": { "headline": "Scaling awareness for", "emphasis": "your next catalyst", "description": "Amplify your corporate milestones with coordinated advertising campaigns. Drilling results, resource estimates, product launches—turn news into trading volume with targeted investor reach." },
+        "content": { "headline": "Deepening your", "emphasis": "investment story", "description": "Comprehensive media coverage that educates investors on your growth trajectory. Research reports, analyst coverage, and thought leadership that builds institutional awareness alongside retail." },
+        "europe": { "headline": "Maximizing your", "emphasis": "Frankfurt listing value", "description": "Full-stack DACH region campaigns for companies ready to build serious European shareholder bases. German-language content, targeted advertising, and investor database access." },
+        "email": { "headline": "Nurturing investors through", "emphasis": "your growth story", "description": "Automated email sequences that keep your shareholder base engaged through corporate developments. Turn one-time visitors into long-term shareholders with strategic communication." },
+        "social": { "headline": "Commanding attention", "emphasis": "in your sector", "description": "Systematic social media presence that positions your company as the sector leader. YouTube investor presentations, Twitter engagement, and community building at scale." },
+        "analytics": { "headline": "Optimizing for", "emphasis": "market cap growth", "description": "Advanced analytics that correlate marketing campaigns with market performance. Attribution modeling, geographic analysis, and ROI reporting that informs strategic decisions." }
+      },
+      "enterprise": {
+        "advertising": { "headline": "Maintaining visibility with", "emphasis": "institutional reach", "description": "Sustained advertising programs that keep your company visible to both retail and institutional investors. Programmatic campaigns targeting family offices, fund managers, and high-net-worth individuals." },
+        "content": { "headline": "Executive thought leadership", "emphasis": "at scale", "description": "Premium content programs positioning your C-suite as industry authorities. Ghostwritten executive content, premium research partnerships, and global content distribution." },
+        "europe": { "headline": "Sustaining European", "emphasis": "investor relations", "description": "Ongoing European investor engagement programs. Localized content, sustained media presence, and relationship management across DACH region financial media." },
+        "email": { "headline": "Strategic shareholder", "emphasis": "communication", "description": "Sophisticated email programs for established investor relations. Segmented communications for retail vs. institutional, catalyst announcements, and quarterly update sequences." },
+        "social": { "headline": "Managing executive", "emphasis": "brand presence", "description": "Full social media management for executives and corporate accounts. Consistent presence, community engagement, and crisis communication protocols." },
+        "analytics": { "headline": "Enterprise-grade", "emphasis": "IR intelligence", "description": "Comprehensive analytics dashboards for board-level reporting. Multi-channel attribution, competitive intelligence, and market correlation analysis." }
+      }
+    }
+  },
+  "caseStudies": {
+    "page": {
+      "title": "Real Results for Public Companies",
+      "description": "See how we've helped issuers build shareholder value through strategic investor relations campaigns."
+    },
+    "studies": {
+      "juniorMining": {
+        "company": "Junior Mining Issuer",
+        "industry": "Mining · TSX-V",
+        "title": "4x Shareholder Growth in 90 Days",
+        "description": "A newly listed junior mining company needed to build an initial shareholder base ahead of their first drill program. We deployed coordinated digital advertising and email campaigns targeting self-directed resource investors.",
+        "metrics": { "shareholderGrowth": "Shareholder Growth", "costPerInvestor": "Cost Per Investor", "tradingVolume": "Trading Volume" }
+      },
+      "biotech": {
+        "company": "Biotech Issuer",
+        "industry": "Life Sciences · CSE / Frankfurt",
+        "title": "European Investor Expansion via Frankfurt Dual-Listing",
+        "description": "A clinical-stage biotech sought European retail investor exposure to complement their North American base. We managed the Frankfurt listing communications and launched DACH-region campaigns with German-language content.",
+        "metrics": { "euShareholders": "EU Shareholders", "frankfurtVolume": "Frankfurt Volume", "mediaPlacements": "Media Placements" }
+      },
+      "techIpo": {
+        "company": "Technology Company",
+        "industry": "SaaS · TSX",
+        "title": "Pre-IPO Communications & Market Awareness",
+        "description": "A B2B SaaS company preparing for a TSX listing needed to build institutional and retail awareness ahead of their IPO. We created executive thought leadership content and a multi-channel investor awareness campaign.",
+        "metrics": { "ipoSubscribed": "IPO Subscribed", "analystCoverage": "Analyst Coverage", "newsletterReach": "Newsletter Reach" }
+      },
+      "resourceCatalyst": {
+        "company": "Resource Company",
+        "industry": "Mining · TSX-V",
+        "title": "Catalyst Campaign: Drill Results Amplification",
+        "description": "A gold exploration company with upcoming assay results needed maximum market visibility during their critical news flow period. We executed a timed investor awareness campaign synchronized with their press release schedule.",
+        "metrics": { "peakDailyVolume": "Peak Daily Volume", "newShareholders": "New Shareholders", "campaignRoi": "Campaign ROI" }
+      }
+    }
+  },
+  "about": {
+    "page": {
+      "title": "Built by B2B Marketers, for B2B Marketers",
+      "description": "We've been in your shoes. We know the pressure to hit pipeline targets, prove ROI, and do more with less. That's why we built {brandName}."
+    },
+    "story": {
+      "title": "Our Story",
+      "p1": "{brandName} was founded with a simple premise: B2B marketing doesn't have to be complicated, but it does have to be strategic.",
+      "p2": "After years of working in-house at fast-growing startups and enterprise companies, our founders saw the same problems repeated: agencies that didn't understand B2B, strategies built on vanity metrics, and a disconnect between marketing activities and business outcomes.",
+      "p3": "We built {brandName} to be different. Every strategy we develop, every campaign we run, and every piece of content we create is designed with one goal: driving measurable business growth."
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "The principles that guide how we work with clients.",
+      "resultsOverActivity": { "title": "Results Over Activity", "description": "We measure success by business outcomes, not vanity metrics. Every campaign is designed with ROI in mind." },
+      "radicalTransparency": { "title": "Radical Transparency", "description": "No black boxes. We share our strategies, data, and learnings openly so you always know what we're doing and why." },
+      "partnershipMindset": { "title": "Partnership Mindset", "description": "We're an extension of your team, not just a vendor. Your success is our success." },
+      "continuousLearning": { "title": "Continuous Learning", "description": "B2B marketing evolves constantly. We stay ahead by testing, learning, and adapting." }
+    },
+    "team": {
+      "title": "Leadership Team",
+      "subtitle": "Experienced marketers who've been where you are."
+    }
+  },
+  "contact": {
+    "page": {
+      "title": "Let's Talk Growth",
+      "description": "Ready to accelerate your B2B marketing? Book a free strategy call or send us a message."
+    },
+    "form": {
+      "getInTouch": "Get in Touch",
+      "getInTouchDescription": "Have a question or want to discuss a project? We'd love to hear from you.",
+      "email": "Email",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "workEmail": "Work Email",
+      "company": "Company",
+      "howCanWeHelp": "How can we help?",
+      "messagePlaceholder": "Tell us about your marketing goals...",
+      "sendMessage": "Send Message",
+      "responseTime": "We'll get back to you within 24 hours."
+    }
+  },
+  "metadata": {
+    "home": { "title": "Capital Markets Communications", "description": "Full-stack investor relations for public companies. We help issuers build market value through strategic communications across North America and Europe." },
+    "services": { "title": "Investor Relations Services", "description": "Full-stack investor relations for public companies. Digital advertising, content & publications, European distribution, email marketing, social & video, and analytics." },
+    "caseStudies": { "title": "Case Studies", "description": "See how {brandName} has helped public companies build shareholder value through strategic investor relations campaigns." },
+    "blog": { "title": "Blog", "description": "B2B marketing insights and best practices from the {brandName} team. Learn about content marketing, SEO, demand generation, and more." },
+    "about": { "title": "About Us", "description": "{brandName} is a B2B marketing agency built by marketers who understand the unique challenges of selling to businesses." },
+    "contact": { "title": "Contact Us", "description": "Get in touch with {brandName}. Book a strategy call or send us a message to discuss how we can help accelerate your B2B marketing." },
+    "privacy": { "title": "Privacy Policy", "description": "{brandName} privacy policy. Learn how we collect, use, and protect your personal information." },
+    "terms": { "title": "Terms of Service", "description": "{brandName} terms of service. Read our terms and conditions for using our website and services." }
+  }
+}

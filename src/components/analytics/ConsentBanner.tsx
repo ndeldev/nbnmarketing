@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { DURATION, EASING } from "@/lib/animations";
 
@@ -26,6 +27,7 @@ function updateConsent(granted: boolean) {
 }
 
 export function ConsentBanner() {
+  const t = useTranslations("common.consent");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -69,22 +71,21 @@ export function ConsentBanner() {
         >
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
             <p className="text-sm text-muted-foreground">
-              We use cookies to analyze site traffic and improve your experience.
-              See our{" "}
+              {t("message")}{" "}
               <Link
                 href="/legal/privacy"
                 className="text-foreground underline underline-offset-4 hover:text-primary"
               >
-                Privacy Policy
+                {t("privacyPolicy")}
               </Link>
               .
             </p>
             <div className="flex shrink-0 gap-3">
               <Button size="sm" onClick={handleAccept}>
-                Accept
+                {t("accept")}
               </Button>
               <Button size="sm" variant="outline" onClick={handleDecline}>
-                Decline
+                {t("decline")}
               </Button>
             </div>
           </div>

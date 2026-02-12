@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,21 +10,37 @@ import { PageHero } from "@/components/sections";
 import { generateMetadata as genMeta, generateLocalBusinessSchema } from "@/lib/metadata";
 import { BRAND_NAME, CONTACT_EMAIL } from "@/lib/constants";
 
-export const metadata: Metadata = genMeta({
-  title: "Contact Us",
-  description: `Get in touch with ${BRAND_NAME}. Book a strategy call or send us a message to discuss how we can help accelerate your B2B marketing.`,
-  path: "/contact",
-  image: "/og-contact.jpg",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return genMeta({
+    title: t("contact.title"),
+    description: t("contact.description", { brandName: BRAND_NAME }),
+    path: "/contact",
+    image: "/og-contact.jpg",
+  });
+}
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("contact");
+
   return (
     <>
       <JsonLd data={generateLocalBusinessSchema()} />
 
       <PageHero
-        title="Let's Talk Growth"
-        description="Ready to accelerate your B2B marketing? Book a free strategy call or send us a message."
+        title={t("page.title")}
+        description={t("page.description")}
       />
 
       {/* Contact Section */}
@@ -33,10 +49,9 @@ export default function ContactPage() {
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold">Get in Touch</h2>
+              <h2 className="text-2xl font-bold">{t("form.getInTouch")}</h2>
               <p className="mt-4 text-muted-foreground">
-                Have a question or want to discuss a project? We&apos;d love to hear
-                from you.
+                {t("form.getInTouchDescription")}
               </p>
 
               <div className="mt-8 space-y-6">
@@ -45,7 +60,7 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-medium">Email</h3>
+                    <h3 className="font-medium">{t("form.email")}</h3>
                     <a
                       href={`mailto:${CONTACT_EMAIL}`}
                       className="text-muted-foreground hover:text-foreground"
@@ -55,29 +70,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Phone className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Office</h3>
-                    <p className="text-muted-foreground">
-                      123 Marketing Street
-                      <br />
-                      San Francisco, CA 94105
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -87,7 +79,7 @@ export default function ContactPage() {
                 <form className="space-y-6">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="firstName">{t("form.firstName")}</Label>
                       <Input
                         id="firstName"
                         name="firstName"
@@ -96,7 +88,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
+                      <Label htmlFor="lastName">{t("form.lastName")}</Label>
                       <Input
                         id="lastName"
                         name="lastName"
@@ -107,7 +99,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Work Email</Label>
+                    <Label htmlFor="email">{t("form.workEmail")}</Label>
                     <Input
                       id="email"
                       name="email"
@@ -118,7 +110,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="company">Company</Label>
+                    <Label htmlFor="company">{t("form.company")}</Label>
                     <Input
                       id="company"
                       name="company"
@@ -128,22 +120,22 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">How can we help?</Label>
+                    <Label htmlFor="message">{t("form.howCanWeHelp")}</Label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Tell us about your marketing goals..."
+                      placeholder={t("form.messagePlaceholder")}
                       rows={4}
                       required
                     />
                   </div>
 
                   <Button type="submit" className="w-full">
-                    Send Message
+                    {t("form.sendMessage")}
                   </Button>
 
                   <p className="text-center text-sm text-muted-foreground">
-                    We&apos;ll get back to you within 24 hours.
+                    {t("form.responseTime")}
                   </p>
                 </form>
               </CardContent>

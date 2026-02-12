@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useAudience } from "@/lib/hooks/useAudienceContext";
 import { AUDIENCE_SEGMENTS } from "@/lib/constants";
 import { StatCard } from "./stats/StatCard";
@@ -14,37 +15,28 @@ const audienceIds = AUDIENCE_SEGMENTS.map((s) => s.id);
 const SCROLL_HEIGHT_MOBILE = 60; // vh per segment on mobile
 const SCROLL_HEIGHT_DESKTOP = 100; // vh per segment on desktop
 
-// Stats values per audience segment
+// Stats values per audience segment (numbers only, labels come from translations)
 const statsValues: Record<string, {
   marketCap: number;
   clients: number;
   volume: number;
   metric4: number;
-  metric4Label: string;
   metric4Suffix: string;
 }> = {
-  startups: { marketCap: 12, clients: 45, volume: 2.1, metric4: 90, metric4Label: "Days to First Results", metric4Suffix: "" },
-  scaleups: { marketCap: 52, clients: 60, volume: 3.4, metric4: 85, metric4Label: "Client Retention Rate", metric4Suffix: "%" },
-  enterprise: { marketCap: 115, clients: 25, volume: 4.2, metric4: 98, metric4Label: "Compliance Rate", metric4Suffix: "%" },
+  startups: { marketCap: 12, clients: 45, volume: 2.1, metric4: 90, metric4Suffix: "" },
+  scaleups: { marketCap: 52, clients: 60, volume: 3.4, metric4: 85, metric4Suffix: "%" },
+  enterprise: { marketCap: 115, clients: 25, volume: 4.2, metric4: 98, metric4Suffix: "%" },
 };
 
-// Transitional copy for each audience segment
-const audienceCopy: Record<string, { headline: string; description: string }> = {
-  startups: {
-    headline: "Breaking through the noise",
-    description: "Small-cap visibility is hard-won. We help emerging companies cut through to the right investors with targeted campaigns that turn first milestones into real momentum.",
-  },
-  scaleups: {
-    headline: "We scale with you",
-    description: "As your company grows, so should your investor base. We expand your reach across North America and Europe, building the shareholder foundation for your next phase.",
-  },
-  enterprise: {
-    headline: "Transform milestones into market cap",
-    description: "At scale, every announcement matters. We optimize your communications strategy to maintain institutional confidence and maximize the impact of corporate catalysts.",
-  },
+// Map audience IDs to metric4 label keys
+const metric4LabelKeys: Record<string, string> = {
+  startups: "daysToFirstResults",
+  scaleups: "clientRetentionRate",
+  enterprise: "complianceRate",
 };
 
 export function Stats() {
+  const t = useTranslations("home.stats");
   const { selectedAudience, setSelectedAudience } = useAudience();
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
@@ -91,7 +83,7 @@ export function Stats() {
   });
 
   const currentValues = statsValues[selectedAudience] || statsValues.startups;
-  const currentCopy = audienceCopy[selectedAudience] || audienceCopy.startups;
+  const audienceKey = selectedAudience || "startups";
   // Shorter scroll distance on mobile for easier navigation
   const scrollHeightPerSegment = isMobile ? SCROLL_HEIGHT_MOBILE : SCROLL_HEIGHT_DESKTOP;
   const containerHeight = `${audienceIds.length * scrollHeightPerSegment}vh`;
@@ -132,19 +124,22 @@ export function Stats() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-22">
               <h2 className="text-lg lg:text-xl font-semibold tracking-tight text-white whitespace-nowrap">
-                Strategic partnerships · Results-driven approach
+                {t("sectionTitle")}
               </h2>
 
               <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
-                {AUDIENCE_SEGMENTS.map((segment) => (
-                  <PillTab
-                    key={segment.id}
-                    active={selectedAudience === segment.id}
-                    onClick={() => handleAudienceClick(segment.id)}
-                  >
-                    {segment.label}
-                  </PillTab>
-                ))}
+                {AUDIENCE_SEGMENTS.map((segment) => {
+                  const labelKey = segment.id === "startups" ? "emerging" : segment.id === "scaleups" ? "growth" : "established";
+                  return (
+                    <PillTab
+                      key={segment.id}
+                      active={selectedAudience === segment.id}
+                      onClick={() => handleAudienceClick(segment.id)}
+                    >
+                      {t(`segments.${labelKey}`)}
+                    </PillTab>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -156,21 +151,21 @@ export function Stats() {
             <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
               <StatCard
                 value={currentValues.marketCap}
-                label="Avg. Market Cap Lift"
+                label={t("labels.avgMarketCapLift")}
                 prefix="$"
                 suffix="M+"
                 index={0}
               />
               <StatCard
                 value={currentValues.clients}
-                label="Clients Served"
+                label={t("labels.clientsServed")}
                 prefix=""
                 suffix="+"
                 index={1}
               />
               <StatCard
                 value={currentValues.volume}
-                label="Avg. Volume Increase"
+                label={t("labels.avgVolumeIncrease")}
                 prefix=""
                 suffix="x"
                 decimals={1}
@@ -178,7 +173,7 @@ export function Stats() {
               />
               <StatCard
                 value={currentValues.metric4}
-                label={currentValues.metric4Label}
+                label={t(`labels.${metric4LabelKeys[audienceKey]}`)}
                 prefix=""
                 suffix={currentValues.metric4Suffix}
                 index={3}
@@ -191,22 +186,22 @@ export function Stats() {
         <div className="py-6 lg:py-8">
           <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
             <motion.h3
-              key={currentCopy.headline}
+              key={`headline-${audienceKey}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className="text-2xl lg:text-3xl font-semibold text-white mb-3"
             >
-              {currentCopy.headline}
+              {t(`copy.${audienceKey}.headline`)}
             </motion.h3>
             <motion.p
-              key={currentCopy.description}
+              key={`desc-${audienceKey}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base lg:text-lg text-white/70 leading-relaxed"
             >
-              {currentCopy.description}
+              {t(`copy.${audienceKey}.description`)}
             </motion.p>
           </div>
         </div>

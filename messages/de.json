@@ -1,0 +1,295 @@
+{
+  "common": {
+    "nav": {
+      "services": "Leistungen",
+      "caseStudies": "Referenzen",
+      "blog": "Blog",
+      "about": "Über uns",
+      "contact": "Kontakt"
+    },
+    "cta": {
+      "getStarted": "Jetzt starten",
+      "sendMessage": "Nachricht senden",
+      "launchCampaign": "Kampagne starten",
+      "viewCaseStudies": "Referenzen ansehen",
+      "scheduleCall": "Strategiegespräch vereinbaren",
+      "seeOurWork": "Unsere Arbeit ansehen",
+      "learnMore": "Mehr erfahren über",
+      "subscribe": "Newsletter abonnieren",
+      "readArticle": "Artikel lesen",
+      "viewAll": "Alle anzeigen",
+      "download": "Herunterladen"
+    },
+    "footer": {
+      "services": "Leistungen",
+      "company": "Unternehmen",
+      "contact": "Kontakt",
+      "legal": "Rechtliches",
+      "privacyPolicy": "Datenschutzerklärung",
+      "termsOfService": "Nutzungsbedingungen",
+      "cookieSettings": "Cookie-Einstellungen",
+      "copyright": "Alle Rechte vorbehalten.",
+      "tagline": "Kapitalmarktkommunikation für börsennotierte Unternehmen in Nordamerika und Europa."
+    },
+    "blog": {
+      "backToBlog": "Zurück zum Blog",
+      "minRead": "Min. Lesezeit",
+      "featuredArticle": "Empfohlener Artikel",
+      "latestArticles": "Neueste Artikel",
+      "allPosts": "Alle Beiträge",
+      "moreArticlesComing": "Weitere Artikel folgen in Kürze. Abonnieren Sie unseren Newsletter, um benachrichtigt zu werden.",
+      "relatedArticles": "Verwandte Artikel",
+      "topics": "Themen",
+      "share": "Teilen",
+      "expertBio": "Experte für B2B-Marketingstrategie und -umsetzung.",
+      "stayUpdated": "Bleiben Sie informiert",
+      "stayUpdatedDescription": "Erhalten Sie die neuesten B2B-Marketing-Einblicke direkt in Ihren Posteingang."
+    },
+    "consent": {
+      "message": "Wir verwenden Cookies, um den Website-Traffic zu analysieren und Ihr Erlebnis zu optimieren. Durch Akzeptieren stimmen Sie der Verwendung von Cookies zu.",
+      "accept": "Akzeptieren",
+      "decline": "Ablehnen",
+      "learnMore": "Mehr erfahren",
+      "privacyPolicy": "Datenschutzerklärung"
+    },
+    "language": "Sprache"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Kapitalmarktkommunikation",
+      "headline1": "Bekanntheit aufbauen.",
+      "headline2": "Werte schaffen.",
+      "subtitle": "Full-Stack Investor Relations",
+      "description": "Wir helfen börsennotierten Unternehmen, Aktionärsbasen in Nordamerika und Europa aufzubauen. Verwandeln Sie Unternehmensmeilensteine in Marktkapitalisierung.",
+      "performanceData": "Leistungsdaten",
+      "clientResults": "Kundenergebnisse",
+      "footnote": "*Medianwerte über aktive Kundenkampagnen im Vergleich der Kennzahlen vor und nach dem Engagement.",
+      "metrics": {
+        "marketCap": "Marktkapitalisierung generiert",
+        "campaigns": "Kampagnen durchgeführt",
+        "continents": "Kontinente abgedeckt"
+      }
+    },
+    "stats": {
+      "sectionTitle": "Strategische Partnerschaften · Ergebnisorientierter Ansatz",
+      "segments": {
+        "emerging": "Aufstrebend",
+        "growth": "Wachstum",
+        "established": "Etabliert"
+      },
+      "labels": {
+        "avgMarketCapLift": "Ø Marktkapitalisierungszuwachs",
+        "clientsServed": "Betreute Kunden",
+        "avgVolumeIncrease": "Ø Volumensteigerung",
+        "daysToFirstResults": "Tage bis erste Ergebnisse",
+        "clientRetentionRate": "Kundenbindungsrate",
+        "complianceRate": "Compliance-Rate"
+      },
+      "copy": {
+        "startups": {
+          "headline": "Durchbruch durch den Lärm",
+          "description": "Sichtbarkeit im Small-Cap-Bereich ist hart erkämpft. Wir helfen aufstrebenden Unternehmen, die richtigen Investoren mit gezielten Kampagnen zu erreichen, die erste Meilensteine in echte Dynamik verwandeln."
+        },
+        "scaleups": {
+          "headline": "Wir wachsen mit Ihnen",
+          "description": "Wenn Ihr Unternehmen wächst, sollte auch Ihre Investorenbasis wachsen. Wir erweitern Ihre Reichweite in Nordamerika und Europa und bauen die Aktionärsbasis für Ihre nächste Phase auf."
+        },
+        "enterprise": {
+          "headline": "Meilensteine in Marktkapitalisierung verwandeln",
+          "description": "Im großen Maßstab zählt jede Ankündigung. Wir optimieren Ihre Kommunikationsstrategie, um das Vertrauen institutioneller Investoren zu stärken und die Wirkung von Unternehmenskatalysatoren zu maximieren."
+        }
+      }
+    },
+    "features": {
+      "title": "Warum",
+      "brandName": "NBN Marketing",
+      "subtitle": "Wir verstehen die einzigartigen Herausforderungen der Junior-Kapitalmärkte und passen unseren Ansatz entsprechend an.",
+      "fullStack": {
+        "title": "Full-Stack-Abdeckung",
+        "description": "Von digitaler Werbung bis hin zur Investorenansprache — wir übernehmen jeden Aspekt Ihrer IR-Kampagne. Ein Team, eine Strategie, nahtlose Umsetzung über alle Kanäle.",
+        "badge": "Integriert"
+      },
+      "globalReach": {
+        "title": "Globale Reichweite",
+        "description": "Aktive Investorennetzwerke in Nordamerika und Europa. Wir erreichen Aktionäre dort, wo sie sind."
+      },
+      "sectorExpertise": {
+        "title": "Branchenexpertise",
+        "description": "Umfassende Erfahrung mit Bergbau, Technologie und Life Sciences. Wir sprechen die Sprache Ihrer Branche."
+      },
+      "measurableResults": {
+        "title": "Messbare Ergebnisse",
+        "description": "Wir messen, was zählt: Aktionärswachstum, Handelsvolumen und Marktkapitalisierungsentwicklung. Echtzeit-Dashboards zeigen die Kampagnenwirkung."
+      },
+      "complianceAware": {
+        "title": "Compliance-bewusst",
+        "description": "Wir verstehen die regulatorischen Anforderungen für TSX-V, CSE und Frankfurt. Alle Kampagnen sind compliance-konform strukturiert."
+      }
+    },
+    "ctaSection": {
+      "title": "Bereit, Ihre Aktionärsbasis aufzubauen?",
+      "description": "Lassen Sie uns besprechen, wie wir Ihre nächste Finanzierung, Ihren Unternehmensmeilenstein oder Ihren Marktkatalysator verstärken können."
+    }
+  },
+  "services": {
+    "page": {
+      "title": "Investor-Relations-Leistungen",
+      "description": "Von digitaler Werbung bis hin zur Analyse bieten wir Full-Stack-IR-Leistungen zum Aufbau von Aktionärsbasen in Nordamerika und Europa."
+    },
+    "cards": {
+      "advertising": {
+        "title": "Digitale Werbung",
+        "shortDescription": "Erreichen Sie Investoren mit präzise ausgerichteten Kampagnen",
+        "description": "Multiplattform-Digitalwerbung über Google, Bing und programmatische Netzwerke für Privatanleger."
+      },
+      "content": {
+        "title": "Content & Publikationen",
+        "shortDescription": "Bauen Sie Glaubwürdigkeit durch Premium-Medienplatzierungen auf",
+        "description": "CEO-Interviews, Unternehmensprofile und redaktionelle Beiträge in führenden Finanzpublikationen."
+      },
+      "europe": {
+        "title": "Europäische Distribution",
+        "shortDescription": "Erweitern Sie Ihre Reichweite auf DACH-Investoren",
+        "description": "Gezielte Kampagnen für in Frankfurt gelistete Emittenten und Unternehmen, die europäische Privatanleger ansprechen möchten."
+      },
+      "email": {
+        "title": "E-Mail-Marketing",
+        "shortDescription": "Erreichen Sie aktive Investoren direkt",
+        "description": "Genehmigungsbasierte E-Mail-Kampagnen an verifizierte Investorendatenbanken, segmentiert nach Kriterien und Brancheninteresse."
+      },
+      "social": {
+        "title": "Social Media & Video",
+        "shortDescription": "Stärken Sie die Sichtbarkeit der Geschäftsführung und Thought Leadership",
+        "description": "LinkedIn Thought Leadership, YouTube-Investorenpräsentationen und CEO-Videoinhalte, die Aufmerksamkeit erregen."
+      },
+      "analytics": {
+        "title": "Analyse & Reporting",
+        "shortDescription": "Messen Sie die Kampagnenwirkung auf die Marktperformance",
+        "description": "Echtzeit-Dashboards, Aktionärsakquisitions-Tracking und ROI-Analyse korreliert mit Handelskennzahlen."
+      }
+    },
+    "serviceDetail": {
+      "features": "Leistungsmerkmale",
+      "process": "Unser Prozess",
+      "benefits": "Vorteile",
+      "faq": "Häufig gestellte Fragen",
+      "relatedServices": "Verwandte Leistungen",
+      "step": "Schritt"
+    },
+    "audienceContent": {
+      "startups": {
+        "advertising": { "headline": "Ihre Story an", "emphasis": "die richtigen Investoren bringen", "description": "Präzise ausgerichtete digitale Kampagnen über Google, Bing und programmatische Netzwerke. Wir helfen neu gelisteten Unternehmen, mit effizientem Werbebudget erste Aktionärsbekanntheit aufzubauen und aktive Privatanleger in Ihrer Branche zu erreichen." },
+        "content": { "headline": "Glaubwürdigkeit aufbauen", "emphasis": "vom ersten Tag an", "description": "CEO-Interviews, Unternehmensprofile und redaktionelle Beiträge in führenden Finanzpublikationen. Schaffen Sie die Drittanbieter-Glaubwürdigkeit, die beiläufiges Interesse in investierte Aktionäre verwandelt." },
+        "europe": { "headline": "Europäische Märkte", "emphasis": "frühzeitig erschließen", "description": "Ob Sie ein Frankfurt-Dual-Listing in Erwägung ziehen oder DACH-Privatanleger ansprechen möchten — wir helfen aufstrebenden Emittenten, von Anfang an eine europäische Präsenz aufzubauen." },
+        "email": { "headline": "Verifizierte Investoren", "emphasis": "direkt erreichen", "description": "Genehmigungsbasierte E-Mail-Kampagnen an verifizierte Investorendatenbanken. Bringen Sie Ihre Story vor Privatanleger, die aktiv mit Junior-Markt-Wertpapieren handeln." },
+        "social": { "headline": "Executive-Sichtbarkeit aufbauen,", "emphasis": "die Kapital anzieht", "description": "LinkedIn Thought Leadership und CEO-Videoinhalte, die Ihr Führungsteam als investitionswürdige Autoritäten positionieren. Bauen Sie die persönliche Marke auf, die Aktionärsvertrauen schafft." },
+        "analytics": { "headline": "Messen, was zählt —", "emphasis": "von Anfang an", "description": "Echtzeit-Dashboards, die Ihre Marketingausgaben mit Handelsvolumen und Aktionärsakquisition korrelieren. Kennen Sie Ihre Kosten pro Investor und optimieren Sie kontinuierlich." }
+      },
+      "scaleups": {
+        "advertising": { "headline": "Bekanntheit skalieren für", "emphasis": "Ihren nächsten Katalysator", "description": "Verstärken Sie Ihre Unternehmensmeilensteine mit koordinierten Werbekampagnen. Bohrergebnisse, Ressourcenschätzungen, Produkteinführungen — verwandeln Sie Nachrichten in Handelsvolumen mit gezielter Investorenansprache." },
+        "content": { "headline": "Ihre Investment-Story", "emphasis": "vertiefen", "description": "Umfassende Medienberichterstattung, die Investoren über Ihre Wachstumsentwicklung informiert. Research-Berichte, Analystenabdeckung und Thought Leadership, die institutionelles Bewusstsein neben dem Privatanlegermarkt aufbaut." },
+        "europe": { "headline": "Den Wert Ihres", "emphasis": "Frankfurt-Listings maximieren", "description": "Full-Stack-DACH-Kampagnen für Unternehmen, die bereit sind, eine ernsthafte europäische Aktionärsbasis aufzubauen. Deutschsprachige Inhalte, gezielte Werbung und Zugang zu Investorendatenbanken." },
+        "email": { "headline": "Investoren begleiten durch", "emphasis": "Ihre Wachstumsstory", "description": "Automatisierte E-Mail-Sequenzen, die Ihre Aktionärsbasis über Unternehmensentwicklungen informiert halten. Verwandeln Sie einmalige Besucher mit strategischer Kommunikation in langfristige Aktionäre." },
+        "social": { "headline": "Aufmerksamkeit gewinnen", "emphasis": "in Ihrer Branche", "description": "Systematische Social-Media-Präsenz, die Ihr Unternehmen als Branchenführer positioniert. YouTube-Investorenpräsentationen, Twitter-Engagement und Community-Aufbau im großen Maßstab." },
+        "analytics": { "headline": "Optimierung für", "emphasis": "Marktkapitalisierungswachstum", "description": "Fortschrittliche Analysen, die Marketingkampagnen mit der Marktperformance korrelieren. Attributionsmodellierung, geografische Analyse und ROI-Reporting für strategische Entscheidungen." }
+      },
+      "enterprise": {
+        "advertising": { "headline": "Sichtbarkeit bewahren mit", "emphasis": "institutioneller Reichweite", "description": "Nachhaltige Werbeprogramme, die Ihr Unternehmen sowohl für Privat- als auch für institutionelle Investoren sichtbar halten. Programmatische Kampagnen für Family Offices, Fondsmanager und vermögende Privatpersonen." },
+        "content": { "headline": "Executive Thought Leadership", "emphasis": "im großen Maßstab", "description": "Premium-Content-Programme, die Ihre Geschäftsführung als Branchenautoritäten positionieren. Ghostwriting für Führungskräfte, Premium-Research-Partnerschaften und globale Content-Distribution." },
+        "europe": { "headline": "Europäische Investor Relations", "emphasis": "nachhaltig betreiben", "description": "Laufende europäische Investor-Engagement-Programme. Lokalisierte Inhalte, nachhaltige Medienpräsenz und Beziehungsmanagement in den DACH-Finanzmedien." },
+        "email": { "headline": "Strategische Aktionärs-", "emphasis": "kommunikation", "description": "Anspruchsvolle E-Mail-Programme für etablierte Investor Relations. Segmentierte Kommunikation für Privat- vs. institutionelle Investoren, Katalysator-Ankündigungen und quartalsweise Update-Sequenzen." },
+        "social": { "headline": "Executive-Markenpräsenz", "emphasis": "professionell verwalten", "description": "Vollständiges Social-Media-Management für Führungskräfte und Unternehmenskonten. Konsistente Präsenz, Community-Engagement und Krisenkommunikationsprotokolle." },
+        "analytics": { "headline": "Enterprise-Grade", "emphasis": "IR-Intelligence", "description": "Umfassende Analyse-Dashboards für Berichterstattung auf Vorstandsebene. Multi-Channel-Attribution, Wettbewerbsanalyse und Marktkorrelationsanalyse." }
+      }
+    }
+  },
+  "caseStudies": {
+    "page": {
+      "title": "Echte Ergebnisse für börsennotierte Unternehmen",
+      "description": "Erfahren Sie, wie wir Emittenten beim Aufbau von Aktionärswert durch strategische Investor-Relations-Kampagnen unterstützt haben."
+    },
+    "studies": {
+      "juniorMining": {
+        "company": "Junior-Mining-Emittent",
+        "industry": "Bergbau · TSX-V",
+        "title": "4-faches Aktionärswachstum in 90 Tagen",
+        "description": "Ein neu gelistetes Junior-Mining-Unternehmen musste vor seinem ersten Bohrprogramm eine anfängliche Aktionärsbasis aufbauen. Wir setzten koordinierte digitale Werbe- und E-Mail-Kampagnen ein, die auf selbstgesteuerte Ressourceninvestoren abzielten.",
+        "metrics": { "shareholderGrowth": "Aktionärswachstum", "costPerInvestor": "Kosten pro Investor", "tradingVolume": "Handelsvolumen" }
+      },
+      "biotech": {
+        "company": "Biotech-Emittent",
+        "industry": "Life Sciences · CSE / Frankfurt",
+        "title": "Europäische Investorenexpansion über Frankfurt-Dual-Listing",
+        "description": "Ein Biotech-Unternehmen in der klinischen Phase suchte europäische Privatanleger-Exposition als Ergänzung zu seiner nordamerikanischen Basis. Wir verwalteten die Frankfurt-Listing-Kommunikation und starteten DACH-Kampagnen mit deutschsprachigen Inhalten.",
+        "metrics": { "euShareholders": "EU-Aktionäre", "frankfurtVolume": "Frankfurt-Volumen", "mediaPlacements": "Medienplatzierungen" }
+      },
+      "techIpo": {
+        "company": "Technologieunternehmen",
+        "industry": "SaaS · TSX",
+        "title": "Pre-IPO-Kommunikation & Marktbekanntheit",
+        "description": "Ein B2B-SaaS-Unternehmen, das sich auf ein TSX-Listing vorbereitete, musste institutionelle und private Bekanntheit vor dem IPO aufbauen. Wir erstellten Executive-Thought-Leadership-Inhalte und eine Multi-Channel-Investor-Awareness-Kampagne.",
+        "metrics": { "ipoSubscribed": "IPO überzeichnet", "analystCoverage": "Analystenabdeckung", "newsletterReach": "Newsletter-Reichweite" }
+      },
+      "resourceCatalyst": {
+        "company": "Rohstoffunternehmen",
+        "industry": "Bergbau · TSX-V",
+        "title": "Katalysator-Kampagne: Verstärkung von Bohrergebnissen",
+        "description": "Ein Goldexplorationsunternehmen mit bevorstehenden Analyseergebnissen benötigte maximale Marktsichtbarkeit während seiner kritischen Nachrichtenphase. Wir führten eine zeitlich abgestimmte Investor-Awareness-Kampagne synchron mit dem Pressemitteilungsplan durch.",
+        "metrics": { "peakDailyVolume": "Spitzen-Tagesvolumen", "newShareholders": "Neue Aktionäre", "campaignRoi": "Kampagnen-ROI" }
+      }
+    }
+  },
+  "about": {
+    "page": {
+      "title": "Von B2B-Marketern, für B2B-Marketer",
+      "description": "Wir waren in Ihrer Position. Wir kennen den Druck, Pipeline-Ziele zu erreichen, ROI nachzuweisen und mit weniger mehr zu erreichen. Deshalb haben wir {brandName} gegründet."
+    },
+    "story": {
+      "title": "Unsere Geschichte",
+      "p1": "{brandName} wurde mit einer einfachen Prämisse gegründet: B2B-Marketing muss nicht kompliziert sein, aber es muss strategisch sein.",
+      "p2": "Nach Jahren der Arbeit in schnell wachsenden Startups und Großunternehmen erkannten unsere Gründer immer wieder die gleichen Probleme: Agenturen, die B2B nicht verstanden, Strategien auf Basis von Eitelkeitsmetriken und eine Diskrepanz zwischen Marketingaktivitäten und Geschäftsergebnissen.",
+      "p3": "Wir haben {brandName} gegründet, um es anders zu machen. Jede Strategie, die wir entwickeln, jede Kampagne, die wir durchführen, und jeder Content, den wir erstellen, ist auf ein Ziel ausgerichtet: messbares Geschäftswachstum."
+    },
+    "values": {
+      "title": "Unsere Werte",
+      "subtitle": "Die Prinzipien, die unsere Zusammenarbeit mit Kunden leiten.",
+      "resultsOverActivity": { "title": "Ergebnisse vor Aktivität", "description": "Wir messen Erfolg an Geschäftsergebnissen, nicht an Eitelkeitsmetriken. Jede Kampagne ist auf ROI ausgelegt." },
+      "radicalTransparency": { "title": "Radikale Transparenz", "description": "Keine Black Boxes. Wir teilen unsere Strategien, Daten und Erkenntnisse offen, damit Sie immer wissen, was wir tun und warum." },
+      "partnershipMindset": { "title": "Partnerschaftliche Denkweise", "description": "Wir sind eine Erweiterung Ihres Teams, nicht nur ein Dienstleister. Ihr Erfolg ist unser Erfolg." },
+      "continuousLearning": { "title": "Kontinuierliches Lernen", "description": "B2B-Marketing entwickelt sich ständig weiter. Wir bleiben durch Testen, Lernen und Anpassen an der Spitze." }
+    },
+    "team": {
+      "title": "Führungsteam",
+      "subtitle": "Erfahrene Marketer, die Ihre Herausforderungen kennen."
+    }
+  },
+  "contact": {
+    "page": {
+      "title": "Sprechen wir über Wachstum",
+      "description": "Bereit, Ihr B2B-Marketing zu beschleunigen? Buchen Sie ein kostenloses Strategiegespräch oder senden Sie uns eine Nachricht."
+    },
+    "form": {
+      "getInTouch": "Kontaktieren Sie uns",
+      "getInTouchDescription": "Haben Sie eine Frage oder möchten Sie ein Projekt besprechen? Wir freuen uns auf Ihre Nachricht.",
+      "email": "E-Mail",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "workEmail": "Geschäftliche E-Mail",
+      "company": "Unternehmen",
+      "howCanWeHelp": "Wie können wir helfen?",
+      "messagePlaceholder": "Erzählen Sie uns von Ihren Marketingzielen...",
+      "sendMessage": "Nachricht senden",
+      "responseTime": "Wir melden uns innerhalb von 24 Stunden bei Ihnen."
+    }
+  },
+  "metadata": {
+    "home": { "title": "Kapitalmarktkommunikation", "description": "Full-Stack Investor Relations für börsennotierte Unternehmen. Wir helfen Emittenten, durch strategische Kommunikation in Nordamerika und Europa Marktwert aufzubauen." },
+    "services": { "title": "Investor-Relations-Leistungen", "description": "Full-Stack Investor Relations für börsennotierte Unternehmen. Digitale Werbung, Content & Publikationen, europäische Distribution, E-Mail-Marketing, Social Media & Video sowie Analyse." },
+    "caseStudies": { "title": "Referenzen", "description": "Erfahren Sie, wie {brandName} börsennotierten Unternehmen geholfen hat, durch strategische Investor-Relations-Kampagnen Aktionärswert aufzubauen." },
+    "blog": { "title": "Blog", "description": "B2B-Marketing-Einblicke und Best Practices vom {brandName}-Team. Erfahren Sie mehr über Content-Marketing, SEO, Demand Generation und mehr." },
+    "about": { "title": "Über uns", "description": "{brandName} ist eine B2B-Marketingagentur, gegründet von Marketern, die die einzigartigen Herausforderungen des B2B-Vertriebs verstehen." },
+    "contact": { "title": "Kontakt", "description": "Nehmen Sie Kontakt mit {brandName} auf. Buchen Sie ein Strategiegespräch oder senden Sie uns eine Nachricht, um zu besprechen, wie wir Ihr B2B-Marketing beschleunigen können." },
+    "privacy": { "title": "Datenschutzerklärung", "description": "{brandName} Datenschutzerklärung. Erfahren Sie, wie wir Ihre personenbezogenen Daten erheben, verwenden und schützen." },
+    "terms": { "title": "Nutzungsbedingungen", "description": "{brandName} Nutzungsbedingungen. Lesen Sie unsere Bedingungen für die Nutzung unserer Website und Dienste." }
+  }
+}

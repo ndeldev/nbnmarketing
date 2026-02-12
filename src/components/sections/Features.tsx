@@ -2,19 +2,12 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { BentoCardWave, BentoCardWithImage } from "@/components/ui/bento-card";
 import { Globe, Pickaxe, BarChart3, Sparkles } from "lucide-react";
 
-const waveFeature = {
-  title: "Full-Stack Coverage",
-  description:
-    "From digital advertising to investor outreach, we handle every aspect of your IR campaign. One team, one strategy, seamless execution across all channels.",
-  badge: "Integrated",
-  image: "/images/features/data-driven.webp",
-  bgColorHex: "#A6A5C4", // Fuji Nezu
-};
-
 export function Features() {
+  const t = useTranslations("home.features");
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -77,11 +70,10 @@ export function Features() {
               }}
             >
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight sm:text-4xl text-shikoku md:text-white md:drop-shadow-lg">
-                Why Choose <em className="font-serif not-italic">NBN Marketing</em>
+                {t("title")} <em className="font-serif not-italic">{t("brandName")}</em>
               </h2>
               <p className="mt-3 md:mt-4 text-base md:text-lg text-muted-foreground md:text-white/90 md:drop-shadow-md max-w-2xl mx-auto">
-                We understand the unique challenges of junior capital markets and
-                tailor our approach accordingly.
+                {t("subtitle")}
               </p>
             </motion.div>
             {/* Top row: Large card + 2 stacked cards */}
@@ -95,11 +87,11 @@ export function Features() {
                 }}
               >
                 <BentoCardWave
-                  title={waveFeature.title}
-                  description={waveFeature.description}
-                  badge={waveFeature.badge}
-                  image={waveFeature.image}
-                  bgColorHex={waveFeature.bgColorHex}
+                  title={t("fullStack.title")}
+                  description={t("fullStack.description")}
+                  badge={t("fullStack.badge")}
+                  image="/images/features/data-driven.webp"
+                  bgColorHex="#A6A5C4"
                   className="h-full"
                 />
               </motion.div>
@@ -114,8 +106,8 @@ export function Features() {
                   }}
                 >
                   <BentoCardWithImage
-                    title="Global Reach"
-                    description="Active investor networks across North America and Europe. We reach shareholders where they are."
+                    title={t("globalReach.title")}
+                    description={t("globalReach.description")}
                     image="/images/features/dedicated-teams.webp"
                     icon={<Globe className="h-5 w-5 text-primary" />}
                     className="h-full"
@@ -130,8 +122,8 @@ export function Features() {
                   }}
                 >
                   <BentoCardWithImage
-                    title="Sector Expertise"
-                    description="Deep experience with mining, tech, and life sciences. We speak your industry's language."
+                    title={t("sectorExpertise.title")}
+                    description={t("sectorExpertise.description")}
                     image="/images/features/creative.webp"
                     icon={<Pickaxe className="h-5 w-5 text-primary" />}
                     className="h-full"
@@ -150,8 +142,8 @@ export function Features() {
                 }}
               >
                 <BentoCardWithImage
-                  title="Measurable Results"
-                  description="We track what matters: shareholder growth, trading volume, and market cap movement. Real-time dashboards show campaign impact."
+                  title={t("measurableResults.title")}
+                  description={t("measurableResults.description")}
                   image="/images/features/transparency.webp"
                   icon={<BarChart3 className="h-5 w-5 text-primary" />}
                   className="h-full"
@@ -166,8 +158,8 @@ export function Features() {
                 }}
               >
                 <BentoCardWithImage
-                  title="Compliance Aware"
-                  description="We understand regulatory requirements for TSX-V, CSE, and Frankfurt. All campaigns are structured for compliance."
+                  title={t("complianceAware.title")}
+                  description={t("complianceAware.description")}
                   image="/images/features/security.webp"
                   icon={<Sparkles className="h-5 w-5 text-primary" />}
                   className="h-full"

@@ -48,16 +48,57 @@ vercel list
 
 ## Architecture
 
+### Internationalization (i18n)
+
+The site uses `next-intl` for EN/DE localization with locale-based URL routing:
+- EN (default): no prefix (`/`, `/services`, `/about`)
+- DE: `/de` prefix (`/de/`, `/de/services`, `/de/about`)
+
+**Key i18n files:**
+| File | Purpose |
+|------|---------|
+| `src/i18n/routing.ts` | Locale config (`locales`, `defaultLocale`, `localePrefix: "as-needed"`) |
+| `src/i18n/request.ts` | Server-side message loading |
+| `src/i18n/navigation.ts` | Locale-aware `Link`, `useRouter`, `usePathname`, `redirect` |
+| `src/middleware.ts` | Locale detection and routing middleware |
+| `messages/en.json` | English translations (243 keys) |
+| `messages/de.json` | German translations (243 keys) |
+
+**Translation pattern — server components:**
+```tsx
+import { getTranslations, setRequestLocale } from "next-intl/server";
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("namespace");
+  return <h1>{t("title")}</h1>;
+}
+```
+
+**Translation pattern — client components:**
+```tsx
+import { useTranslations } from "next-intl";
+export function MyComponent() {
+  const t = useTranslations("namespace");
+  return <h1>{t("title")}</h1>;
+}
+```
+
+**Navigation:** Always use `Link` from `@/i18n/navigation` (NOT `next/link`). It auto-prefixes `/de` for DE locale.
+
+**What's translated:** UI chrome, nav labels, page titles, section headings, form labels, CTAs, metadata.
+**What stays English:** Blog article content, legal page body text, SERVICE_DETAILS (features/FAQs/process — deferred).
+
 ### Data Flow
 
 All site content is centralized in `src/lib/constants.ts`:
 - `BRAND_NAME`, `SITE_URL`, `SITE_DESCRIPTION` - Brand configuration
-- `SERVICES` - Service card data (id, title, shortDescription, icon)
-- `SERVICE_DETAILS` - Full service page content (features, process, benefits, FAQs)
+- `SERVICES` - Service card data (id, icon). Titles/descriptions come from `messages/*.json`
+- `SERVICE_DETAILS` - Full service page content (features, process, benefits, FAQs) — English only
 - `NAV_LINKS`, `SOCIAL_LINKS`, `CONTACT_EMAIL` - Site-wide configuration
-- `AUDIENCE_SEGMENTS` - For audience selector component
+- `AUDIENCE_SEGMENTS` - For audience selector component (labels from translations)
 
-Service detail pages (`/services/[slug]`) use `generateStaticParams()` to pre-render all service pages from `SERVICES` array.
+All pages live under `src/app/[locale]/`. Service detail pages (`/services/[slug]`) use `generateStaticParams()` to pre-render all service pages from `SERVICES` array. The locale layout's `generateStaticParams()` returns both locales.
 
 ### SEO Infrastructure
 
@@ -137,6 +178,9 @@ Icons are centralized in `src/lib/icons.ts`. Use `getIcon(name)` to get an icon 
 | `src/lib/icons.ts` | Centralized icon map (47 icons) |
 | `src/lib/animations.ts` | Shared animation constants (EASING, DURATION, variants) |
 | `src/app/globals.css` | CSS variables, custom utilities, brand colors |
+| `src/i18n/routing.ts` | i18n locale config and routing |
+| `messages/en.json` | English translation strings |
+| `messages/de.json` | German translation strings |
 | `SITE-SPEC.md` | Complete site specification (styling, components) |
 | `STYLING.md` | Design system and CSS utility reference |
 | `docs/CHANGE-CHECKLIST.md` | Pre/post change workflow |

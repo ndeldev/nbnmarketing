@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import Image from "next/image";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,12 +20,13 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
         <Link href={`/blog/${post.slug}`}>
           <div className="grid md:grid-cols-2 gap-6">
             {post.image && (
-              <div className="aspect-video bg-muted overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="aspect-video bg-muted overflow-hidden relative">
+                <Image
                   src={post.image}
                   alt={post.title}
-                  className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform group-hover:scale-105"
                 />
               </div>
             )}
@@ -65,12 +67,13 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     <Card className="group overflow-hidden card-hover">
       <Link href={`/blog/${post.slug}`}>
         {post.image && (
-          <div className="aspect-video bg-muted overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="aspect-video bg-muted overflow-hidden relative">
+            <Image
               src={post.image}
               alt={post.title}
-              className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform group-hover:scale-105"
             />
           </div>
         )}

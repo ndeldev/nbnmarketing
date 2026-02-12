@@ -5,6 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2026-02-11
+
+### Added - German Translation & i18n System
+
+Full internationalization with `next-intl` enabling EN/DE language support with locale-based URL routing.
+
+**i18n Infrastructure:**
+- Installed `next-intl` and created config (`src/i18n/routing.ts`, `request.ts`, `navigation.ts`)
+- Created locale detection middleware (`src/middleware.ts`)
+- Wrapped Next.js config with `createNextIntlPlugin`
+- EN default (no URL prefix), DE at `/de/...` (`localePrefix: "as-needed"`)
+
+**Translation Files:**
+- `messages/en.json` — 243 keys covering all UI text
+- `messages/de.json` — 243 keys with German translations
+- Namespaces: common, home, services, caseStudies, about, contact, metadata
+
+**Page Restructure:**
+- All pages moved under `src/app/[locale]/` route group
+- Root layout becomes thin wrapper; locale layout handles `<html lang>`, `NextIntlClientProvider`
+- Every page calls `setRequestLocale(locale)` for static generation
+- `generateStaticParams()` in layout returns both locales
+
+**Component Updates:**
+- All `import Link from "next/link"` → `import { Link } from "@/i18n/navigation"`
+- Header: language toggle wired to `router.replace(pathname, { locale })`, nav labels from translations
+- Footer: converted to async server component with `getTranslations()`
+- Hero, Stats, Features, Services, CTA, ConsentBanner: all use `useTranslations()` hooks
+- Service titles/descriptions sourced from translation keys instead of constants
+
+**SEO:**
+- Layout `generateMetadata()` returns locale-specific titles, descriptions, OG locale
+- `<link rel="alternate" hreflang="en|de|x-default">` on all pages
+- Sitemap generates entries for both locales with `xhtml:link` hreflang alternates
+- Page-level metadata uses translation keys for localized titles
+
+**Scope:**
+- Translated: UI chrome, navigation, headings, form labels, CTAs, metadata, audience content
+- Deferred: SERVICE_DETAILS body text, blog article content, legal page body text
+
+**PRD:** `docs/prds/2026-02-11-german-translation-i18n.md`
+
+---
+
 ## [2.5.5] - 2026-02-02
 
 ### Changed - Complete Rebrand to NBN Marketing

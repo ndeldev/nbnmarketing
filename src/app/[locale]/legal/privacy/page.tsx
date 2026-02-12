@@ -1,14 +1,27 @@
-import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { generateMetadata as genMeta } from "@/lib/metadata";
 import { BRAND_NAME, CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
 
-export const metadata: Metadata = genMeta({
-  title: "Privacy Policy",
-  description: `${BRAND_NAME} privacy policy. Learn how we collect, use, and protect your personal information.`,
-  path: "/legal/privacy",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return genMeta({
+    title: "Privacy Policy",
+    description: `${BRAND_NAME} privacy policy. Learn how we collect, use, and protect your personal information.`,
+    path: "/legal/privacy",
+  });
+}
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const lastUpdated = "January 26, 2026";
 
   return (
@@ -182,10 +195,6 @@ export default function PrivacyPolicyPage() {
               <strong>{BRAND_NAME}</strong>
               <br />
               Email: {CONTACT_EMAIL}
-              <br />
-              123 Marketing Street
-              <br />
-              San Francisco, CA 94105
             </p>
           </section>
         </div>

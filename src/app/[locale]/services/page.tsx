@@ -1,27 +1,66 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { JsonLd } from "@/components/seo";
 import { CTA, PageHero } from "@/components/sections";
 import { generateMetadata as genMeta } from "@/lib/metadata";
-import { SERVICES } from "@/lib/constants";
+import { BRAND_NAME, SERVICES, SITE_URL } from "@/lib/constants";
 import { getIcon } from "@/lib/icons";
 
-export const metadata: Metadata = genMeta({
-  title: "Investor Relations Services",
-  description:
-    "Full-stack investor relations for public companies. Digital advertising, content & publications, European distribution, email marketing, social & video, and analytics.",
-  path: "/services",
-  image: "/og-services.jpg",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return genMeta({
+    title: t("services.title"),
+    description: t("services.description"),
+    path: "/services",
+    image: "/og-services.jpg",
+  });
+}
 
-export default function ServicesPage() {
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("services");
+  const tCta = await getTranslations("common.cta");
+
+  const serviceListSchema = {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: `${BRAND_NAME} Services`,
+    description: "Full-stack investor relations services for public companies.",
+    url: `${SITE_URL}/services`,
+    itemListElement: SERVICES.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: t(`cards.${service.id}.title`),
+        description: t(`cards.${service.id}.description`),
+        url: `${SITE_URL}/services/${service.id}`,
+        provider: {
+          "@type": "Organization",
+          name: BRAND_NAME,
+        },
+      },
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={serviceListSchema} />
       <PageHero
-        title="Investor Relations Services"
-        description="From digital advertising to analytics reporting, we offer full-stack IR services designed to build shareholder bases across North America and Europe."
+        title={t("page.title")}
+        description={t("page.description")}
       />
 
       {/* Services Grid */}
@@ -40,10 +79,10 @@ export default function ServicesPage() {
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
                     <h2 className="mt-6 text-xl font-semibold">
-                      {service.title}
+                      {t(`cards.${service.id}.title`)}
                     </h2>
                     <p className="mt-2 text-muted-foreground">
-                      {service.description}
+                      {t(`cards.${service.id}.description`)}
                     </p>
                     <Button
                       variant="link"
@@ -51,7 +90,7 @@ export default function ServicesPage() {
                       asChild
                     >
                       <Link href={`/services/${service.id}`}>
-                        Learn more about {service.title}
+                        {tCta("learnMore")} {t(`cards.${service.id}.title`)}
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>

@@ -1,7 +1,7 @@
 # NBN Marketing Site Specification
 
-**Version:** 2.0.1
-**Last Updated:** 2026-01-26
+**Version:** 2.1.0
+**Last Updated:** 2026-02-11
 **Status:** Production
 
 This document is the single source of truth for the NBN Marketing site's styling, components, and content structure.
@@ -438,6 +438,36 @@ className="relative rounded-3xl overflow-hidden shadow-crisp"
 
 ## 5. Page Structure
 
+### 5.0 Routing & i18n
+
+All pages live under `src/app/[locale]/`. The site supports EN (default, no prefix) and DE (`/de/...`).
+
+```
+src/app/
+├── layout.tsx              ← Thin root (returns children, no <html>/<body>)
+├── globals.css
+├── sitemap.ts              ← Dual-locale sitemap with hreflang
+├── feed.xml/route.ts
+└── [locale]/
+    ├── layout.tsx          ← Main layout (<html lang>, NextIntlClientProvider)
+    ├── page.tsx            ← Homepage
+    ├── about/page.tsx
+    ├── blog/page.tsx
+    ├── blog/[slug]/page.tsx
+    ├── case-studies/page.tsx
+    ├── contact/page.tsx
+    ├── services/page.tsx
+    ├── services/[slug]/page.tsx
+    ├── legal/privacy/page.tsx
+    ├── legal/terms/page.tsx
+    ├── resources/page.tsx  ← Redirects to /blog
+    └── not-found.tsx
+```
+
+**URL examples:**
+- EN: `/`, `/services`, `/about`, `/blog/my-post`
+- DE: `/de`, `/de/services`, `/de/about`, `/de/blog/my-post`
+
 ### 5.1 Homepage (`/`)
 
 ```
@@ -565,6 +595,7 @@ const { formattedValue, start } = useCountUp(stat.value, {
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.1.0 | 2026-02-11 | next-intl i18n: EN/DE localization with locale-based routing |
 | 2.0.1 | 2026-01-26 | Fixed dark theme bleeding, restored light sections |
 | 2.0.0 | 2026-01-26 | Capital Markets repositioning |
 | 1.2.0 | 2026-01-26 | Added Framer Motion animations |

@@ -1,33 +1,43 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BRAND_NAME, NAV_LINKS } from "@/lib/constants";
+import { BRAND_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function Header() {
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const t = useTranslations("common.nav");
+  const tCta = useTranslations("common.cta");
+  const tCommon = useTranslations("common");
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [language, setLanguage] = useState<"en" | "de">("en");
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [onDarkSection, setOnDarkSection] = useState(false); // Start false, detect on mount
+  const [onDarkSection, setOnDarkSection] = useState(false);
+
+  const navLinks = [
+    { label: t("services"), href: "/services" as const },
+    { label: t("caseStudies"), href: "/case-studies" as const },
+    { label: t("blog"), href: "/blog" as const },
+    { label: t("about"), href: "/about" as const },
+    { label: t("contact"), href: "/contact" as const },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger pill form as soon as user starts scrolling
       const scrollThreshold = 20;
       setScrolled(window.scrollY > scrollThreshold);
 
-      // Detect if header is over a dark section
-      const headerY = scrolled ? 40 : 60; // Approximate header center position
-
-      // Get all dark sections (marked with data attribute)
+      const headerY = scrolled ? 40 : 60;
       const darkSections = document.querySelectorAll('[data-dark-section="true"]');
       let isOverDark = false;
 
-      // Check each dark section to see if header overlaps
       darkSections.forEach((section) => {
         const rect = section.getBoundingClientRect();
         if (rect.top <= headerY && rect.bottom >= headerY) {
@@ -39,13 +49,13 @@ export function Header() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Check initial state
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "de" : "en");
+  const switchLocale = (newLocale: "en" | "de") => {
+    router.replace(pathname, { locale: newLocale });
     setLangMenuOpen(false);
   };
 
@@ -81,7 +91,7 @@ export function Header() {
           "hidden lg:flex lg:items-center transition-all duration-300",
           scrolled ? "lg:gap-x-6" : "lg:gap-x-10"
         )}>
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -110,7 +120,7 @@ export function Header() {
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
-              {language.toUpperCase()}
+              {locale.toUpperCase()}
               <ChevronDown className={cn("h-3 w-3 transition-transform", langMenuOpen && "rotate-180")} />
             </button>
 
@@ -120,19 +130,19 @@ export function Header() {
                 <div className="fixed inset-0 z-40" onClick={() => setLangMenuOpen(false)} />
                 <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg py-1 min-w-[60px]">
                   <button
-                    onClick={() => { setLanguage("en"); setLangMenuOpen(false); }}
+                    onClick={() => switchLocale("en")}
                     className={cn(
                       "w-full px-3 py-1.5 text-sm text-left hover:bg-muted transition-colors",
-                      language === "en" && "font-medium text-foreground"
+                      locale === "en" && "font-medium text-foreground"
                     )}
                   >
                     EN
                   </button>
                   <button
-                    onClick={() => { setLanguage("de"); setLangMenuOpen(false); }}
+                    onClick={() => switchLocale("de")}
                     className={cn(
                       "w-full px-3 py-1.5 text-sm text-left hover:bg-muted transition-colors",
-                      language === "de" && "font-medium text-foreground"
+                      locale === "de" && "font-medium text-foreground"
                     )}
                   >
                     DE
@@ -152,7 +162,7 @@ export function Header() {
             )}
             asChild
           >
-            <Link href="/contact">Get Started</Link>
+            <Link href="/contact">{tCta("getStarted")}</Link>
           </Button>
         </div>
 
@@ -166,6 +176,7 @@ export function Header() {
               : "text-foreground hover:bg-muted"
           )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {mobileMenuOpen ? (
@@ -189,7 +200,7 @@ export function Header() {
         {/* Glass menu content */}
         <div className="rounded-2xl bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10 overflow-hidden">
           <div className="px-4 py-5 space-y-1">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -202,21 +213,21 @@ export function Header() {
 
             {/* Language Toggle in Mobile */}
             <div className="flex items-center gap-2 px-4 py-3">
-              <span className="text-sm text-muted-foreground">Language:</span>
+              <span className="text-sm text-muted-foreground">{tCommon("language")}:</span>
               <button
-                onClick={() => setLanguage("en")}
+                onClick={() => switchLocale("en")}
                 className={cn(
                   "px-3 py-1 text-sm rounded-full transition-colors",
-                  language === "en" ? "bg-shikoku text-white" : "text-muted-foreground hover:bg-black/5"
+                  locale === "en" ? "bg-shikoku text-white" : "text-muted-foreground hover:bg-black/5"
                 )}
               >
                 EN
               </button>
               <button
-                onClick={() => setLanguage("de")}
+                onClick={() => switchLocale("de")}
                 className={cn(
                   "px-3 py-1 text-sm rounded-full transition-colors",
-                  language === "de" ? "bg-shikoku text-white" : "text-muted-foreground hover:bg-black/5"
+                  locale === "de" ? "bg-shikoku text-white" : "text-muted-foreground hover:bg-black/5"
                 )}
               >
                 DE
@@ -226,7 +237,7 @@ export function Header() {
             <div className="pt-4 px-4">
               <Button className="w-full rounded-full bg-shikoku hover:bg-shikoku/90" size="lg" asChild>
                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  Get Started
+                  {tCta("getStarted")}
                 </Link>
               </Button>
             </div>

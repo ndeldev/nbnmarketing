@@ -1,19 +1,19 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { SERVICES, SERVICE_IMAGES, SERVICE_CONTENT } from "@/lib/constants";
+import { SERVICES, SERVICE_IMAGES } from "@/lib/constants";
 import { useAudience } from "@/lib/hooks/useAudienceContext";
 import { getIcon } from "@/lib/icons";
 
-// Simplified service list for cleaner sidebar
+// Service IDs from constants (structural, not translated)
 const servicesList = SERVICES.map((s) => ({
   id: s.id,
-  label: s.title,
   icon: s.icon,
 }));
 
@@ -25,6 +25,8 @@ const SCROLL_HEIGHT_MOBILE = 50; // vh per service on mobile
 const SCROLL_HEIGHT_DESKTOP = 100; // vh per service on desktop
 
 export function Services() {
+  const t = useTranslations("services");
+  const tCta = useTranslations("common.cta");
   const { selectedAudience } = useAudience();
   const [selectedService, setSelectedService] = useState("advertising");
   const [isMobile, setIsMobile] = useState(false);
@@ -93,11 +95,13 @@ export function Services() {
 
   // Fallback to "startups" if selectedAudience is undefined (initial render)
   const audience = selectedAudience || "startups";
-  const currentContent =
-    SERVICE_CONTENT[audience]?.[selectedService] ||
-    SERVICE_CONTENT.startups.advertising;
+  const currentContent = {
+    headline: t(`audienceContent.${audience}.${selectedService}.headline`),
+    emphasis: t(`audienceContent.${audience}.${selectedService}.emphasis`),
+    description: t(`audienceContent.${audience}.${selectedService}.description`),
+  };
 
-  const currentService = SERVICES.find((s) => s.id === selectedService);
+  const currentServiceTitle = t(`cards.${selectedService}.title`);
 
   // Calculate container height - shorter on mobile for easier scrolling
   const scrollHeightPerService = isMobile ? SCROLL_HEIGHT_MOBILE : SCROLL_HEIGHT_DESKTOP;
@@ -140,10 +144,10 @@ export function Services() {
               {/* Section Header */}
               <div className="mb-2 md:mb-6">
                 <h2 className="text-lg sm:text-xl font-bold tracking-tight md:text-4xl">
-                  Full-Stack Investor Relations
+                  {t("page.title")}
                 </h2>
-                <p className="mt-1 md:mt-3 text-xs md:text-base text-muted-foreground">
-                  Integrated campaigns that build shareholder bases across North America and Europe.
+                <p className="mt-1 md:mt-3 text-sm md:text-base text-muted-foreground">
+                  {t("page.description")}
                 </p>
               </div>
 
@@ -160,14 +164,14 @@ export function Services() {
                         data-service={service.id}
                         onClick={() => handleServiceClick(service.id)}
                         className={cn(
-                          "flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-full md:rounded-xl text-left transition-all whitespace-nowrap md:whitespace-normal md:w-full flex-shrink-0 md:flex-shrink text-xs md:text-sm",
+                          "flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-full md:rounded-xl text-left transition-all whitespace-nowrap md:whitespace-normal md:w-full flex-shrink-0 md:flex-shrink text-sm",
                           selectedService === service.id
                             ? "bg-shikoku text-white md:bg-muted md:text-foreground font-medium"
                             : "bg-muted/50 md:bg-transparent hover:bg-muted/80 md:hover:bg-muted/50 text-muted-foreground"
                         )}
                       >
                         <ServiceIcon className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
-                        <span>{service.label}</span>
+                        <span>{t(`cards.${service.id}.title`)}</span>
                         {selectedService === service.id && (
                           <span className="indicator-dot ml-auto hidden md:block" />
                         )}
@@ -199,7 +203,7 @@ export function Services() {
                     >
                       <Image
                         src={SERVICE_IMAGES[selectedService] || SERVICE_IMAGES.advertising}
-                        alt={currentService?.title || "Service"}
+                        alt={currentServiceTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 66vw"
@@ -233,13 +237,13 @@ export function Services() {
 
                       {/* CTAs - stacked on mobile */}
                       <div className="mt-4 md:mt-6 flex flex-col gap-2 sm:flex-row sm:gap-3">
-                        <Button variant="outline" className="rounded-full px-4 sm:px-6 text-xs sm:text-sm" asChild>
+                        <Button variant="outline" className="rounded-full px-4 sm:px-6 text-sm" asChild>
                           <Link href={`/services/${selectedService}`}>
-                            Learn more about {currentService?.title}
+                            {tCta("learnMore")} {currentServiceTitle}
                           </Link>
                         </Button>
-                        <Button className="rounded-full px-4 sm:px-6 text-xs sm:text-sm" asChild>
-                          <Link href="/contact">Schedule a call</Link>
+                        <Button className="rounded-full px-4 sm:px-6 text-sm" asChild>
+                          <Link href="/contact">{tCta("scheduleCall")}</Link>
                         </Button>
                       </div>
                     </motion.div>

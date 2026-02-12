@@ -1,31 +1,32 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Linkedin, Twitter } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Separator } from "@/components/ui/separator";
 import { CookieSettingsButton } from "@/components/analytics/CookieSettingsButton";
-import { BRAND_NAME, SOCIAL_LINKS, CONTACT_EMAIL } from "@/lib/constants";
+import { BRAND_NAME, SOCIAL_LINKS, CONTACT_EMAIL, SERVICES } from "@/lib/constants";
 
-const footerLinks = {
-  services: [
-    { label: "Digital Advertising", href: "/services/advertising" },
-    { label: "Content & Publications", href: "/services/content" },
-    { label: "European Distribution", href: "/services/europe" },
-    { label: "Email Marketing", href: "/services/email" },
-    { label: "Social & Video", href: "/services/social" },
-    { label: "Analytics & Reporting", href: "/services/analytics" },
-  ],
-  company: [
-    { label: "About", href: "/about" },
-    { label: "Case Studies", href: "/case-studies" },
-    { label: "Resources", href: "/resources" },
-    { label: "Contact", href: "/contact" },
-  ],
-  legal: [
-    { label: "Privacy Policy", href: "/legal/privacy" },
-    { label: "Terms of Service", href: "/legal/terms" },
-  ],
-};
+export async function Footer() {
+  const t = await getTranslations("common.footer");
+  const tCards = await getTranslations("services.cards");
+  const tNav = await getTranslations("common.nav");
 
-export function Footer() {
+  const footerLinks = {
+    services: SERVICES.map((s) => ({
+      label: tCards(`${s.id}.title`),
+      href: `/services/${s.id}` as const,
+    })),
+    company: [
+      { label: tNav("about"), href: "/about" as const },
+      { label: tNav("caseStudies"), href: "/case-studies" as const },
+      { label: tNav("blog"), href: "/blog" as const },
+      { label: tNav("contact"), href: "/contact" as const },
+    ],
+    legal: [
+      { label: t("privacyPolicy"), href: "/legal/privacy" as const },
+      { label: t("termsOfService"), href: "/legal/terms" as const },
+    ],
+  };
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -38,7 +39,7 @@ export function Footer() {
               {BRAND_NAME}
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Capital markets communications for public companies across North America and Europe.
+              {t("tagline")}
             </p>
             {(SOCIAL_LINKS.linkedin || SOCIAL_LINKS.twitter) && (
               <div className="mt-4 flex gap-4">
@@ -70,7 +71,7 @@ export function Footer() {
 
           {/* Services Column */}
           <div>
-            <h3 className="text-sm font-semibold">Services</h3>
+            <h3 className="text-sm font-semibold">{t("services")}</h3>
             <ul className="mt-3 space-y-2">
               {footerLinks.services.map((link) => (
                 <li key={link.href}>
@@ -87,7 +88,7 @@ export function Footer() {
 
           {/* Company Column */}
           <div>
-            <h3 className="text-sm font-semibold">Company</h3>
+            <h3 className="text-sm font-semibold">{t("company")}</h3>
             <ul className="mt-3 space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
@@ -104,7 +105,7 @@ export function Footer() {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-sm font-semibold">Contact</h3>
+            <h3 className="text-sm font-semibold">{t("contact")}</h3>
             <ul className="mt-3 space-y-2">
               <li>
                 <a
@@ -134,7 +135,7 @@ export function Footer() {
         <Separator className="mt-4 mb-2" />
 
         <p className="text-sm text-muted-foreground">
-          &copy; {currentYear} {BRAND_NAME}. All rights reserved.
+          &copy; {currentYear} {BRAND_NAME}. {t("copyright")}
         </p>
       </div>
     </footer>
