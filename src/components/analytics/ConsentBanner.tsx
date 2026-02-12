@@ -62,9 +62,9 @@ export function ConsentBanner() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
           transition={{ duration: DURATION.normal, ease: EASING.smooth }}
-          className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-lg"
+          className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-white/95 backdrop-blur-sm shadow-crisp"
         >
-          <div className="rounded-xl bg-white p-5 shadow-crisp border border-border">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
             <p className="text-sm text-muted-foreground">
               We use cookies to analyze site traffic and improve your experience.
               See our{" "}
@@ -76,7 +76,7 @@ export function ConsentBanner() {
               </Link>
               .
             </p>
-            <div className="mt-4 flex gap-3">
+            <div className="flex shrink-0 gap-3">
               <Button size="sm" onClick={handleAccept}>
                 Accept
               </Button>
