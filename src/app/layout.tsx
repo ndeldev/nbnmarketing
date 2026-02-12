@@ -72,9 +72,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} light`} style={{ colorScheme: 'light' }}>
       <head>
         <JsonLd data={generateOrganizationSchema()} />
-        <GoogleAnalytics />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
+        <GoogleAnalytics />
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
