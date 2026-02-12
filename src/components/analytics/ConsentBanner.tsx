@@ -16,8 +16,12 @@ declare global {
 
 function updateConsent(granted: boolean) {
   if (typeof window === "undefined" || !window.gtag) return;
+  const state = granted ? "granted" : "denied";
   window.gtag("consent", "update", {
-    analytics_storage: granted ? "granted" : "denied",
+    analytics_storage: state,
+    ad_storage: state,
+    ad_user_data: state,
+    ad_personalization: state,
   });
 }
 
