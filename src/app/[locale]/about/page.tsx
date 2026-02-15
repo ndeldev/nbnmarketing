@@ -16,6 +16,7 @@ export async function generateMetadata({
     title: t("about.title"),
     description: t("about.description", { brandName: BRAND_NAME }),
     path: "/about",
+    locale,
     image: "/og-about.jpg",
   });
 }

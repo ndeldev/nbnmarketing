@@ -12,6 +12,7 @@ export async function generateMetadata({
     title: "Terms of Service",
     description: `${BRAND_NAME} terms of service. Read our terms and conditions for using our website and services.`,
     path: "/legal/terms",
+    locale,
   });
 }
 

@@ -35,7 +35,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const service = SERVICES.find((s) => s.id === slug);
   const details = SERVICE_DETAILS[slug];
 
@@ -51,6 +51,7 @@ export async function generateMetadata({
     title: details.headline,
     description: `${details.tagline} Learn how ${BRAND_NAME} can help your business grow.`,
     path: `/services/${slug}`,
+    locale,
   });
 }
 

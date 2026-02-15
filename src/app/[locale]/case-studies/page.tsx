@@ -15,6 +15,7 @@ export async function generateMetadata({
     title: t("caseStudies.title"),
     description: t("caseStudies.description", { brandName: BRAND_NAME }),
     path: "/case-studies",
+    locale,
   });
 }
 

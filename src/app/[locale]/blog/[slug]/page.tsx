@@ -35,7 +35,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {
@@ -50,6 +50,7 @@ export async function generateMetadata({
     title: post.title,
     description: post.description,
     path: `/blog/${slug}`,
+    locale,
     image: post.image || "/og-image.jpg",
   });
 }

@@ -20,6 +20,7 @@ export async function generateMetadata({
     title: t("services.title"),
     description: t("services.description"),
     path: "/services",
+    locale,
     image: "/og-services.jpg",
   });
 }

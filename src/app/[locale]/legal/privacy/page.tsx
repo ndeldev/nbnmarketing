@@ -12,6 +12,7 @@ export async function generateMetadata({
     title: "Privacy Policy",
     description: `${BRAND_NAME} privacy policy. Learn how we collect, use, and protect your personal information.`,
     path: "/legal/privacy",
+    locale,
   });
 }
 

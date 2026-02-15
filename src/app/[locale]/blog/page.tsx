@@ -19,6 +19,7 @@ export async function generateMetadata({
     title: t("blog.title"),
     description: t("blog.description", { brandName: BRAND_NAME }),
     path: "/blog",
+    locale,
   });
 }
 

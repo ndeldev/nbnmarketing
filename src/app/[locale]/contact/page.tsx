@@ -21,6 +21,7 @@ export async function generateMetadata({
     title: t("contact.title"),
     description: t("contact.description", { brandName: BRAND_NAME }),
     path: "/contact",
+    locale,
     image: "/og-contact.jpg",
   });
 }

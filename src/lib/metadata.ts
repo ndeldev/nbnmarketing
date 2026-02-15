@@ -12,6 +12,7 @@ type GenerateMetadataOptions = {
   title: string;
   description?: string;
   path?: string;
+  locale?: string;
   image?: string;
   noIndex?: boolean;
 };
@@ -21,28 +22,37 @@ type GenerateMetadataOptions = {
  * SEO best practices:
  * - Title: keyword first, <60 chars
  * - Description: 155-160 chars, CTA at end
+ * - Canonical: self-referencing per locale
+ * - Alternates: hreflang for all supported locales
  */
 export function generateMetadata({
   title,
   description = SITE_DESCRIPTION,
   path = "",
+  locale = "en",
   image = IMAGE_PATHS.ogDefault,
   noIndex = false,
 }: GenerateMetadataOptions): Metadata {
-  const url = `${SITE_URL}${path}`;
+  const canonicalUrl = locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/${locale}${path}`;
   const fullTitle = path === "" ? `${BRAND_NAME} | ${title}` : `${title} | ${BRAND_NAME}`;
+  const ogLocale = locale === "de" ? "de_DE" : "en_US";
 
   return {
     title,
     description,
     metadataBase: new URL(SITE_URL),
     alternates: {
-      canonical: url,
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SITE_URL}${path}`,
+        de: `${SITE_URL}/de${path}`,
+        "x-default": `${SITE_URL}${path}`,
+      },
     },
     openGraph: {
       title: fullTitle,
       description,
-      url,
+      url: canonicalUrl,
       siteName: BRAND_NAME,
       images: [
         {
@@ -52,7 +62,7 @@ export function generateMetadata({
           alt: title,
         },
       ],
-      locale: "en_US",
+      locale: ogLocale,
       type: "website",
     },
     twitter: {

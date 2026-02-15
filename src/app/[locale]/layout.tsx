@@ -48,6 +48,7 @@ export async function generateMetadata({
     authors: [{ name: BRAND_NAME }],
     creator: BRAND_NAME,
     alternates: {
+      canonical: locale === "en" ? SITE_URL : `${SITE_URL}/${locale}`,
       languages: {
         en: SITE_URL,
         de: `${SITE_URL}/de`,
@@ -57,7 +58,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: ogLocale,
-      url: SITE_URL,
+      url: locale === "en" ? SITE_URL : `${SITE_URL}/${locale}`,
       siteName: BRAND_NAME,
       title: `${BRAND_NAME} | ${t("title")}`,
       description: t("description"),
