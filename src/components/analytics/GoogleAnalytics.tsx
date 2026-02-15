@@ -9,6 +9,10 @@ export function GoogleAnalytics() {
 
   return (
     <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="beforeInteractive"
+      />
       <Script id="google-consent-init" strategy="beforeInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -24,10 +28,6 @@ export function GoogleAnalytics() {
           gtag('config', '${GA_MEASUREMENT_ID}');
         `}
       </Script>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="beforeInteractive"
-      />
     </>
   );
 }
