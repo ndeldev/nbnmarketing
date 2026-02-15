@@ -103,13 +103,28 @@ All pages live under `src/app/[locale]/`. Service detail pages (`/services/[slug
 ### SEO Infrastructure
 
 Metadata generation lives in `src/lib/metadata.ts`:
-- `generateMetadata()` - Page metadata with OG/Twitter cards
+- `generateMetadata()` - Page metadata with OG/Twitter cards, canonicals, hreflang
 - `generateServiceSchema()` - Service JSON-LD
 - `generateFAQSchema()` - FAQ page JSON-LD
 - `generateBreadcrumbSchema()` - Breadcrumb JSON-LD
 - `generateArticleSchema()` - Blog article JSON-LD
 
 The `JsonLd` component (`src/components/seo/JsonLd.tsx`) injects schema data into pages.
+
+**Canonical URLs & hreflang (CRITICAL for i18n SEO):**
+Every page must pass `locale` to `generateMetadata()` so that:
+- Canonicals are self-referencing per locale (`/de/about` → canonical: `/de/about`, NOT `/about`)
+- hreflang alternate tags are emitted for all locales (en, de, x-default)
+
+Failing to pass `locale` causes German pages to canonicalize to English URLs, which triggers Google's "Duplicate, Google chose different canonical than user" error and prevents indexing.
+
+```tsx
+// CORRECT — always pass locale
+return genMeta({ title: "...", path: "/about", locale });
+
+// WRONG — omitting locale makes all pages canonicalize to EN
+return genMeta({ title: "...", path: "/about" });
+```
 
 ### Component Organization
 
@@ -203,6 +218,18 @@ Google Analytics 4 is integrated via the `GoogleAnalytics` component in `src/com
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` - GA4 measurement ID (format: `G-XXXXXXXXXX`)
 
 Set in Vercel project settings for production. Analytics only loads when the env var is present.
+
+**GA4 Script Loading Order (CRITICAL):**
+The `GoogleAnalytics.tsx` component must load scripts in this exact order:
+1. **External script first**: `gtag/js?id=...` (`strategy="beforeInteractive"`)
+2. **Inline script second**: dataLayer init, `window.gtag` exposure, consent defaults, `gtag('js', ...)`, `gtag('config', ...)`
+
+Never reorder these — putting the inline config before the external library causes GA to send malformed requests (400 errors) and lose tracking data.
+
+**Consent Flow:**
+- Default consent state: all categories `denied` (set in inline script)
+- `ConsentBanner.tsx` calls `window.gtag('consent', 'update', ...)` on accept/decline
+- All 4 categories must be updated together: `analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization`
 
 ## Conventions
 

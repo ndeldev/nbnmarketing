@@ -50,6 +50,16 @@ This file captures patterns and mistakes to avoid. Updated after corrections.
 **Wrong**: Keeping commented-out code or null-returning components
 **Right**: Delete unused code; git history preserves it if needed
 
+### 6. GA4 Script Loading Order
+**Wrong**: Inline gtag config script before external `gtag/js` library
+**Right**: External `gtag/js` script tag FIRST, inline config script SECOND
+**Why**: Reversed order causes 400 errors and lost tracking data. Google's standard snippet always loads the library before calling `gtag('config', ...)`.
+
+### 7. Missing Locale in Page Metadata
+**Wrong**: `genMeta({ title: "...", path: "/about" })` — omitting `locale`
+**Right**: `genMeta({ title: "...", path: "/about", locale })` — always pass `locale`
+**Why**: Without `locale`, all pages (including `/de/*`) canonicalize to English URLs. Google sees conflicting canonical vs hreflang signals and refuses to index the pages ("Duplicate, Google chose different canonical than user").
+
 ---
 
 ## Session Log
@@ -59,3 +69,5 @@ This file captures patterns and mistakes to avoid. Updated after corrections.
 | Date | Correction | Pattern Added |
 |------|------------|---------------|
 | 2026-02-01 | Initial codebase review | Established baseline patterns |
+| 2026-02-15 | GA4 scripts in wrong order caused 400 errors | #6 GA4 Script Loading Order |
+| 2026-02-15 | All DE pages unindexed — missing locale in generateMetadata | #7 Missing Locale in Page Metadata |
