@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2026-02-15
+
+### Changed - Custom Generated Images & Stats Background Reveal
+
+Replaced all stock homepage images with custom AI-generated assets and added a scroll-driven background reveal to the Stats section.
+
+**New Images (11 assets):**
+- 6 service images: `service-{advertising,content,europe,email,social,analytics}.webp`
+- 5 feature images: `feature-{full-stack,global-reach,sector-expertise,measurable-results,compliance}.webp`
+- 1 Stats background: `strategic-partnerships.webp`
+- All converted from PNG to WebP at quality 85
+
+**Stats Section — Background Image Reveal:**
+- Scroll-driven left-to-right gradient mask reveal (1/3 per audience segment)
+- Soft 20% feather edge blends image into dark background
+- Opacity materialises gradually (2% → 8% → 14% → 20%) as segments progress
+- Section extends behind header (sticky top-0, full viewport height)
+
+**Services Section — Image Transition Fix:**
+- Changed AnimatePresence from `mode="wait"` to `mode="popLayout"` for crossfade
+- Removed scale transforms on exit/enter to prevent white border gap
+- Increased transition duration to 0.6s for smoother crossfade
+
+**Audience Pill Tabs:**
+- Added 80ms debounce on scroll-driven audience switching
+- Added 300ms CSS transition for smoother active state changes
+
+**Cleanup:**
+- Removed 27 old stock images (JPG + WebP duplicates)
+- Removed unused legacy hero files (`hero/hero-bg.*`, `hero-bg.webp`)
+- Removed unused `isSticky` state and scroll listener from Stats
+
+**Files modified:**
+- `src/lib/constants.ts` — SERVICE_IMAGES paths
+- `src/components/sections/Features.tsx` — 5 feature image paths
+- `src/components/sections/Services.tsx` — crossfade animation
+- `src/components/sections/Stats.tsx` — background image reveal
+- `src/components/sections/stats/PillTab.tsx` — transition duration
+
 ## [2.6.0] - 2026-02-11
 
 ### Added - German Translation & i18n System

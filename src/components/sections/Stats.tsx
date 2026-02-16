@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import Image from "next/image";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useAudience } from "@/lib/hooks/useAudienceContext";
 import { AUDIENCE_SEGMENTS } from "@/lib/constants";
@@ -40,7 +41,6 @@ export function Stats() {
   const { selectedAudience, setSelectedAudience } = useAudience();
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if mobile on mount and resize
@@ -51,23 +51,15 @@ export function Stats() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Track when the section becomes sticky
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!stickyRef.current) return;
-      const rect = stickyRef.current.getBoundingClientRect();
-      setIsSticky(rect.top <= 73);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Track scroll progress within the tall container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
+
+  // Debounced audience switch — slight delay so pills don't flicker
+  const switchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastSetAudience = useRef(selectedAudience);
 
   // Update selected audience based on scroll position (bidirectional)
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
@@ -77,10 +69,23 @@ export function Stats() {
     );
 
     const newAudience = audienceIds[audienceIndex];
-    if (newAudience && newAudience !== selectedAudience) {
-      setSelectedAudience(newAudience);
+    if (newAudience && newAudience !== lastSetAudience.current) {
+      lastSetAudience.current = newAudience;
+      if (switchTimeout.current) clearTimeout(switchTimeout.current);
+      switchTimeout.current = setTimeout(() => setSelectedAudience(newAudience), 80);
     }
   });
+
+  // Scroll-driven background image reveal: left-to-right with soft gradient edge
+  // revealPct: how much of the image is visible (0% → 100%)
+  const revealPct = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0, 33, 66, 100]);
+  // Gradient mask: solid up to the reveal point, then a 20% feather to transparent
+  const maskImage = useTransform(revealPct, (v) => {
+    const solidEnd = Math.max(0, v - 20);
+    return `linear-gradient(to right, black ${solidEnd}%, transparent ${v}%)`;
+  });
+  // Materialise: opacity fades in alongside the reveal
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], [0.02, 0.08, 0.14, 0.2]);
 
   const currentValues = statsValues[selectedAudience] || statsValues.startups;
   const audienceKey = selectedAudience || "startups";
@@ -108,19 +113,33 @@ export function Stats() {
         />
       ))}
 
-      {/* Sticky content - fills viewport minus header */}
+      {/* Sticky content - fills full viewport, extends behind header */}
       <div
         ref={stickyRef}
-        className="sticky top-[72px] relative h-[calc(100vh-72px)] flex flex-col justify-center overflow-hidden"
+        className="sticky top-0 relative h-screen flex flex-col justify-center overflow-hidden pt-[72px]"
         style={{ backgroundColor: '#2E2930' }}
         data-dark-section="true"
       >
-        {isSticky && (
-          <div className="absolute left-0 right-0 bottom-full h-[72px]" style={{ backgroundColor: '#2E2930' }} data-dark-section="true" />
-        )}
+        {/* Background image with scroll-driven left-to-right reveal */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            maskImage,
+            WebkitMaskImage: maskImage,
+            opacity: imageOpacity,
+          }}
+        >
+          <Image
+            src="/images/strategic-partnerships.webp"
+            alt="Strategic partnerships — construction blueprint at dawn"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </motion.div>
 
         {/* Audience Selector Bar */}
-        <div className="py-4 lg:py-6">
+        <div className="py-4 lg:py-6 relative z-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-22">
               <h2 className="text-lg lg:text-xl font-semibold tracking-tight text-white whitespace-nowrap">
@@ -146,7 +165,7 @@ export function Stats() {
         </div>
 
         {/* Stats Grid */}
-        <div className="py-8 lg:py-10">
+        <div className="py-8 lg:py-10 relative z-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
             <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
               <StatCard
@@ -183,7 +202,7 @@ export function Stats() {
         </div>
 
         {/* Transitional Copy Section - inside sticky */}
-        <div className="py-6 lg:py-8">
+        <div className="py-6 lg:py-8 relative z-10">
           <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
             <motion.h3
               key={`headline-${audienceKey}`}

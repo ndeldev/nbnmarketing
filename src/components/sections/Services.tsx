@@ -192,13 +192,13 @@ export function Services() {
               <div className="rounded-2xl md:rounded-3xl bg-card border border-border/50 overflow-hidden shadow-soft md:h-full h-full flex flex-col">
                 {/* Visual Area - Stock Image - flex-1 to fill available space */}
                 <div className="flex-1 min-h-[200px] md:min-h-[200px] relative overflow-hidden">
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence mode="popLayout">
                     <motion.div
                       key={selectedService}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.4 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }}
                       className="absolute inset-0"
                     >
                       <Image

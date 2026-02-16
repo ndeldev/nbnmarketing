@@ -109,12 +109,12 @@ export const IMAGE_PATHS = {
 
 // Service images for display
 export const SERVICE_IMAGES: Record<string, string> = {
-  advertising: "/images/services/business-strategy.webp",
-  content: "/images/services/content-publications.webp",
-  europe: "/images/services/market-insights.webp",
-  email: "/images/services/outreach-campaigns.webp",
-  social: "/images/services/product-planning.webp",
-  analytics: "/images/services/seo-technical.webp",
+  advertising: "/images/services/service-advertising.webp",
+  content: "/images/services/service-content.webp",
+  europe: "/images/services/service-europe.webp",
+  email: "/images/services/service-email.webp",
+  social: "/images/services/service-social.webp",
+  analytics: "/images/services/service-analytics.webp",
 };
 
 // Service content by audience segment (for Services section)

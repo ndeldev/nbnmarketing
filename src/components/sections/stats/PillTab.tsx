@@ -20,7 +20,7 @@ export function PillTab({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
+        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
         active
           ? "bg-white shadow-sm text-shikoku"
           : "text-white/60 hover:text-white"

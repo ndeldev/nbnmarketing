@@ -90,7 +90,7 @@ export function Features() {
                   title={t("fullStack.title")}
                   description={t("fullStack.description")}
                   badge={t("fullStack.badge")}
-                  image="/images/features/data-driven.webp"
+                  image="/images/features/feature-full-stack.webp"
                   bgColorHex="#A6A5C4"
                   className="h-full"
                 />
@@ -108,7 +108,7 @@ export function Features() {
                   <BentoCardWithImage
                     title={t("globalReach.title")}
                     description={t("globalReach.description")}
-                    image="/images/features/dedicated-teams.webp"
+                    image="/images/features/feature-global-reach.webp"
                     icon={<Globe className="h-5 w-5 text-primary" />}
                     className="h-full"
                   />
@@ -124,7 +124,7 @@ export function Features() {
                   <BentoCardWithImage
                     title={t("sectorExpertise.title")}
                     description={t("sectorExpertise.description")}
-                    image="/images/features/creative.webp"
+                    image="/images/features/feature-sector-expertise.webp"
                     icon={<Pickaxe className="h-5 w-5 text-primary" />}
                     className="h-full"
                   />
@@ -144,7 +144,7 @@ export function Features() {
                 <BentoCardWithImage
                   title={t("measurableResults.title")}
                   description={t("measurableResults.description")}
-                  image="/images/features/transparency.webp"
+                  image="/images/features/feature-measurable-results.webp"
                   icon={<BarChart3 className="h-5 w-5 text-primary" />}
                   className="h-full"
                 />
@@ -160,7 +160,7 @@ export function Features() {
                 <BentoCardWithImage
                   title={t("complianceAware.title")}
                   description={t("complianceAware.description")}
-                  image="/images/features/security.webp"
+                  image="/images/features/feature-compliance.webp"
                   icon={<Sparkles className="h-5 w-5 text-primary" />}
                   className="h-full"
                 />
