@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.1] - 2026-02-16
+
+### Improved - Mobile Scroll & Services Card Image Bleed
+
+**Mobile Scroll Experience:**
+- Reduced Stats scroll height per segment: 60vh → 40vh (120vh total)
+- Reduced Services scroll height per service: 50vh → 35vh (210vh total)
+- Disabled scroll-snap on mobile (desktop-only via media query)
+- Total mobile scroll-driven area reduced ~30% (480vh → 330vh)
+
+**Services Card Image Bleed:**
+- Added bottom gradient fade on service image (`from-card to-transparent`)
+- Image dissolves smoothly into content area instead of ending with hard edge
+- Services image crossfade slowed to 0.6s for smoother transitions
+
+**Stats Section:**
+- Aligned sticky positioning with Services (`top-[72px]`, `h-[calc(100vh-72px)]`)
+- Audience pill tabs: 80ms debounce + 300ms CSS transition for smoother switching
+
+**Files modified:**
+- `src/components/sections/Services.tsx` — image bleed gradient, crossfade timing
+- `src/components/sections/Stats.tsx` — mobile scroll height, sticky positioning
+- `src/components/sections/stats/PillTab.tsx` — transition duration
+- `src/app/globals.css` — desktop-only scroll snap
+
 ## [2.7.0] - 2026-02-15
 
 ### Changed - Custom Generated Images & Stats Background Reveal

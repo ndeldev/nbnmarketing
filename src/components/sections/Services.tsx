@@ -190,7 +190,7 @@ export function Services() {
               className="md:col-span-8 xl:col-span-9 order-1 md:order-2 md:h-full flex-1 md:flex-none"
             >
               <div className="rounded-2xl md:rounded-3xl bg-card border border-border/50 overflow-hidden shadow-soft md:h-full h-full flex flex-col">
-                {/* Visual Area - Stock Image - flex-1 to fill available space */}
+                {/* Image area — flex-1 fills available space */}
                 <div className="flex-1 min-h-[200px] md:min-h-[200px] relative overflow-hidden">
                   <AnimatePresence mode="popLayout">
                     <motion.div
@@ -209,14 +209,15 @@ export function Services() {
                         sizes="(max-width: 768px) 100vw, 66vw"
                         priority
                       />
-                      {/* Subtle overlay for better text contrast below */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" />
                     </motion.div>
                   </AnimatePresence>
+                  {/* Bottom fade — image gradually dissolves into card background */}
+                  <div className="absolute bottom-0 left-0 right-0 h-24 md:h-28 bg-gradient-to-t from-card to-transparent" />
                 </div>
 
                 {/* Content Area */}
-                <div className="p-4 sm:p-5 lg:p-8">
+                <div className="relative z-10 p-4 sm:p-5 lg:p-8">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={`${selectedAudience}-${selectedService}`}
