@@ -13,7 +13,7 @@ import { PillTab } from "./stats/PillTab";
 const audienceIds = AUDIENCE_SEGMENTS.map((s) => s.id);
 
 // Scroll height multiplier per segment (shorter on mobile for easier scrolling)
-const SCROLL_HEIGHT_MOBILE = 60; // vh per segment on mobile
+const SCROLL_HEIGHT_MOBILE = 40; // vh per segment on mobile
 const SCROLL_HEIGHT_DESKTOP = 100; // vh per segment on desktop
 
 // Stats values per audience segment (numbers only, labels come from translations)
@@ -116,7 +116,7 @@ export function Stats() {
       {/* Sticky content - fills full viewport, extends behind header */}
       <div
         ref={stickyRef}
-        className="sticky top-0 relative h-screen flex flex-col justify-center overflow-hidden pt-[72px]"
+        className="sticky top-[72px] relative h-[calc(100vh-72px)] flex flex-col justify-center overflow-hidden"
         style={{ backgroundColor: '#2E2930' }}
         data-dark-section="true"
       >

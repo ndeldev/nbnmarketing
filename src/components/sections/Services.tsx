@@ -21,7 +21,7 @@ const servicesList = SERVICES.map((s) => ({
 const serviceIds: string[] = servicesList.map((s) => s.id);
 
 // Scroll height per service (shorter on mobile for easier scrolling)
-const SCROLL_HEIGHT_MOBILE = 50; // vh per service on mobile
+const SCROLL_HEIGHT_MOBILE = 35; // vh per service on mobile
 const SCROLL_HEIGHT_DESKTOP = 100; // vh per service on desktop
 
 export function Services() {

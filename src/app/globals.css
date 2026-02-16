@@ -186,9 +186,11 @@
   }
 }
 
-/* Subtle scroll snap for sections */
-html {
-  scroll-snap-type: y proximity;
+/* Subtle scroll snap for sections — desktop only (touch devices get free scroll) */
+@media (min-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
 }
 
 .snap-section {
